@@ -15,7 +15,17 @@
 					placeholder="Password"
 				/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
 					Request Access
-				</button>
+				</button><router-link
+					to="/login"
+					class="hover:text-slate-200 mt-6 inline-block text-center w-full"
+				>
+					Go to login
+				</router-link><router-link
+					to="/recover"
+					class="mt-3 hover:text-slate-200 inline-block text-center w-full"
+				>
+					Recover lost password
+				</router-link>
 			</div>
 		</WrapperPage>
 	</div>
