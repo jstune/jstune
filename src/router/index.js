@@ -50,6 +50,18 @@ const routes = [{
         component: () => import('@/views/Login.vue')
     },
     {
+        path: '/register',
+        component: () => import('@/views/Register.vue')
+    },
+    {
+        path: '/recover',
+        component: () => import('@/views/Recover.vue')
+    },
+    {
+        path: '/setup',
+        component: () => import('@/views/Setup.vue')
+    },
+    {
         path: '/search/:term?',
         component: () => import('@/views/SearchResult.vue'),
         props: true
