@@ -57,7 +57,15 @@
 											RAM
 										</td>
 										<td class="border-b border-slate-200 dark:border-slate-600 p-4 pr-8 text-slate-500 dark:text-slate-400">
-											3.84GB
+											1.24GB of 3.84GB used
+										</td>
+									</tr>
+									<tr>
+										<td class="font-bold border-b border-slate-200 dark:border-slate-600 p-4 pl-8 text-slate-500 dark:text-slate-400">
+											Storage
+										</td>
+										<td class="border-b border-slate-200 dark:border-slate-600 p-4 pr-8 text-slate-500 dark:text-slate-400">
+											12GB of 100GB used
 										</td>
 									</tr>
 									<tr>
