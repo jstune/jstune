@@ -1,5 +1,5 @@
 <template>
-	<div class="h-screen bg-gradient-to-tl bg-cyan-800 grow place-items-center flex from-emerald-500 justify-center uppercase p-8 text-white w-full">
+	<div class="h-screen bg-gradient-to-tl bg-cyan-800 grow place-items-center flex from-emerald-500 justify-center p-8 text-white w-full">
 		<WrapperPage class="justify-center">
 			<div style="max-width:100%;width:240px">
 				<h2 class="mb-2">
@@ -12,7 +12,17 @@
 					placeholder="Password"
 				/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
 					Login
-				</button>
+				</button><router-link
+					to="/recover"
+					class="hover:text-slate-200 mt-6 inline-block text-center w-full"
+				>
+					Recover lost password
+				</router-link><router-link
+					to="/register"
+					class="mt-3 hover:text-slate-200 inline-block text-center w-full"
+				>
+					Request access
+				</router-link>
 			</div>
 		</WrapperPage>
 	</div>
