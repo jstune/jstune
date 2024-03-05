@@ -16,7 +16,7 @@
 					<h1 class="mb-8 font-semibold text-4xl">
 						Main Server Node
 					</h1>
-					<div class="relative rounded-xl overflow-auto max-w-sm">
+					<div class="relative rounded-xl overflow-auto max-w-m">
 						<div class="shadow-sm overflow-hidden my-8">
 							<table class="border-collapse table-auto w-full text-sm">
 								<tbody class="bg-white dark:bg-slate-800">
