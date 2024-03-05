@@ -5,57 +5,19 @@ const icon = URL.createObjectURL(new Blob([home], {
 }))
 
 export default [{
-        label: 'Home',
-        route: '/',
-        icon
+        label: 'Apps',
+        route: '/'
     },
     {
-        label: 'Docs',
-        route: '/documentation'
+        label: 'Cluster',
+        route: '/cluster'
     },
     {
-        label: 'Example Pages',
-        children: [{
-                label: 'Blog',
-                route: '/blog',
-            },
-            {
-                label: 'Videos',
-                route: '/videos',
-            },
-            {
-                label: 'Products',
-                route: '/products',
-            },
-            {
-                label: 'Categories',
-                route: '/categories',
-            },
-            {
-                label: '404 Not Found',
-                route: '/hello-world',
-            }
-        ]
+        label: 'Users',
+        route: '/users'
     },
     {
-        label: `External URL's`,
-        children: [{
-            label: 'vueplay.com',
-            route: 'https://vueplay.com',
-            external: true
-        }, {
-            label: `More`,
-            children: [{
-                    label: 'vuejs.org',
-                    route: 'https://vuejs.org',
-                    external: true
-                },
-
-            ]
-        }]
-    },
-    {
-        label: 'Contact',
-        route: '/contact'
-    },
+        label: 'Settings',
+        route: '/settings'
+    }
 ]
