@@ -9,6 +9,10 @@ export default [{
         route: '/'
     },
     {
+        label: 'One Click',
+        route: '/one-click'
+    },
+    {
         label: 'Cluster',
         route: '/cluster'
     },
