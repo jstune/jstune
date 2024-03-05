@@ -5,65 +5,37 @@ const icon = URL.createObjectURL(new Blob([home], {
 }))
 
 export default [{
-        label: 'Group 1'
+        label: 'Applications'
     },
     {
-        label: 'Home',
+        label: 'NodeJS',
         route: '/',
-        icon
     },
     {
-        label: 'Docs',
-        route: '/documentation'
+        label: 'PHP',
+        route: '/php',
     },
     {
-        label: 'More',
+        label: 'Databases',
+    },
+    {
+        label: `MySQL`,
         children: [{
-                label: 'Group A',
-            },
-            {
-                label: 'Videos',
-                route: '/videos',
-            },
-            {
-                label: 'Group B',
-            },
-            {
-                label: 'Products',
-                route: '/products',
-            },
-            {
-                label: 'Categories',
-                route: '/categories',
-            },
-            {
-                label: '404 Not Found',
-                route: '/hello-world',
-            }
-        ]
-    },
-    {
-        label: 'Group 2',
-    },
-    {
-        label: `External URL's`,
-        children: [{
-            label: 'vueplay.com',
-            route: 'https://vueplay.com',
-            external: true
+            label: 'DB 1',
+            route: '/db1'
         }, {
-            label: `More`,
-            children: [{
-                    label: 'vuejs.org',
-                    route: 'https://vuejs.org',
-                    external: true
-                },
-
-            ]
+            label: 'DB 2',
+            route: '/db2'
         }]
     },
     {
-        label: 'Contact',
-        route: '/contact'
+        label: `MongoDB`,
+        children: [{
+            label: 'DB 3',
+            route: '/db3'
+        }, {
+            label: 'DB 4',
+            route: '/db4'
+        }]
     },
 ]
