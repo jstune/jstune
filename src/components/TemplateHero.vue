@@ -113,7 +113,7 @@
 			</WrapperPage>
 		</SectionHeader>
 		<SectionHero>
-			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6">
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center">
 				{{title}}
 			</h1>
 		</SectionHero>

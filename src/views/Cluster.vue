@@ -1,5 +1,5 @@
 <template>
-	<TemplateHero title="Your Nodes">
+	<TemplateHero title="Cluster Nodes">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative rounded-xl overflow-auto w-full">
 				<div class="shadow-sm my-8">
