@@ -1,48 +1,66 @@
 <template>
-	<TemplateHero title="One Click Apps">
-		<WrapperPage class="px-6 flex-col md:flex-row">
-			<div class="md:max-w-xs w-full">
-				<UtilityNavbar
-					:menu="menus.SidebarMenu"
-					:sidebar="true"
-					:color="''"
-					:groupBackgroundColorSubmenu="'#ffffffff'"
-					leftBorderWidth="3px"
-					backgroundColorSubmenu="#ffffffff"
-					backgroundColor="#ffffffff"
-					backgroundColorActive="#faf7f7ff"
-					backgroundColorHover="#faf7f7ff"
-					indent="20px"
-					leftBorderColorActive="#6d2580ff"
-					class="mt-11"
-					leftBorderColor="#efebf0ff"
-					leftBorderColorHover="#efebf0ff"
-					groupSize="15px"
-					groupColor="#545454ff"
-					groupBackgroundColor="#ffffffff"
-					groupPaddingBottom="5px"
-					groupPaddingTop="0px"
-				>
-				</UtilityNavbar>
-			</div>
-			<div class="flex-col place-self-center mt-8 mb-24 flex">
-				<h1 class="px-4 mb-4 mt-6 font-medium text-3xl w-full">
-					Directus
-				</h1> <span class="text-slate-500 pl-5 mt-2">
-					Version 1.0.0
-				</span>
-				<div class="relative mb-16 flex-col md:flex-row flex w-full px-4">
-					<div class="pt-2 md:pt-0 grow px-1">
-						<h2 class="text-xl font-medium mt-10">
-							Lorem ipsum dolor sit amet
-						</h2> <span class="text-slate-800 my-4 w-full block">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed ut justo quis nisi placerat faucibus. Integer feugiat eros at nisi commodo, sed dictum eros volutpat.
-						</span><span class="text-slate-800 my-4 w-full block">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed ut justo quis nisi placerat faucibus. Integer feugiat eros at nisi commodo, sed dictum eros volutpat.
-						</span>
-					</div>
-					<div class="bg-slate-100 -bottom-5 absolute h-0.5 left-4 right-4">
-					</div>
+	<TemplateHero title="Users">
+		<WrapperPage class="p-6">
+			<div class="relative rounded-xl overflow-auto w-full">
+				<div class="shadow-sm overflow-hidden my-8">
+					<table class="border-collapse table-auto w-full text-sm">
+						<thead>
+							<tr>
+								<th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+									App Name
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Persisten Data
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Instance Count
+								</th>
+								<th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+									Last Deploy
+								</th>
+								<th class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-center">
+									Open
+								</th>
+							</tr>
+						</thead>
+						<tbody class="bg-white dark:bg-slate-800">
+							<tr>
+								<td class="hover:text-slate-700 cursor-pointer border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										fill="currentColor"
+										class="mx-auto w-6 h-6"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</td>
+								<td class="text-center border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+									1
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 text-center">
+									06.03.2024 15:02:45
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"><svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										fill="currentColor"
+										class="hover:text-slate-700 cursor-pointer w-6 h-6 mx-auto"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M15.75 2.25H21a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0V4.81L8.03 17.03a.75.75 0 01-1.06-1.06L19.19 3.75h-3.44a.75.75 0 010-1.5zm-10.5 4.5a1.5 1.5 0 00-1.5 1.5v10.5a1.5 1.5 0 001.5 1.5h10.5a1.5 1.5 0 001.5-1.5V10.5a.75.75 0 011.5 0v8.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V8.25a3 3 0 013-3h8.25a.75.75 0 010 1.5H5.25z"
+											clip-rule="evenodd"
+										/>
+									</svg> </td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</WrapperPage>
@@ -156,12 +174,10 @@
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
 	import TemplateHero from '@/components/TemplateHero.vue';
-	import UtilityNavbar from '@/components/UtilityNavbar.vue';
 	export default {
 		components: {
 			WrapperPage,
-			TemplateHero,
-			UtilityNavbar
+			TemplateHero
 		},
 		inject: ['menus'],
 		data: () => ({})

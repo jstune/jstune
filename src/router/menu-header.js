@@ -9,10 +9,6 @@ export default [{
         route: '/'
     },
     {
-        label: 'One Click',
-        route: '/one-click'
-    },
-    {
         label: 'Cluster',
         route: '/cluster'
     },
@@ -23,5 +19,9 @@ export default [{
     {
         label: 'Settings',
         route: '/settings'
-    }
+    },
+    {
+        label: 'One Click Apps',
+        route: '/one-click'
+    },
 ]

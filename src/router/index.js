@@ -8,6 +8,22 @@ const routes = [{
         component: () => import('@/views/Home.vue')
     },
     {
+        path: '/cluster',
+        component: () => import('@/views/Cluster.vue')
+    },
+    {
+        path: '/settings',
+        component: () => import('@/views/Settings.vue')
+    },
+    {
+        path: '/users',
+        component: () => import('@/views/Users.vue')
+    },
+    {
+        path: '/one-click',
+        component: () => import('@/views/OneClick.vue')
+    },
+    {
         path: '/videos',
         component: () => import('@/views/Videos.vue')
     },
