@@ -31,7 +31,7 @@
 				</h1> <span class="text-slate-500 pl-5 mt-2">
 					Version 1.0.0
 				</span>
-				<div class="relative mb-16 flex-col md:flex-row flex w-full px-4">
+				<div class="flex-wrap relative mb-16 flex-col md:flex-row flex w-full px-4">
 					<div class="pt-2 md:pt-0 grow px-1">
 						<h2 class="text-xl font-medium mt-10">
 							Lorem ipsum dolor sit amet
@@ -40,7 +40,22 @@
 						</span><span class="text-slate-800 my-4 w-full block">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed ut justo quis nisi placerat faucibus. Integer feugiat eros at nisi commodo, sed dictum eros volutpat.
 						</span>
-					</div>
+					</div><button class="items-center w-32 bg-emerald-500 hover:bg-emerald-600 text-emerald-50 font-bold py-2 px-4 rounded inline-flex">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6 mr-2"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						<span>
+							Install
+						</span> </button>
 					<div class="bg-slate-100 -bottom-5 absolute h-0.5 left-4 right-4">
 					</div>
 				</div>
