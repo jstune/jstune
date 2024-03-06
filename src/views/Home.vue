@@ -10,7 +10,7 @@
 									App Name
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Persisten Data
+									Persistent Data
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Instance Count
