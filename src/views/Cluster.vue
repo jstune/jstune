@@ -1,6 +1,6 @@
 <template>
 	<TemplateHero title="Your Nodes">
-		<WrapperPage class="max-w-full p-6">
+		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative rounded-xl overflow-auto w-full">
 				<div class="shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
