@@ -1,9 +1,9 @@
 <template>
-	<TemplateHero title="Applications">
+	<TemplateHero title="Dashboard">
 		<WrapperPage>
 			<div class="w-full flex-col mt-12 py-4 px-6 flex">
 				<h1 class="mb-8 font-semibold text-4xl">
-					Docker Containers
+					Applications
 				</h1>
 			</div>
 		</WrapperPage>

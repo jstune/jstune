@@ -963,6 +963,7 @@
 	ul>li.active>.left-border {
 		height: v-bind('leftBorderHeightActiveComputed');
 		background-color: v-bind('leftBorderColorActive');
+		z-index: 1;
 	}
 
 	ul>li:last-child.active>.left-border {
@@ -996,6 +997,7 @@
 	ul>li.active>.right-border {
 		height: v-bind('rightBorderHeightActiveComputed');
 		background-color: v-bind('rightBorderColorActive');
+		z-index: 1;
 	}
 
 	ul>li:last-child.active>.right-border {
