@@ -5,8 +5,12 @@ const icon = URL.createObjectURL(new Blob([home], {
 }))
 
 export default [{
-        label: 'Apps',
+        label: 'Todos',
         route: '/'
+    },
+    {
+        label: 'Apps',
+        route: '/apps'
     },
     {
         label: 'Cluster',

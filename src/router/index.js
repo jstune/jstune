@@ -5,6 +5,10 @@ import {
 
 const routes = [{
         path: '/',
+        component: () => import('@/views/Todos.vue')
+    },
+    {
+        path: '/apps',
         component: () => import('@/views/Home.vue')
     },
     {
@@ -83,8 +87,8 @@ const routes = [{
         props: true
     },
     {
-        path: '/categories',
-        component: () => import('@/views/Categories.vue')
+        path: '/todos',
+        component: () => import('@/views/Todos.vue')
     },
     {
         path: '/terms',
