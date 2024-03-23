@@ -6,11 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  repository_projects: write
-  deployments: write
+  actions: write
 
 jobs:
   build:
