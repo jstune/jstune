@@ -8,6 +8,23 @@ const routes = [{
         component: () => import('@/views/Todos.vue')
     },
     {
+        path: '/dashboard',
+        component: () => import('@/views/Todos.vue')
+    },
+    {
+        path: '/setup',
+        children: [
+            {
+                path: 'docker',
+                component: () => import('@/views/Todos.vue')
+            },
+            {
+                path: 'database',
+                component: () => import('@/views/Todos.vue')
+            }
+        ]
+    },
+    {
         path: '/apps',
         component: () => import('@/views/Home.vue')
     },
