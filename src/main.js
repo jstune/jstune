@@ -10,7 +10,7 @@ import menus from '@/router/menus.js'
 import feathers from '@feathersjs/client'
 import sio from 'socket.io-client'
 
-let domain = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? 'http://localhost:8000' : '/'
+let domain = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? 'http://localhost:4040' : '/'
 const socket = sio(domain, {
     transports: ['websocket', 'polling']
 })
@@ -31,17 +31,15 @@ router.beforeEach(async to => {
     } catch (e) {
         // If user is not logged in
         user.value = null
-        let setup = [] // await io.service('/status').get('setup')
-        let setupPage = to.path.replace('/setup/', '')
-        if (to.path.startsWith('/setup/') && setup.includes(setupPage)) {
-            // Allow navigating to setup pages which are not completed
-            return to.path
-        } else if (setup.length) {
+        // Retrieve potential missing configuration setups
+        let setup = await io.service('status').get('setup')
+        if (setup.length && to.path !== '/setup/' + setup[0]) {
             // Force going to next setup step if installation is not completed
             return '/setup/' + setup[0]
         }
+        
         // Force going to login page if not routing to one of the following routes
-        if (!['/login', '/register', '/recover'].includes(to.path)) return '/login'
+        if (!setup.length && !['/login', '/register', '/recover'].includes(to.path)) return '/login'
     }
 })
 

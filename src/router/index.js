@@ -16,11 +16,11 @@ const routes = [{
         children: [
             {
                 path: 'docker',
-                component: () => import('@/views/Todos.vue')
+                component: () => import('@/views/SetupDocker.vue')
             },
             {
                 path: 'database',
-                component: () => import('@/views/Todos.vue')
+                component: () => import('@/views/SetupDatabase.vue')
             }
         ]
     },
