@@ -1,14 +1,20 @@
 <template>
 	<TemplateSetup>
-		<h2 class="mb-2">
-			Setup Docker Automagically
-		</h2><button
-			@click="autoSetup"
-			class="hover:bg-fuchsia-950 mb-4 rounded-lg bg-fuchsia-900 w-full p-3"
-			title="Install and/or start docker on your machine"
-		>
-			Auto install
-		</button>
+		<div v-if="platform === 'linux'">
+			<h2 class="mb-2">
+				Setup Docker Automagically
+			</h2><button
+				@click="autoSetup"
+				class="hover:bg-fuchsia-950 mb-4 rounded-lg bg-fuchsia-900 w-full p-3"
+				title="Install and/or start docker on your machine"
+			>
+				Auto install
+			</button><input
+				v-model="sudo"
+				class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+				placeholder="Sudo user password:"
+			/>
+		</div>
 		<h2 class="mb-2">
 			Setup Docker Manually
 		</h2><input
@@ -49,16 +55,23 @@
 				port: '',
 				username: '',
 				password: ''
-			}
+			},
+			platform: '',
+			sudo: ''
 		}),
 		async created() {
-			this.config = await this.io.service('setup')
+			const result = await this.io.service('setup')
 				.get('docker');
+			this.config = result.config;
+			this.platform = result.platform;
+			console.log('result', result);
 		},
 		methods: {
 			async autoSetup() {
 				let result = await this.io.service('setup')
-					.patch('docker', {});
+					.patch('docker', {
+						sudo: this.sudo
+					});
 				this.resolve(result);
 			},
 			async setup() {
