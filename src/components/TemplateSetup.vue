@@ -1,5 +1,5 @@
 <template>
-	<div class="h-screen bg-gradient-to-tl bg-cyan-800 grow place-items-center flex from-emerald-500 justify-center p-8 text-white w-full">
+	<div class="overflow-auto h-screen bg-gradient-to-tl bg-cyan-800 grow place-items-center flex from-emerald-500 justify-center p-8 text-white w-full">
 		<WrapperPage class="justify-center">
 			<div style="max-width:100%;width:240px">
 				<slot>
