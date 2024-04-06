@@ -5,6 +5,7 @@
 				Setup Docker Automagically
 			</h2><button
 				@click="autoSetup"
+				:disabled="loading"
 				class="hover:bg-fuchsia-950 mb-4 rounded-lg bg-fuchsia-900 w-full p-3"
 				title="Install and/or start docker on your machine"
 			>
@@ -35,11 +36,16 @@
 			placeholder="Password:"
 		/><button
 			@click="setup"
+			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running docker instance"
 		>
 			Install manually
-		</button><button
+		</button>
+		<h2 class="mt-6">
+			Install and start docker desktop manually and try to reconnect.
+		</h2><button
+			:disabled="loading"
 			@click="connect"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running docker instance"
@@ -47,7 +53,7 @@
 			Try to reconnect
 		</button>
 		<h2 class="mt-2">
-			Platform: {{platform}} Ready: {{ready}}
+			Platform: {{platform}} Ready: {{ready}} Loading: {{loading}}
 		</h2>
 	</TemplateSetup>
 </template>
