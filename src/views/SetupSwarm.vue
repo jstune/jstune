@@ -1,0 +1,91 @@
+<template>
+	<TemplateSetup>
+		<h2 class="mb-2">
+			Connect to swarm
+		</h2> <input
+			v-model="config.token"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="Token:"
+		/> <input
+			v-model="config.ip"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="IP:"
+		/> <input
+			v-model="config.port"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="Port:"
+		/> <select v-model="config.role">
+			<option value="worker">Worker</option>
+			<option value="manager">Manager</option>
+		</select> <button
+			@click="setup()"
+			:disabled="loading"
+			class="hover:bg-fuchsia-950 mt-2 rounded-lg bg-fuchsia-900 w-full p-3"
+			title="Install using already running database instance"
+		>
+			Connect to existing database
+		</button> <button
+			@click="setup(true)"
+			:disabled="loading"
+			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+			title="Install using already running database instance"
+		>
+			Create a new database
+		</button>
+		<h2 class="mt-2">
+			Loading: {{loading}}
+		</h2>
+	</TemplateSetup>
+</template>
+<script>
+	import TemplateSetup from '@/components/TemplateSetup.vue';
+	export default {
+		inject: ['io'],
+		components: {
+			TemplateSetup: TemplateSetup
+		},
+		data: () => ({
+			config: {
+				token,
+				ip,
+				port,
+				role: 'worker'
+			},
+			loading: false
+		}),
+		async created() {
+			await this.connect();
+		},
+		methods: {
+			async connect() {
+				this.loading = true;
+				const result = await this.io.service('setup')
+					.get('swarm');
+				this.resolve(result);
+			},
+			async setup(create = false) {
+				this.loading = true;
+				let result = await this.io.service('setup')
+					.patch('swarm', {
+						...this.config,
+						create
+					});
+				this.resolve(result);
+			},
+			async resolve(result) {
+				console.log('res', result);
+				if (result) {
+					this.config = result.config;
+					if (!this.config.role) {
+						this.config.role = 'worker';
+					}
+				} else {
+					this.$router.push('/login');
+				}
+				this.loading = false;
+			}
+		}
+	};
+
+</script>
+<style scoped></style>
