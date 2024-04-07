@@ -6,7 +6,7 @@
 			v-model="config.token"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Token:"
-		/> <input
+		/><input
 			v-model="config.ip"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="IP:"
@@ -14,7 +14,10 @@
 			v-model="config.port"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Port:"
-		/> <select v-model="config.role">
+		/> <select
+			v-model="config.role"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+		>
 			<option value="worker">Worker</option>
 			<option value="manager">Manager</option>
 		</select> <button
@@ -23,14 +26,14 @@
 			class="hover:bg-fuchsia-950 mt-2 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Connect to existing database
+			Connect to existing swarm
 		</button> <button
 			@click="setup(true)"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Create a new database
+			Create a new swarm
 		</button>
 		<h2 class="mt-2">
 			Loading: {{loading}}
@@ -46,14 +49,15 @@
 		},
 		data: () => ({
 			config: {
-				token,
-				ip,
-				port,
+				token: '',
+				ip: '',
+				port: '',
 				role: 'worker'
 			},
 			loading: false
 		}),
 		async created() {
+			console.log('create', this.config);
 			await this.connect();
 		},
 		methods: {
@@ -73,7 +77,6 @@
 				this.resolve(result);
 			},
 			async resolve(result) {
-				console.log('res', result);
 				if (result) {
 					this.config = result.config;
 					if (!this.config.role) {
