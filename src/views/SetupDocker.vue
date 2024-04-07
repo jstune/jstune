@@ -53,7 +53,7 @@
 			Re-connect
 		</button>
 		<h2 class="mt-2">
-			Platform: {{platform}} Ready: {{ready}} Loading: {{loading}}
+			Platform: {{platform}} Loading: {{loading}}
 		</h2>
 	</TemplateSetup>
 </template>
@@ -72,7 +72,6 @@
 				password: ''
 			},
 			platform: '',
-			ready: false,
 			sudoPassword: '',
 			loading: false
 		}),
@@ -100,13 +99,12 @@
 					.patch('docker', this.config);
 				this.resolve(result);
 			},
-			resolve(result) {
+			async resolve(result) {
 				if (result) {
 					this.config = result.config;
 					this.platform = result.platform;
-					this.ready = false;
 				} else {
-					this.ready = true;
+					this.$router.push('/login');
 				}
 				this.loading = false;
 			}
