@@ -57,7 +57,6 @@
 			loading: false
 		}),
 		async created() {
-			console.log('create', this.config);
 			await this.connect();
 		},
 		methods: {
@@ -77,7 +76,7 @@
 				this.resolve(result);
 			},
 			async resolve(result) {
-				if (result) {
+				if (result && !result.ready) {
 					this.config = result.config;
 					if (!this.config.role) {
 						this.config.role = 'worker';

@@ -26,14 +26,14 @@
 			class="hover:bg-fuchsia-950 mt-2 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Connect to existing swarm
+			Connect to existing admin
 		</button> <button
 			@click="setup(true)"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Create a new swarm
+			Create a new admin
 		</button>
 		<h2 class="mt-2">
 			Loading: {{loading}}
@@ -57,30 +57,33 @@
 			loading: false
 		}),
 		async created() {
-			console.log('create', this.config);
 			await this.connect();
 		},
 		methods: {
 			async connect() {
 				this.loading = true;
 				const result = await this.io.service('setup')
-					.get('swarm');
+					.get('admin');
 				this.resolve(result);
 			},
 			async setup(create = false) {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.patch('swarm', {
+					.patch('admin', {
 						...this.config,
 						create
 					});
 				this.resolve(result);
 			},
 			async resolve(result) {
-				if (result) {
-					this.config = result.config;
-					if (!this.config.role) {
-						this.config.role = 'worker';
+				if (result && !result.ready) {
+					if (result.config) {
+						this.config = result.config;
+						if (!this.config.role) {
+							this.config.role = 'worker';
+						}
+					} else {
+						console.log('rrr', result)
 					}
 				} else {
 					this.$router.push('/login');

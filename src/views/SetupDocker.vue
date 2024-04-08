@@ -100,7 +100,7 @@
 				this.resolve(result);
 			},
 			async resolve(result) {
-				if (result) {
+				if (result && !result.ready) {
 					this.config = result.config;
 					this.platform = result.platform;
 				} else {

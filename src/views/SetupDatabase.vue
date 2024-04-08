@@ -3,39 +3,20 @@
 		<h2 class="mb-2">
 			Connect to database
 		</h2> <input
-			v-model="config.host"
+			v-model="config.email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Host: 127.0.0.1"
 		/> <input
-			v-model="config.port"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Port: 3306"
-		/> <input
-			v-model="config.user"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Username:"
-		/> <input
 			v-model="config.password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Password:"
-		/> <input
-			v-model="config.database"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Database:"
-		/> <button
+			placeholder="Port: 3306"
+		/><button
 			@click="setup()"
-			:disabled="loading"
-			class="hover:bg-fuchsia-950 mt-2 rounded-lg bg-fuchsia-900 w-full p-3"
-			title="Install using already running database instance"
-		>
-			Connect to existing database
-		</button> <button
-			@click="setup(true)"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Create a new database
+			Submit
 		</button>
 		<h2 class="mt-2">
 			Loading: {{loading}}
@@ -51,11 +32,8 @@
 		},
 		data: () => ({
 			config: {
-				host: '',
-				port: '',
-				user: '',
-				password: '',
-				database: ''
+				email: '',
+				password: ''
 			},
 			loading: false
 		}),
@@ -65,13 +43,13 @@
 		methods: {
 			async connect() {
 				this.loading = true;
-				const result = await this.io.service('setup')
+				const result = await this.io.service('admin')
 					.get('database');
 				this.resolve(result);
 			},
-			async setup(create = false) {
+			async setup() {
 				this.loading = true;
-				let result = await this.io.service('setup')
+				let result = await this.io.service('admin')
 					.patch('database', {
 						...this.config,
 						create
@@ -79,9 +57,7 @@
 				this.resolve(result);
 			},
 			async resolve(result) {
-				if (result) {
-					this.config = result.config;
-				} else {
+				if (result && !result.ready) {} else {
 					this.$router.push('/login');
 				}
 				this.loading = false;
