@@ -1,41 +1,39 @@
 <template>
 	<TemplateSetup>
 		<h2 class="mb-2">
-			Connect to database
+			Create Admin User
 		</h2> <input
-			v-model="config.host"
+			v-model="config.token"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Host: 127.0.0.1"
+			placeholder="Token:"
+		/><input
+			v-model="config.ip"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="IP:"
 		/> <input
 			v-model="config.port"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Port: 3306"
-		/> <input
-			v-model="config.user"
+			placeholder="Port:"
+		/> <select
+			v-model="config.role"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Username:"
-		/> <input
-			v-model="config.password"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Password:"
-		/> <input
-			v-model="config.database"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Database:"
-		/> <button
+		>
+			<option value="worker">Worker</option>
+			<option value="manager">Manager</option>
+		</select> <button
 			@click="setup()"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-2 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Connect to existing database
+			Connect to existing swarm
 		</button> <button
 			@click="setup(true)"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Create a new database
+			Create a new swarm
 		</button>
 		<h2 class="mt-2">
 			Loading: {{loading}}
@@ -51,28 +49,28 @@
 		},
 		data: () => ({
 			config: {
-				host: '',
+				token: '',
+				ip: '',
 				port: '',
-				user: '',
-				password: '',
-				database: ''
+				role: 'worker'
 			},
 			loading: false
 		}),
 		async created() {
+			console.log('create', this.config);
 			await this.connect();
 		},
 		methods: {
 			async connect() {
 				this.loading = true;
 				const result = await this.io.service('setup')
-					.get('database');
+					.get('swarm');
 				this.resolve(result);
 			},
 			async setup(create = false) {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.patch('database', {
+					.patch('swarm', {
 						...this.config,
 						create
 					});
@@ -81,6 +79,9 @@
 			async resolve(result) {
 				if (result) {
 					this.config = result.config;
+					if (!this.config.role) {
+						this.config.role = 'worker';
+					}
 				} else {
 					this.$router.push('/login');
 				}

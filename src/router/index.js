@@ -19,8 +19,16 @@ const routes = [{
                 component: () => import('@/views/SetupDocker.vue')
             },
             {
+                path: 'swarm',
+                component: () => import('@/views/SetupSwarm.vue')
+            },
+            {
                 path: 'database',
                 component: () => import('@/views/SetupDatabase.vue')
+            },
+            {
+                path: 'admin',
+                component: () => import('@/views/SetupAdmin.vue')
             }
         ]
     },
