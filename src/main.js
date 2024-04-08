@@ -47,6 +47,8 @@ router.beforeEach(async to => {
 const app = createApp(App)
 
 app.provide('menus', menus)
+app.provide('user', computed(() => user?.value))
+app.provide('userUpdate', val => user.value = val)
 app.provide('io', io)
 app.use(router)
 app.mount('#app')

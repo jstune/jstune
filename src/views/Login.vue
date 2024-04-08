@@ -3,6 +3,7 @@
 		<h2 class="mb-2">
 			JSTune
 		</h2><input
+			ref="username"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Username"
 		/><input
@@ -29,7 +30,28 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		data: () => ({})
+		inject: ["io", "user", "userUpdate"],
+		data: () => ({
+			email: '',
+			password: ''
+		}),
+		mounted() {
+            this.$refs?.username?.focus()
+        },
+		methods: {
+			async login(creds) {
+                this.io.authenticate({
+                    strategy: "local",
+                    ...creds
+                }).then(profile => {
+                    this.userUpdate(profile?.user);
+                    this.$router.push("/admin/users")
+                }).catch(e => {
+                    console.error("Authentication error", e);
+                    alert(e.message)
+                })
+            }
+		}
 	};
 
 </script>
