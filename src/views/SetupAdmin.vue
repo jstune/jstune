@@ -3,37 +3,20 @@
 		<h2 class="mb-2">
 			Create Admin User
 		</h2> <input
-			v-model="config.token"
+			v-model="config.email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Token:"
+			placeholder="Email:"
 		/><input
-			v-model="config.ip"
+			v-model="config.password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="IP:"
-		/> <input
-			v-model="config.port"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Port:"
-		/> <select
-			v-model="config.role"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-		>
-			<option value="worker">Worker</option>
-			<option value="manager">Manager</option>
-		</select> <button
+			placeholder="Password:"
+		/><button
 			@click="setup()"
-			:disabled="loading"
-			class="hover:bg-fuchsia-950 mt-2 rounded-lg bg-fuchsia-900 w-full p-3"
-			title="Install using already running database instance"
-		>
-			Connect to existing admin
-		</button> <button
-			@click="setup(true)"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running database instance"
 		>
-			Create a new admin
+			Submit
 		</button>
 		<h2 class="mt-2">
 			Loading: {{loading}}
@@ -49,10 +32,8 @@
 		},
 		data: () => ({
 			config: {
-				token: '',
-				ip: '',
-				port: '',
-				role: 'worker'
+				email: '',
+				password: ''
 			},
 			loading: false
 		}),
@@ -77,14 +58,6 @@
 			},
 			async resolve(result) {
 				if (result && !result.ready) {
-					if (result.config) {
-						this.config = result.config;
-						if (!this.config.role) {
-							this.config.role = 'worker';
-						}
-					} else {
-						console.log('rrr', result)
-					}
 				} else {
 					this.$router.push('/login');
 				}

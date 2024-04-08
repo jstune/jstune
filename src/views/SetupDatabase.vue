@@ -1,15 +1,15 @@
 <template>
 	<TemplateSetup>
 		<h2 class="mb-2">
-			Connect to database
+			Create admin user
 		</h2> <input
 			v-model="config.email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Host: 127.0.0.1"
+			placeholder="Email:"
 		/> <input
 			v-model="config.password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Port: 3306"
+			placeholder="Password:"
 		/><button
 			@click="setup()"
 			:disabled="loading"
