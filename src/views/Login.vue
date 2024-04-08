@@ -4,12 +4,14 @@
 			JSTune
 		</h2><input
 			ref="username"
+			v-model="email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Username"
 		/><input
+			v-model="password"
 			class="font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password"
-		/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
+		/><button @click="login({ email, password })" class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
 			Login
 		</button><router-link
 			to="/recover"
@@ -40,12 +42,14 @@
         },
 		methods: {
 			async login(creds) {
+				console.log(creds)
                 this.io.authenticate({
                     strategy: "local",
                     ...creds
                 }).then(profile => {
+					console.log('profile', profile)
                     this.userUpdate(profile?.user);
-                    this.$router.push("/admin/users")
+                    this.$router.push("/dashboard")
                 }).catch(e => {
                     console.error("Authentication error", e);
                     alert(e.message)
