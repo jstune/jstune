@@ -10,6 +10,7 @@
 			v-model="config.password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password:"
+			type="password"
 		/><button
 			@click="setup()"
 			:disabled="loading"
@@ -57,8 +58,7 @@
 				this.resolve(result);
 			},
 			async resolve(result) {
-				if (result && !result.ready) {
-				} else {
+				if (result && !result.ready) {} else {
 					this.$router.push('/login');
 				}
 				this.loading = false;

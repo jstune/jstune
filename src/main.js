@@ -48,7 +48,6 @@ router.beforeEach(async to => {
             }
         })
         await Promise.race([authenticate, timeout])
-        user.value = usr?.user
         if (
             ['/', '/setup', '/login', '/register', '/recover', '/disconnected'].includes(to.path) ||
             to.path.startsWith('/setup/')

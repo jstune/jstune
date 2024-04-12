@@ -11,6 +11,7 @@
 		/><input
 			class="font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password"
+			type="password"
 		/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
 			Request Access
 		</button><router-link
