@@ -19,12 +19,25 @@ const io = feathers()
 io.configure(feathers.socketio(socket))
 io.configure(feathers.authentication())
 
+io.io.on('disconnect', () => {
+    console.log('Disconnected from server') // @todo - Show a dialog notice
+    if (router.currentRoute.value.fullPath === '/login') {
+        router.push('/disconnected')
+    }
+});
+
+io.io.on('connect', () => {
+    if (router.currentRoute.value.fullPath === '/disconnected') {
+        router.push('/')
+    }
+});
+
 let user = ref()
 
 router.beforeEach(async to => {
     try {
         const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Re-authentication timed out')), 1000)
+            setTimeout(() => reject(new Error('Re-authentication timed out')), 300)
         })
         const authenticate = new Promise(async (resolve, reject) => {
             try {
@@ -36,15 +49,15 @@ router.beforeEach(async to => {
         })
         await Promise.race([authenticate, timeout])
         user.value = usr?.user
-        if (to.path === '/') return '/dashboard'
+        if (
+            ['/', '/setup', '/login', '/register', '/recover', '/disconnected'].includes(to.path) ||
+            to.path.startsWith('/setup/')
+        ) return '/dashboard'
     } catch (e) {
-        let uninstalled = []
-        user.value = null
-
+        const uninstalled = []
         const timeout = new Promise((_, reject) => {
             setTimeout(() => reject(new Error('Fetching facilities timed out')), 1000)
         })
-        
         const getUninstalledFacilities = new Promise(async (resolve, reject) => {
             try {
                 await io.service('setup').get()
@@ -54,18 +67,16 @@ router.beforeEach(async to => {
             }
         })
 
+        user.value = null
+
         try {
             await Promise.race([getUninstalledFacilities, timeout])
-            
             if (uninstalled.length && to.path !== '/setup/' + uninstalled[0].name) {
                 // Force going to next setup step if installation is not completed
                 return '/setup/' + uninstalled[0].name
             }
-            
-            // Force going to login page if not routing to one of the following routes
             if (!uninstalled.length && !['/login', '/register', '/recover'].includes(to.path)) return '/login'
         } catch(e) {
-            console.log('Server Error', e)
             if (!['/disconnected'].includes(to.path)) return '/disconnected'
         }
     }

@@ -1,12 +1,10 @@
 <template>
 	<TemplateSetup>
-		<h2 class="text-center mb-2">
-			Disconnected
-		</h2> <router-link
+		<router-link
 			to="/"
 			class="text-center block hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 		>
-			Try to re-connect
+			Disconnected from Server
 		</router-link>
 	</TemplateSetup>
 </template>
@@ -16,10 +14,16 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		created() {
-			setInterval(() => {
-				this.$router.push('/');
-			}, 250);
+		data: () => ({
+			interval: null
+		}),
+		mounted() {
+			this.interval = setInterval(() => {
+				this.$router.push('/')
+			}, 1000)
+		},
+		beforeUnmount() {
+			clearInterval(this.interval)
 		}
 	};
 
