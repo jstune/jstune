@@ -54,13 +54,13 @@ router.beforeEach(async to => {
             to.path.startsWith('/setup/')
         ) return '/dashboard'
     } catch (e) {
-        const uninstalled = []
+        let uninstalled = []
         const timeout = new Promise((_, reject) => {
             setTimeout(() => reject(new Error('Fetching facilities timed out')), 1000)
         })
         const getUninstalledFacilities = new Promise(async (resolve, reject) => {
             try {
-                await io.service('setup').get()
+                uninstalled = await io.service('setup').get()
                 resolve()
             } catch(e) {
                 reject(e)
