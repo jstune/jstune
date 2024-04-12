@@ -16,13 +16,10 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		inject: ["io", "user", "userUpdate"],
-		data: () => ({
-			email: '',
-			password: ''
-		}),
-		mounted() {
-			this.$refs?.username?.focus();
+		created() {
+			setInterval(() => {
+				this.$router.push('/');
+			}, 250);
 		}
 	};
 

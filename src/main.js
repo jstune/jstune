@@ -24,7 +24,7 @@ let user = ref()
 router.beforeEach(async to => {
     try {
         const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Re-authentication timed out')), 250)
+            setTimeout(() => reject(new Error('Re-authentication timed out')), 1000)
         })
         const authenticate = new Promise(async (resolve, reject) => {
             try {
@@ -42,7 +42,7 @@ router.beforeEach(async to => {
         user.value = null
 
         const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Fetching facilities timed out')), 250)
+            setTimeout(() => reject(new Error('Fetching facilities timed out')), 1000)
         })
         
         const getUninstalledFacilities = new Promise(async (resolve, reject) => {
@@ -57,18 +57,15 @@ router.beforeEach(async to => {
         try {
             await Promise.race([getUninstalledFacilities, timeout])
             
-            // if (uninstalled.length) console.log('Remaining configurations to install', uninstalled)
-            console.log('zac')
             if (uninstalled.length && to.path !== '/setup/' + uninstalled[0].name) {
-                console.log('zup')
                 // Force going to next setup step if installation is not completed
                 return '/setup/' + uninstalled[0].name
             }
-            console.log('xzz')
             
             // Force going to login page if not routing to one of the following routes
             if (!uninstalled.length && !['/login', '/register', '/recover'].includes(to.path)) return '/login'
         } catch(e) {
+            console.log('Server Error', e)
             if (!['/disconnected'].includes(to.path)) return '/disconnected'
         }
     }
