@@ -124,6 +124,10 @@ const routes = [{
         component: () => import('@/views/Privacy.vue')
     },
     {
+        path: '/disconnected',
+        component: () => import('@/views/Disconnected.vue')
+    },
+    {
         path: '/:catchAll(.*)',
         component: () => import('@/views/NotFound.vue'),
         props: true

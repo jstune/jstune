@@ -21,26 +21,56 @@ io.configure(feathers.authentication())
 
 let user = ref()
 
-// io.reAuthenticate().then(() => {}).catch(e => {})
-
 router.beforeEach(async to => {
     try {
-        // If user is logged in
-        user.value = (await io.reAuthenticate())?.user
+        const timeout = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Re-authentication timed out')), 250)
+        })
+        const authenticate = new Promise(async (resolve, reject) => {
+            try {
+                user.value = (await io.reAuthenticate())?.user
+                resolve()
+            } catch(e) {
+                reject(e)
+            }
+        })
+        await Promise.race([authenticate, timeout])
+        user.value = usr?.user
         if (to.path === '/') return '/dashboard'
     } catch (e) {
-        // If user is not logged in
+        let uninstalled = []
         user.value = null
-        // Retrieve potential missing configuration setups
-        let uninstalled = await io.service('setup').get()
-        // if (uninstalled.length) console.log('Remaining configurations to install', uninstalled)
-        if (uninstalled.length && to.path !== '/setup/' + uninstalled[0].name) {
-            // Force going to next setup step if installation is not completed
-            return '/setup/' + uninstalled[0].name
-        }
+
+        const timeout = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Fetching facilities timed out')), 250)
+        })
         
-        // Force going to login page if not routing to one of the following routes
-        if (!uninstalled.length && !['/login', '/register', '/recover'].includes(to.path)) return '/login'
+        const getUninstalledFacilities = new Promise(async (resolve, reject) => {
+            try {
+                await io.service('setup').get()
+                resolve()
+            } catch(e) {
+                reject(e)
+            }
+        })
+
+        try {
+            await Promise.race([getUninstalledFacilities, timeout])
+            
+            // if (uninstalled.length) console.log('Remaining configurations to install', uninstalled)
+            console.log('zac')
+            if (uninstalled.length && to.path !== '/setup/' + uninstalled[0].name) {
+                console.log('zup')
+                // Force going to next setup step if installation is not completed
+                return '/setup/' + uninstalled[0].name
+            }
+            console.log('xzz')
+            
+            // Force going to login page if not routing to one of the following routes
+            if (!uninstalled.length && !['/login', '/register', '/recover'].includes(to.path)) return '/login'
+        } catch(e) {
+            if (!['/disconnected'].includes(to.path)) return '/disconnected'
+        }
     }
 })
 
