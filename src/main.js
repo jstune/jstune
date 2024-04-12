@@ -35,6 +35,10 @@ io.io.on('connect', () => {
 let user = ref()
 
 router.beforeEach(async to => {
+    if (to.path === '/logout') {
+        await io.logout()
+        return '/login'
+    }
     try {
         const timeout = new Promise((_, reject) => {
             setTimeout(() => reject(new Error('Re-authentication timed out')), 300)

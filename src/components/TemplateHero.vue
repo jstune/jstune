@@ -26,9 +26,6 @@
 					<div class="flex-row-reverse w-1/2 h-full flex"><button
 							class="hover:bg-blue-900 px-2 h-full"
 							@click="$router.push('/logout')"
-							:class="{
-'bg-blue-900': $route.path === '/login'
-}"
 						><svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"

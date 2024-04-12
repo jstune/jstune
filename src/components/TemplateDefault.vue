@@ -26,9 +26,6 @@
 					<div class="flex-row-reverse w-1/2 h-full flex"><button
 							class="hover:bg-blue-900 px-2 h-full"
 							@click="$router.push('/logout')"
-							:class="{
-'bg-blue-900': $route.path === '/login'
-}"
 						><svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
@@ -40,8 +37,7 @@
 									d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
 									clip-rule="evenodd"
 								/>
-							</svg> </button>
-						<button
+							</svg> </button> <button
 							class="hover:bg-blue-900 px-2 h-full"
 							@click="$router.push('/profile')"
 							:class="{
@@ -73,8 +69,7 @@
 									d="M9.013 19.9a.75.75 0 01.877-.597 11.319 11.319 0 004.22 0 .75.75 0 11.28 1.473 12.819 12.819 0 01-4.78 0 .75.75 0 01-.597-.876zM9.754 22.344a.75.75 0 01.824-.668 13.682 13.682 0 002.844 0 .75.75 0 11.156 1.492 15.156 15.156 0 01-3.156 0 .75.75 0 01-.668-.824z"
 									clip-rule="evenodd"
 								/>
-							</svg> </button>
-					</div>
+							</svg> </button> </div>
 				</WrapperPage>
 			</div>
 			<WrapperPage class="flex-col md:flex-row h-full">
