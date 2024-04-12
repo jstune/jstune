@@ -23,27 +23,9 @@
 									clip-rule="evenodd"
 								/>
 							</svg> </button> </div>
-					<div class="flex-row-reverse w-1/2 h-full flex">
-						<button
+					<div class="flex-row-reverse w-1/2 h-full flex"><button
 							class="hover:bg-blue-900 px-2 h-full"
-							@click="$router.push('/profile')"
-							:class="{
-'bg-blue-900': $route.path === '/profile'
-}"
-						><svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24"
-								fill="currentColor"
-								class="text-slate-50 w-6 h-6"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z"
-									clip-rule="evenodd"
-								/>
-							</svg> </button><button
-							class="hover:bg-blue-900 px-2 h-full"
-							@click="$router.push('/login')"
+							@click="$router.push('/logout')"
 							:class="{
 'bg-blue-900': $route.path === '/login'
 }"
@@ -55,7 +37,24 @@
 							>
 								<path
 									fill-rule="evenodd"
-									d="M15.75 1.5a6.75 6.75 0 00-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 00-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 00.75-.75v-1.5h1.5A.75.75 0 009 19.5V18h1.5a.75.75 0 00.53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1015.75 1.5zm0 3a.75.75 0 000 1.5A2.25 2.25 0 0118 8.25a.75.75 0 001.5 0 3.75 3.75 0 00-3.75-3.75z"
+									d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+									clip-rule="evenodd"
+								/>
+							</svg> </button> <button
+							class="hover:bg-blue-900 px-2 h-full"
+							@click="$router.push('/profile')"
+							:class="{
+								'bg-blue-900': $route.path === '/profile'
+							}"
+						><svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="currentColor"
+								class="text-slate-50 w-6 h-6"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z"
 									clip-rule="evenodd"
 								/>
 							</svg> </button><button
@@ -73,8 +72,7 @@
 									d="M9.013 19.9a.75.75 0 01.877-.597 11.319 11.319 0 004.22 0 .75.75 0 11.28 1.473 12.819 12.819 0 01-4.78 0 .75.75 0 01-.597-.876zM9.754 22.344a.75.75 0 01.824-.668 13.682 13.682 0 002.844 0 .75.75 0 11.156 1.492 15.156 15.156 0 01-3.156 0 .75.75 0 01-.668-.824z"
 									clip-rule="evenodd"
 								/>
-							</svg> </button>
-					</div>
+							</svg> </button> </div>
 				</WrapperPage>
 			</div>
 			<WrapperPage class="flex-col md:flex-row h-full">
