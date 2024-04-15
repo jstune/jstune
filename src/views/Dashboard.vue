@@ -4,7 +4,7 @@
 
 			<div class="flex-col max-w-md place-self-center mt-8 mb-24 w-full flex md:max-w-4xl">
 				<h1 class="px-4 mb-4 mt-6 font-medium text-3xl w-full">
-					Todos...
+					Dashboard
 				</h1>
 				<div class="mt-6 relative mb-16 flex-col md:flex-row flex w-full px-4">
 					<div class="grid-cols-2 md:grid-cols-3 gap-11 grid w-full">

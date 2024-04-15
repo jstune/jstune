@@ -5,11 +5,11 @@ import {
 
 const routes = [{
         path: '/',
-        component: () => import('@/views/Todos.vue')
+        component: () => import('@/views/Dashboard.vue')
     },
     {
         path: '/dashboard',
-        component: () => import('@/views/Todos.vue')
+        component: () => import('@/views/Dashboard.vue')
     },
     {
         path: '/setup',

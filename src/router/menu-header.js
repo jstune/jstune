@@ -5,7 +5,7 @@ const icon = URL.createObjectURL(new Blob([home], {
 }))
 
 export default [{
-        label: 'Todos',
+        label: 'Dashboard',
         route: '/'
     },
     {
