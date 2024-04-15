@@ -69,7 +69,7 @@
 			async setup(create = false) {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.patch('swarm', {
+					.install('swarm', {
 						...this.config,
 						create
 					});

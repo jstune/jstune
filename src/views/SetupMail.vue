@@ -1,16 +1,44 @@
 <template>
 	<TemplateSetup>
 		<h2 class="mb-2">
-			Create Admin User
+			Setup sender email
 		</h2> <input
 			v-model="config.email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Email:"
-		/><input
+		/><a
+			class="hover:no-underline hover:text-sky-100 underline inline-block mb-2"
+			style="height:24px"
+			target="_blank"
+			href="https://security.google.com/settings/security/apppasswords"
+			v-if="config.email.includes('@gmail')"
+		>
+			Get Your Gmail App Password
+		</a><input
 			v-model="config.password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password:"
 			type="password"
+		/><input
+			v-model="config.host"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="Host: smtp.gmail.com"
+		/> <input
+			v-model="config.port"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="Port: 587"
+		/> <label class="block">Secure</label> <input
+			type="checkbox"
+			v-model="config.secure"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md"
+		/> <label class="block">Pool</label> <input
+			type="checkbox"
+			v-model="config.pool"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md"
+		/> <label class="block">Reject unauthorized</label> <input
+			type="checkbox"
+			v-model="config.rejectUnauthorized"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md"
 		/><button
 			@click="setup()"
 			:disabled="loading"
@@ -34,7 +62,12 @@
 		data: () => ({
 			config: {
 				email: '',
-				password: ''
+				password: '',
+				host: 'smtp.gmail.com',
+				port: 587,
+				secure: false,
+				pool: false,
+				rejectUnauthorized: true
 			},
 			loading: false
 		}),
@@ -45,15 +78,14 @@
 			async connect() {
 				this.loading = true;
 				const result = await this.io.service('setup')
-					.get('admin');
+					.get('mail');
 				this.resolve(result);
 			},
-			async setup(create = false) {
+			async setup() {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.install('admin', {
-						...this.config,
-						create
+					.install('mail', {
+						...this.config
 					});
 				this.resolve(result);
 			},

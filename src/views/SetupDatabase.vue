@@ -50,7 +50,7 @@
 			async setup() {
 				this.loading = true;
 				let result = await this.io.service('admin')
-					.patch('database', {
+					.install('database', {
 						...this.config,
 						create
 					});

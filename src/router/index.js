@@ -27,6 +27,10 @@ const routes = [{
                 component: () => import('@/views/SetupDatabase.vue')
             },
             {
+                path: 'mail',
+                component: () => import('@/views/SetupMail.vue')
+            },
+            {
                 path: 'admin',
                 component: () => import('@/views/SetupAdmin.vue')
             }
