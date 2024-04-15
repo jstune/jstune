@@ -1,7 +1,12 @@
 <template>
 	<TemplateHero title="Applications">
 		<WrapperPage class="p-6">
-			<div class="relative rounded-xl overflow-auto w-full">
+			<div class="relative rounded-xl overflow-auto w-full"><button
+					class="rounded p-2 bg-slate-200"
+					@click="getItems"
+				>
+					Reload
+				</button>
 				<div class="shadow-sm overflow-hidden my-8">
 
 					<table class="border-collapse table-auto w-full text-sm">
@@ -61,7 +66,7 @@
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 24 24"
 										fill="currentColor"
-										class="w-6 h-6"
+										class="mx-auto w-6 h-6"
 										v-if="item.State !== 'running'"
 									>
 										<path
@@ -69,8 +74,7 @@
 											d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
 											clip-rule="evenodd"
 										/>
-									</svg>
-									<svg
+									</svg> <svg
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 24 24"
 										fill="currentColor"
@@ -82,8 +86,7 @@
 											d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
 											clip-rule="evenodd"
 										/>
-									</svg>
-								</td>
+									</svg> </td>
 								<td
 									class="text-center border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"
 									:title="item.ImageID"
@@ -141,7 +144,13 @@
 				try {
 					this.items = await this.io.service(this.service)
 						.find({
-							query: {}
+							query: {
+								all: true,
+								limit: 100,
+								since: '',
+								// container ID or name
+								before: '' // container ID or name
+							}
 						});
 					console.log(this.items);
 				} catch (e) {
