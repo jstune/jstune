@@ -45,8 +45,8 @@ const routes = [{
         component: () => import('@/views/Router.vue')
     },
     {
-        path: '/cluster',
-        component: () => import('@/views/Cluster.vue')
+        path: '/swarm',
+        component: () => import('@/views/Swarm.vue')
     },
     {
         path: '/settings',

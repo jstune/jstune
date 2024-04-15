@@ -17,8 +17,8 @@ export default [{
         route: '/router'
     },
     {
-        label: 'Cluster',
-        route: '/cluster'
+        label: 'Swarm',
+        route: '/swarm'
     },
     {
         label: 'Users',
