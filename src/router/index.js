@@ -41,6 +41,10 @@ const routes = [{
         component: () => import('@/views/Home.vue')
     },
     {
+        path: '/router',
+        component: () => import('@/views/Router.vue')
+    },
+    {
         path: '/cluster',
         component: () => import('@/views/Cluster.vue')
     },

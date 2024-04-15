@@ -13,6 +13,10 @@ export default [{
         route: '/apps'
     },
     {
+        label: 'Router',
+        route: '/router'
+    },
+    {
         label: 'Cluster',
         route: '/cluster'
     },
