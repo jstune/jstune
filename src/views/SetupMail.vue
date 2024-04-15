@@ -3,35 +3,42 @@
 		<h2 class="mb-2">
 			Setup sender email
 		</h2> <input
-			v-model="config.email"
+			v-model="config.user"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Email:"
+			name="email"
 		/><a
 			class="hover:no-underline hover:text-sky-100 underline inline-block mb-2"
 			style="height:24px"
 			target="_blank"
 			href="https://security.google.com/settings/security/apppasswords"
-			v-if="config.email.includes('@gmail')"
+			v-if="config.user.includes('@gmail')"
 		>
-			Get Your Gmail App Password
+			Get your gmail app password
 		</a><input
-			v-model="config.password"
+			v-model="config.pass"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password:"
 			type="password"
+			name="password"
 		/><input
 			v-model="config.host"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Host: smtp.gmail.com"
+			name="host"
 		/> <input
 			v-model="config.port"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Port: 587"
+			placeholder="Port: 465"
+			type="number"
+			name="port"
 		/> <label class="block">Secure</label> <input
+			name="secure"
 			type="checkbox"
 			v-model="config.secure"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md"
 		/> <label class="block">Pool</label> <input
+			name="pool"
 			type="checkbox"
 			v-model="config.pool"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md"
@@ -39,7 +46,31 @@
 			type="checkbox"
 			v-model="config.rejectUnauthorized"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md"
+		/>
+		<h2
+			class="mt-10 mb-2"
+			style="height:24px"
+		>
+			Send a test email
+		</h2><input
+			name="receiver-email"
+			v-model="receiver"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="Receiver: example@gmail.com"
 		/><button
+			@click="setup(true)"
+			:disabled="loading"
+			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+			title="Install using already running database instance"
+		>
+			Send test email
+		</button>
+		<h2
+			class="mt-10"
+			style="height:24px"
+		>
+			Store sender
+		</h2><button
 			@click="setup()"
 			:disabled="loading"
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
@@ -61,14 +92,15 @@
 		},
 		data: () => ({
 			config: {
-				email: '',
-				password: '',
+				user: '',
+				pass: '',
 				host: 'smtp.gmail.com',
-				port: 587,
-				secure: false,
+				port: 465,
+				secure: true,
 				pool: false,
 				rejectUnauthorized: true
 			},
+			receiver: '',
 			loading: false
 		}),
 		async created() {
@@ -81,13 +113,20 @@
 					.get('mail');
 				this.resolve(result);
 			},
-			async setup() {
+			async setup(test = false) {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.install('mail', {
+					.update('mail', {
+						test,
+						receiver: this.receiver,
 						...this.config
 					});
-				this.resolve(result);
+				if (test) {
+					alert(result);
+					this.loading = false;
+				} else {
+					this.resolve(result);
+				}
 			},
 			async resolve(result) {
 				if (result && !result.ready) {} else {

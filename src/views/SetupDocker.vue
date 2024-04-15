@@ -88,7 +88,7 @@
 			async autoSetup() {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.install('docker', {
+					.update('docker', {
 						sudo: this.sudoPassword
 					});
 				this.resolve(result);
@@ -96,7 +96,7 @@
 			async setup() {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.install('docker', this.config);
+					.update('docker', this.config);
 				this.resolve(result);
 			},
 			async resolve(result) {

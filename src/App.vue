@@ -1,5 +1,5 @@
 <template>
-	<router-view style="width:551px" /> </template>
+	<router-view /> </template>
 <script>
 	export default {
 		data: () => ({})
