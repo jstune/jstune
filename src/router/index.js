@@ -3,42 +3,14 @@ import {
     createWebHistory
 } from 'vue-router'
 
-const routes = [{
-        path: '/',
-        component: () => import('@/views/Dashboard.vue')
-    },
+const routes = [
     {
         path: '/dashboard',
         component: () => import('@/views/Dashboard.vue')
     },
     {
-        path: '/setup',
-        children: [
-            {
-                path: 'docker',
-                component: () => import('@/views/SetupDocker.vue')
-            },
-            {
-                path: 'swarm',
-                component: () => import('@/views/SetupSwarm.vue')
-            },
-            {
-                path: 'database',
-                component: () => import('@/views/SetupDatabase.vue')
-            },
-            {
-                path: 'mail',
-                component: () => import('@/views/SetupMail.vue')
-            },
-            {
-                path: 'admin',
-                component: () => import('@/views/SetupAdmin.vue')
-            }
-        ]
-    },
-    {
         path: '/apps',
-        component: () => import('@/views/Home.vue')
+        component: () => import('@/views/Apps.vue')
     },
     {
         path: '/router',
@@ -134,6 +106,31 @@ const routes = [{
     {
         path: '/disconnected',
         component: () => import('@/views/Disconnected.vue')
+    },
+    {
+        path: '/setup',
+        children: [
+            {
+                path: 'docker',
+                component: () => import('@/views/SetupDocker.vue')
+            },
+            {
+                path: 'swarm',
+                component: () => import('@/views/SetupSwarm.vue')
+            },
+            {
+                path: 'database',
+                component: () => import('@/views/SetupDatabase.vue')
+            },
+            {
+                path: 'mail',
+                component: () => import('@/views/SetupMail.vue')
+            },
+            {
+                path: 'admin',
+                component: () => import('@/views/SetupAdmin.vue')
+            }
+        ]
     },
     {
         path: '/:catchAll(.*)',

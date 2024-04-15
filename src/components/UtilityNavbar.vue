@@ -7,8 +7,7 @@
 			class="outside"
 			@click="open = !open"
 		/>
-	</teleport>
-	<button
+	</teleport> <button
 		v-if="!sidebar"
 		v-bind="attributes"
 		@click="open = !open"
@@ -173,8 +172,7 @@
 				}"
 			>
 				{{ item.label }}
-			</span>
-			<img
+			</span> <img
 				v-if="item.icon && align === 'right-strong'"
 				:src="item.icon"
 				@click="item.route ? $router.push(item.route) : ''"
@@ -690,7 +688,7 @@
 				default: '40px',
 				unit: 'px',
 				controller: 'SLIDER'
-			},
+			}
 		},
 		data: () => ({
 			open: false,
@@ -704,6 +702,7 @@
 			attributes() {
 				const attributes = JSON.parse(JSON.stringify(this.$attrs));
 				delete attributes['vx-slotted']; /* TODO - Fix in editor source code */
+				/* TODO - Fix in editor source code */
 				return attributes;
 			},
 			leftBorderHeightComputed() {
@@ -781,7 +780,7 @@
 				this.small = this.minimize || this.sidebar || window.innerWidth < this.breakpoint;
 			},
 			setItems() {
-				let menu = this.menu ? JSON.parse(JSON.stringify(this.menu)) : null
+				let menu = this.menu ? JSON.parse(JSON.stringify(this.menu)) : null;
 				this.items = (menu || [{
 						label: 'Home',
 						route: '/'
@@ -793,7 +792,7 @@
 						label: 'More',
 						children: [{
 							label: 'More 1',
-							route: '/more-1',
+							route: '/more-1'
 						}, {
 							label: 'More 2',
 							route: '/more-2',
