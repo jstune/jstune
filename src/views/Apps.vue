@@ -1,7 +1,8 @@
 <template>
 	<TemplateHero title="Applications">
 		<WrapperPage class="p-6">
-			<div class="relative rounded-xl overflow-auto w-full"><button
+			<div class="relative overflow-auto w-full">
+				<button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
 				>
