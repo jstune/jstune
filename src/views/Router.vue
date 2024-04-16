@@ -2,7 +2,15 @@
 	<TemplateHero title="Hostname port routing">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
-				<button
+				<h2 class="text-center">
+					Make an A Record on your domain to 127.0.0.1.
+				</h2>
+				<h2 class="text-center">
+					Add hostname below and point i to wanted port or redirect url.
+				</h2>
+				<h2 class="text-center">
+					Static port is 6060 for already built distributions.
+				</h2><button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
 				>
