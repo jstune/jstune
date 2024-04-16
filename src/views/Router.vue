@@ -6,7 +6,7 @@
 					Make an A Record on your domain to 127.0.0.1.
 				</h2>
 				<h2 class="text-center">
-					Add hostname below and point i to wanted port or redirect url.
+					Add hostname below and point it to wanted port or redirect url.
 				</h2>
 				<h2 class="text-center">
 					Static port is 6060 for already built distributions.
