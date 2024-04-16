@@ -51,13 +51,14 @@
 			async setup(create = false) {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.install('admin', {
+					.update('admin', {
 						...this.config,
 						create
 					});
 				this.resolve(result);
 			},
 			async resolve(result) {
+				console.log('res', result)
 				if (result && !result.ready) {} else {
 					this.$router.push('/login');
 				}
