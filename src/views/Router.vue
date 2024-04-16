@@ -58,7 +58,6 @@
 						<tbody class="bg-white dark:bg-slate-800">
 							<tr>
 								<td class="text-ellipsis overflow-hidden border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-									1
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
@@ -146,7 +145,7 @@
 							</tr>
 							<tr v-for="item in items?.data">
 								<td class="text-ellipsis overflow-hidden border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-									1
+									{{ item.id }}
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
