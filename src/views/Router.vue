@@ -218,7 +218,7 @@
 										viewBox="0 0 24 24"
 										fill="currentColor"
 										class="w-6 h-6 mx-auto cursor-pointer hover:text-slate-700"
-										@click="remove(item)"
+										@click="removeItem(item)"
 									>
 										<path
 											fill-rule="evenodd"
