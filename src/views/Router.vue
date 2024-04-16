@@ -2,8 +2,11 @@
 	<TemplateHero title="Hostname port routing">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative rounded-xl overflow-auto w-full">
-				<button @click="getItems">
-					Refresh
+				<button
+					class="rounded p-2 bg-slate-200"
+					@click="getItems"
+				>
+					Reload
 				</button>
 				<div class="shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
