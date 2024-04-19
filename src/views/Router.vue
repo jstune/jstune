@@ -9,7 +9,22 @@
 					Add hostname below and point it to wanted port or redirect url.
 				</h2>
 				<h2 class="text-center">
-					Static port is 6060 for already built distributions.
+					Feathers port is 5050.
+				</h2>
+				<h2 class="text-center">
+					Static port is 6060.
+				</h2>
+				<h2 class="text-center">
+					Admin port is 9090.
+				</h2>
+				<h2 class="text-center">
+					Fallback port is 8080.
+				</h2>
+				<h2 class="text-center">
+					Http proxy port is 8000.
+				</h2>
+				<h2 class="text-center">
+					Https proxy port is 443.
 				</h2><button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
@@ -37,6 +52,9 @@
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Force HTTPS
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Subdomain fallback
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Created at
@@ -88,6 +106,13 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										v-model="create.force_https"
+										class="shadow"
+										type="checkbox"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.subdomain_fallback"
 										class="shadow"
 										type="checkbox"
 									/>
@@ -184,6 +209,13 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
+										type="checkbox"
+										v-model="item.subdomain_fallbac"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
 										v-model="item.created_at"
 									/>
 								</td>
@@ -263,7 +295,8 @@
 				redirect_url: '',
 				redirect_status: '',
 				port: '',
-				force_https: true
+				force_https: true,
+				subdomain_fallback: true
 			}
 		}),
 		async created() {
@@ -317,7 +350,8 @@
 					redirect_url: '',
 					redirect_status: '',
 					port: '',
-					force_https: true
+					force_https: true,
+					subdomain_fallback: true
 				};
 			}
 		}

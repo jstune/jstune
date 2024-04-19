@@ -9,6 +9,11 @@
 					@click="getItems"
 				>
 					Reload
+				</button><button
+					class="rounded p-2 bg-slate-200"
+					@click="renewSSLCertificates"
+				>
+					Renew certificates
 				</button>
 				<div class="shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
@@ -99,7 +104,6 @@
 									<input
 										class="shadow"
 										v-model="item.key"
-										style="height:20px"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -182,12 +186,14 @@
 			await this.getItems();
 		},
 		methods: {
+			async renewSSLCertificates() {
+				await this.io.service('jobs').remove('renew-ssl-certificates')
+			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
 					.find({
 						query: {}
 					});
-				console.log('items', this.items);
 			},
 			async createItem() {
 				try {
