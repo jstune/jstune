@@ -8,7 +8,7 @@
 				>
 					Reload
 				</button>
-				<div class="shadow-sm overflow-hidden my-8">
+				<div class="overflow-auto shadow-sm my-8">
 
 					<table class="border-collapse table-auto w-full text-sm">
 						<thead>
