@@ -248,6 +248,7 @@
 										viewBox="0 0 24 24"
 										fill="currentColor"
 										class="w-6 h-6 mx-auto cursor-pointer hover:text-slate-700"
+										@click="openItem(item)"
 									>
 										<path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
 										<path
@@ -305,6 +306,10 @@
 			await this.getItems();
 		},
 		methods: {
+			openItem(item) {
+				let port = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? ':8000' : ''
+				window.open('http://' + item.hostname + port, '_blank')
+			},
 			async getItems() {
 				try {
 					this.items = await this.io.service(this.service).find({
