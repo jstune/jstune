@@ -51,9 +51,7 @@
 						...creds
 					})
 					.then(profile => {
-						console.log('update user', profile)
 						this.userUpdate(profile?.user);
-						console.log('user updated, moving on')
 						this.$router.push("/dashboard");
 					})
 					.catch(e => {

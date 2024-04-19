@@ -2,7 +2,7 @@
 	<TemplateSetup>
 		<div v-if="platform === 'linux'">
 			<h2 class="mb-2">
-				Setup Docker Automagically
+				Setup Docker Automatically
 			</h2> <button
 				@click="autoSetup"
 				:disabled="loading"
@@ -17,7 +17,7 @@
 			/>
 		</div>
 		<h2 class="mb-2">
-			Connect with custom values
+			Connect to docker
 		</h2> <input
 			v-model="config.host"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
@@ -40,7 +40,7 @@
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 			title="Install using already running docker instance"
 		>
-			Connect to docker
+			Connect
 		</button>
 		<h2 class="mt-6">
 			Install and start docker desktop manually and try to reconnect.

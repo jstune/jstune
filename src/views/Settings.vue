@@ -110,6 +110,7 @@
 									<input
 										class="shadow"
 										v-model="item.value"
+										style="height:20px"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -187,7 +188,8 @@
 		},
 		methods: {
 			async renewSSLCertificates() {
-				await this.io.service('jobs').remove('renew-ssl-certificates')
+				await this.io.service('jobs')
+					.remove('renew-ssl-certificates');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)

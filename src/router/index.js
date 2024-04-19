@@ -129,6 +129,10 @@ const routes = [
             {
                 path: 'admin',
                 component: () => import('@/views/SetupAdmin.vue')
+            },
+            {
+                path: 'letsencrypt',
+                component: () => import('@/views/SetupLetsEncrypt.vue')
             }
         ]
     },
