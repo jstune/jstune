@@ -29,6 +29,10 @@ export default [{
         route: '/settings'
     },
     {
+        label: 'OAuth',
+        route: '/oauth-providers'
+    },
+    {
         label: 'One Click Apps',
         route: '/one-click'
     },

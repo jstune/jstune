@@ -25,6 +25,10 @@ const routes = [
         component: () => import('@/views/Settings.vue')
     },
     {
+        path: '/oauth-providers',
+        component: () => import('@/views/OAuthProviders.vue')
+    },
+    {
         path: '/users',
         component: () => import('@/views/Users.vue')
     },
