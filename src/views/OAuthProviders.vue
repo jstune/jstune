@@ -27,7 +27,7 @@
 									Secret
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Scopes
+									Scope
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Nonce
@@ -74,7 +74,7 @@
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
-										v-model="create.scopes"
+										v-model="create.scope"
 										class="shadow"
 									/>
 								</td>
@@ -161,7 +161,7 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
-										v-model="item.scopes"
+										v-model="item.scope"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -251,7 +251,7 @@
 				provider: '',
 				key: '',
 				secret: '',
-				scopes: '',
+				scope: '',
 				nonce: false,
 				token: '',
 				setup_url: ''
@@ -306,7 +306,7 @@
 					provider: '',
 					key: '',
 					secret: '',
-					scopes: '',
+					scope: '',
 					nonce: false,
 					token: '',
 					setup_url: ''

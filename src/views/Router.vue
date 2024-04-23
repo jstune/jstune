@@ -25,11 +25,19 @@
 				</h2>
 				<h2 class="text-center">
 					Https proxy port is 443.
+				</h2>
+				<h2 class="text-center">
+					/oauth/github?origin=http://localhost:3000/auth
 				</h2><button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
 				>
 					Reload
+				</button><button
+					class="ml-2 rounded p-2 bg-slate-200"
+					@click="saveItems"
+				>
+					Save all
 				</button>
 				<div class="shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
@@ -51,10 +59,16 @@
 									App Port
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Auto SSL
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Force HTTPS
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Subdomain fallback
+									Subdomain Fallback
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									OAuth Origin
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Created at
@@ -105,6 +119,13 @@
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
+										v-model="create.auto_ssl"
+										class="shadow"
+										type="checkbox"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
 										v-model="create.force_https"
 										class="shadow"
 										type="checkbox"
@@ -113,6 +134,13 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										v-model="create.subdomain_fallback"
+										class="shadow"
+										type="checkbox"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.oauth_origin"
 										class="shadow"
 										type="checkbox"
 									/>
@@ -204,6 +232,13 @@
 									<input
 										class="shadow"
 										type="checkbox"
+										v-model="item.auto_ssl"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										type="checkbox"
 										v-model="item.force_https"
 									/>
 								</td>
@@ -212,6 +247,13 @@
 										class="shadow"
 										type="checkbox"
 										v-model="item.subdomain_fallback"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										type="checkbox"
+										v-model="item.oauth_origin"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -298,7 +340,9 @@
 				redirect_status: '',
 				port: '',
 				force_https: true,
-				subdomain_fallback: true
+				auto_ssl: true,
+				subdomain_fallback: true,
+				oauth_origin: false
 			}
 		}),
 		async created() {
@@ -307,16 +351,17 @@
 		},
 		methods: {
 			openItem(item) {
-				let port = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? ':8000' : ''
-				window.open('http://' + item.hostname + port, '_blank')
+				let port = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? ':8000' : '';
+				window.open('http://' + item.hostname + port, '_blank');
 			},
 			async getItems() {
 				try {
-					this.items = await this.io.service(this.service).find({
-						query: {}
-					});
-				} catch(e) {
-					console.log(e.message)
+					this.items = await this.io.service(this.service)
+						.find({
+							query: {}
+						});
+				} catch (e) {
+					console.log(e.message);
 				}
 			},
 			async createItem() {
@@ -342,6 +387,12 @@
 					alert(e.message);
 				}
 			},
+			async saveItems() {
+				for (const item of this.items?.data || []) {
+					await this.updateItem(item);
+				}
+				alert('All Updated');
+			},
 			async removeItem(item) {
 				try {
 					await this.io.service(this.service)
@@ -359,7 +410,9 @@
 					redirect_status: '',
 					port: '',
 					force_https: true,
-					subdomain_fallback: true
+					auto_ssl: true,
+					subdomain_fallback: true,
+					oauth_origin: false
 				};
 			}
 		}
