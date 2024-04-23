@@ -36,7 +36,10 @@
 					To allow redirect, url must be registered here
 				</h2>
 				<h2 class="text-center">
-					http://localhost:8000/oauth/google?redirect=http://localhost:9
+					Only http://localhost:8000/oauth/google/callback needs to be added as redirect for providers
+				</h2>
+				<h2 class="text-center">
+					http://localhost:8000/oauth/google?redirect=http://localhost:9090
 				</h2><button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
