@@ -27,7 +27,16 @@
 					Https proxy port is 443.
 				</h2>
 				<h2 class="text-center">
-					http://supercool.localhost:8000/oauth/github?origin=http://localhost:3000/auth
+					Set oauth_origin in settings to where feathers is hosted so code can be exchanged.
+				</h2>
+				<h2 class="text-center">
+					Use ?redirect= to allow login in on custom page
+				</h2>
+				<h2 class="text-center">
+					To allow redirect, url must be registered here
+				</h2>
+				<h2 class="text-center">
+					http://localhost:8000/oauth/google?redirect=http://localhost:9
 				</h2><button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
