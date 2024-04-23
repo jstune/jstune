@@ -27,7 +27,7 @@
 					Https proxy port is 443.
 				</h2>
 				<h2 class="text-center">
-					/oauth/github?origin=http://localhost:3000/auth
+					http://banana.localhost:8000/oauth/github?origin=http://localhost:3000/auth
 				</h2><button
 					class="rounded p-2 bg-slate-200"
 					@click="getItems"
