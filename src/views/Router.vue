@@ -29,7 +29,10 @@
 				<h2 class="text-center">
 					Set oauth_origin in settings to match feathers url, so oauth callbacks is routed correctly
 				</h2>
-				<h2 class="text-center">
+				<h2
+					class="text-center"
+					style="height:24px"
+				>
 					Use ?app_url= to be redirected to another frontend url (Must be one below with oauth origin checked).
 				</h2>
 				<h2 class="text-center">
@@ -37,9 +40,6 @@
 				</h2>
 				<h2 class="text-center">
 					To allow redirect, url must be registered here
-				</h2>
-				<h2 class="text-center">
-					Only http://localhost:8000/oauth/google/callback needs to be added as redirect for providers
 				</h2>
 				<h2 class="text-center">
 					http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
