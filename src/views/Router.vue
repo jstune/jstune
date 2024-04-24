@@ -363,7 +363,7 @@
 				force_https: true,
 				auto_ssl: true,
 				subdomain_fallback: true,
-				oauth_origin: false
+				oauth_origin: true
 			}
 		}),
 		async created() {
@@ -433,7 +433,7 @@
 					force_https: true,
 					auto_ssl: true,
 					subdomain_fallback: true,
-					oauth_origin: false
+					oauth_origin: true
 				};
 			}
 		}
