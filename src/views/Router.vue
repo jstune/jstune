@@ -45,10 +45,10 @@
 					http://localhost:8000/oauth/google?redirect=http://localhost:9090
 				</h2>
 				<h2 class="text-center">
-					Re-instantiate github :
+					Re-instantiate github with new sc:
 				</h2>
 				<h2 class="text-center">
-					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&scope=read:user
+					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&scope=read:user%20r
 				</h2>
 				<h2 class="text-center">
 					http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
