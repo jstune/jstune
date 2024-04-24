@@ -45,10 +45,10 @@
 					http://localhost:8000/oauth/google?redirect=http://localhost:9090
 				</h2>
 				<h2 class="text-center">
-					Add more scopes:
+					Re-instantiate github :
 				</h2>
 				<h2 class="text-center">
-					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&redirect_uri=http://localhost:8000/oauth/github/callback&scope=read:user
+					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&scope=read:user
 				</h2>
 				<h2 class="text-center">
 					http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
