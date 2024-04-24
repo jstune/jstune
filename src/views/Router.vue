@@ -48,7 +48,7 @@
 					Re-instantiate github with new sc:
 				</h2>
 				<h2 class="text-center">
-					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&scope=read:user%20r
+					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&scope=read:user%20repo&require_auth=true
 				</h2>
 				<h2 class="text-center">
 					http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
