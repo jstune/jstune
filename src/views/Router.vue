@@ -42,15 +42,6 @@
 					Only http://localhost:8000/oauth/google/callback needs to be added as redirect for providers
 				</h2>
 				<h2 class="text-center">
-					http://localhost:8000/oauth/google?redirect=http://localhost:9090
-				</h2>
-				<h2 class="text-center">
-					Re-instantiate github with new sc:
-				</h2>
-				<h2 class="text-center">
-					https://github.com/login/oauth/authorize?client_id=d5a7d86763ba6aa12aad&scope=repo%20user&prompt=consent
-				</h2>
-				<h2 class="text-center">
 					http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
 				</h2><button
 					class="rounded p-2 bg-slate-200"
