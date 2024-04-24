@@ -27,10 +27,13 @@
 					Https proxy port is 443.
 				</h2>
 				<h2 class="text-center">
-					Set oauth_origin in settings to where feathers is hosted so code can be exchanged.
+					Set oauth_origin in settings to match feathers url, so oauth callbacks is routed correctly
 				</h2>
 				<h2 class="text-center">
-					Use ?redirect= to allow login in on custom page
+					Use ?app_url= to be redirected to another frontend url (Must be one below with oauth origin checked).
+				</h2>
+				<h2 class="text-center">
+					If url should not be routed here, uncheck Auto SSL
 				</h2>
 				<h2 class="text-center">
 					To allow redirect, url must be registered here
