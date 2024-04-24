@@ -38,6 +38,12 @@
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Setup URL
 								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Callback URL
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Consent URL
+								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Created at
 								</th>
@@ -98,10 +104,28 @@
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input class="shadow" />
+									<input
+										class="shadow"
+										readonly="readonly"
+									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input class="shadow" />
+									<input
+										class="shadow"
+										readonly="readonly"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										readonly="readonly"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										readonly="readonly"
+									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
 
@@ -186,13 +210,29 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
+										v-model="item.callback_url"
+										readonly="readonly"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										v-model="item.consent_url"
+										readonly="readonly"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
 										v-model="item.created_at"
+										readonly="readonly"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
 										v-model="item.updated_at"
+										readonly="readonly"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
@@ -280,9 +320,14 @@
 				}
 			},
 			async updateItem(oldItem) {
+				let clone = {
+					...oldItem
+				};
+				delete clone.consent_url;
+				delete clone.callback_url;
 				try {
 					const newItem = await this.io.service(this.service)
-						.update(oldItem.id, oldItem);
+						.update(oldItem.id, clone);
 					for (const key of Object.keys(oldItem)) {
 						oldItem[key] = newItem[key];
 					}
