@@ -6,7 +6,7 @@
 
 					<h2 class="my-4">
 						Basic app settings
-					</h2><input
+					</h2> <input
 						placeholder="App name"
 						class="px-4 py-2"
 					/><input
@@ -18,13 +18,11 @@
 					<h2 class="my-4">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
 					</h2>
-
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<h2 class="my-4">
 						One click installation browsing images from docker hub
 					</h2>
-
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<button
