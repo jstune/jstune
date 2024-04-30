@@ -169,11 +169,11 @@
 	import WrapperPage from '@/components/WrapperPage.vue';
 	import TemplateHero from '@/components/TemplateHero.vue';
 	export default {
+		inject: ['menus', 'io'],
 		components: {
 			WrapperPage,
 			TemplateHero
 		},
-		inject: ['menus', 'io'],
 		data: () => ({
 			items: null,
 			service: 'settings',
