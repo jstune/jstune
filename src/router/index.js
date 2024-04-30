@@ -87,10 +87,6 @@ const routes = [
         component: () => import('@/views/Recover.vue')
     },
     {
-        path: '/setup',
-        component: () => import('@/views/Setup.vue')
-    },
-    {
         path: '/search/:term?',
         component: () => import('@/views/SearchResult.vue'),
         props: true
