@@ -92,10 +92,6 @@ const routes = [
         props: true
     },
     {
-        path: '/todos',
-        component: () => import('@/views/Todos.vue')
-    },
-    {
         path: '/terms',
         component: () => import('@/views/Terms.vue')
     },
