@@ -33,7 +33,10 @@ io.io.on('connect', () => {
 });
 
 let user = ref()
-try { user.value = (await io.reAuthenticate())?.user } catch(e) {}
+
+io.reAuthenticate().then(user => {
+    user.value = user
+}).catch(e => {})
 
 router.beforeEach(async to => {
     if (to.path === '/logout') {
