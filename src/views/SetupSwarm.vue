@@ -3,10 +3,6 @@
 		<h2 class="mb-2">
 			Connect to swarm
 		</h2> <input
-			v-model="config.token"
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Token:"
-		/><input
 			v-model="config.ip"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="IP:"
@@ -14,6 +10,10 @@
 			v-model="config.port"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Port:"
+		/><input
+			v-model="config.token"
+			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
+			placeholder="Token:"
 		/> <select
 			v-model="config.role"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
