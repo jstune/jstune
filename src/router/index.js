@@ -129,6 +129,10 @@ const routes = [
             {
                 path: 'letsencrypt',
                 component: () => import('@/views/SetupLetsEncrypt.vue')
+            },
+            {
+                path: 'attached',
+                component: () => import('@/views/SetupAttached.vue')
             }
         ]
     },

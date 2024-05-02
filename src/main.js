@@ -50,7 +50,11 @@ router.beforeEach(async to => {
         const authenticate = new Promise(async (resolve, reject) => {
             try {
                 user.value = (await io.reAuthenticate())?.user
-                resolve()
+                if (user.value) {
+                    resolve()
+                } else {
+                    reject()
+                }
             } catch(e) {
                 reject(e)
             }
