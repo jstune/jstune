@@ -70,7 +70,6 @@
 				this.resolve(result);
 			},
 			async resolve(result) {
-				console.log('res', result)
 				if (result && !result.ready) {} else {
 					this.$router.push('/login');
 				}

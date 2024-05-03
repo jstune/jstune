@@ -72,7 +72,7 @@
 			async setup(create = false) {
 				this.loading = true;
 				let result = await this.io.service('setup')
-					.patch('database', {
+					.update('database', {
 						...this.config,
 						create
 					});
