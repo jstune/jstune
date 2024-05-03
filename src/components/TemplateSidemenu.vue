@@ -139,10 +139,7 @@
 				</div>
 				<div class="overflow-auto grow">
 					<slot>
-						<div
-							class="py-8 px-6"
-							style="width:1000px"
-						>
+						<div class="py-8 px-6">
 							Add Some Content To Template...
 						</div>
 					</slot>
