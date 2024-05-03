@@ -1,14 +1,17 @@
 <template>
 	<TemplateSidemenu title="Applications">
-		<div class="flex h-full">
-			<div class="flex-col flex w-1/2">
+		<div class="flex h-full flex-col md:flex-row">
+			<div class="flex-col flex w-full md:w-1/2">
 				<div class="p-4">
 					Searchbox
+				</div>
+				<div class="p-4 md:hidden">
+					Pagination
 				</div>
 				<div class="p-4 grow">
 					List items
 				</div>
-				<div class="p-4">
+				<div class="p-4 hidden md:block">
 					Pagination
 				</div>
 			</div>
