@@ -2,8 +2,8 @@
 	<TemplateSidemenu title="Applications">
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
-				<h2 class="font-extralight text-lg p-4 max-w-full">Header H2</h2>
-				<div class="flex p-4">
+				<h2 class="font-light text-lg p-4 max-w-full">Header H2</h2>
+				<div class="flex px-4">
 
 					<input
 						placeholder="Search"
@@ -12,14 +12,28 @@
 						Search
 					</button>
 				</div>
-				<div class="p-4 md:hidden">
-					Pagination
+				<div class="px-4 pt-4 md:hidden flex">
+					<button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+						Previous
+					</button>
+					<div class="text-sm justify-items-center content-center text-center grow">
+						Page 1 of 2
+					</div><button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+						Next
+					</button>
 				</div>
-				<div class="p-4 grow">
-					List items
+				<div class="px-4 pt-4 grow">
+					<button class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2">Button</button><button class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2">Button</button><button class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2">Button</button>
 				</div>
-				<div class="p-4 hidden md:block">
-					Pagination
+				<div class="p-4 hidden md:flex">
+					<button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+						Previous
+					</button>
+					<div class="text-sm justify-items-center content-center text-center grow">
+						Page 1 of 2
+					</div><button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+						Next
+					</button>
 				</div>
 			</div>
 			<div class="grow p-4">
