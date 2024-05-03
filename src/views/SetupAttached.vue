@@ -1,6 +1,6 @@
 <template>
 	<TemplateSetup>
-		<h2 class="mb-2">
+		<h2 class="text-center mb-2">
 			Node is connected to swarm
 		</h2>
 	</TemplateSetup>
