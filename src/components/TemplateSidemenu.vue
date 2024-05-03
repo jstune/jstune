@@ -110,8 +110,8 @@
 			</WrapperPage>
 		</SectionHeader>
 		<div class="flex-grow flex-col">
-			<div class="flex flex-col md:flex-row">
-				<div class="w-full md:w-56">
+			<div class="min-h-full flex flex-col md:flex-row">
+				<div class="min-h-full w-full md:w-56">
 					<UtilityNavbar
 						:menu="menus.SidebarMenu"
 						:color="''"
@@ -132,7 +132,8 @@
 						groupPaddingTop="0px"
 						:side="true"
 						groupWeight="606"
-						class="drop-shadow"
+						class="border-r min-h-full"
+						paddingX="20px"
 					>
 					</UtilityNavbar>
 				</div>

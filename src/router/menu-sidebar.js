@@ -7,54 +7,63 @@ const icon = URL.createObjectURL(new Blob([home], {
 export default [
     {
         label: 'General',
-    },
-    {
-        label: 'Users',
-        route: '/db1'
-    },
-    {
-        label: 'Settings',
-        route: '/db1'
+        children: [
+            {
+                label: 'Users',
+                route: '/db1'
+            },
+            {
+                label: 'Settings',
+                route: '/db1'
+            }
+        ]
     },
     {
         label: 'Authentication',
+        children: [
+            {
+                label: 'OAuth',
+                route: '/db1'
+            }
+        ]
     },
     {
-        label: 'OAuth',
-        route: '/db1'
-    },
-    {
-        label: `Reverse Proxy`
-    },
-    {
-        label: 'Routes',
-        route: '/db1'
+        label: `Reverse Proxy`,
+        children: [
+            {
+                label: 'Routes',
+                route: '/db1'
+            }
+        ]
     },
     {
         label: 'Docker Swarm',
-    },
-    {
-        label: 'Services',
-        route: '/db4'
-    },
-    {
-        label: 'Tasks',
-        route: '/db4'
-    },
-    {
-        label: 'Networks',
-        route: '/db4'
-    },
-    {
-        label: 'Volumes',
-        route: '/db4'
-    },
-    {
-        label: 'Images',
-        route: '/db4'
-    },
-    {
-        label: 'Nodes',
-        route: '/db4'
+        children: [
+            {
+                label: 'Services',
+                route: '/db4'
+            },
+            {
+                label: 'Tasks',
+                route: '/db4'
+            },
+            {
+                label: 'Networks',
+                route: '/db4'
+            },
+            {
+                label: 'Volumes',
+                route: '/db4'
+            },
+            {
+                label: 'Images',
+                route: '/db4'
+            },
+            {
+                label: 'Nodes',
+                route: '/db4'
+            }
+        ]
     }
+    
 ]
