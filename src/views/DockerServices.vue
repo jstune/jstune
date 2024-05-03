@@ -2,8 +2,13 @@
 	<TemplateSidemenu title="Applications">
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
-				<div class="p-4">
-					Searchbox
+				<div class="flex p-4">
+					<input
+						placeholder="Search"
+						class="rounded-l bg-slate-50 grow p-2"
+					/><button class="rounded-r p-2 bg-slate-100">
+						Search
+					</button>
 				</div>
 				<div class="p-4 md:hidden">
 					Pagination
