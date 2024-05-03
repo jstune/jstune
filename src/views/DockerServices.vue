@@ -1,8 +1,20 @@
 <template>
 	<TemplateSidemenu title="Applications">
 		<div class="flex h-full">
-			<div class="w-1/2"></div>
-			<div class="grow"></div>
+			<div class="flex-col flex w-1/2">
+				<div class="p-4">
+					Searchbox
+				</div>
+				<div class="p-4 grow">
+					List items
+				</div>
+				<div class="p-4">
+					Pagination
+				</div>
+			</div>
+			<div class="grow p-4">
+				Details & Actions
+			</div>
 		</div>
 	</TemplateSidemenu>
 </template>
