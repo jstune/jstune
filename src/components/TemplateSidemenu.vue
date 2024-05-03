@@ -132,7 +132,7 @@
 						groupPaddingTop="0px"
 						:side="true"
 						groupWeight="606"
-						class="border-r min-h-full"
+						class="py-4 border-r min-h-full"
 						paddingX="20px"
 					>
 					</UtilityNavbar>

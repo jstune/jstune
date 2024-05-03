@@ -10,7 +10,7 @@ const routes = [
     },
     {
         path: '/apps',
-        component: () => import('@/views/Apps.vue')
+        component: () => import('@/views/DockerServices.vue')
     },
     {
         path: '/router',
