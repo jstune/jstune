@@ -2,11 +2,13 @@
 	<TemplateSidemenu title="Applications">
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
+				<h2 class="font-extralight text-lg p-4 max-w-full">Header H2</h2>
 				<div class="flex p-4">
+
 					<input
 						placeholder="Search"
 						class="rounded-l bg-slate-50 grow p-2"
-					/><button class="rounded-r p-2 bg-slate-100">
+					/><button class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100">
 						Search
 					</button>
 				</div>
