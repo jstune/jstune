@@ -1,5 +1,5 @@
 <template>
-	<TemplateHero title="Applications">
+	<TemplateSidemenu title="Applications">
 		<WrapperPage class="p-6">
 			<div class="relative overflow-auto w-full">
 				<button
@@ -122,15 +122,15 @@
 				</div>
 			</div>
 		</WrapperPage>
-	</TemplateHero>
+	</TemplateSidemenu>
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
-	import TemplateHero from '@/components/TemplateHero.vue';
+	import TemplateSidemenu from '@/components/TemplateSidemenu.vue';
 	export default {
 		components: {
 			WrapperPage,
-			TemplateHero
+			TemplateSidemenu
 		},
 		inject: ['menus', 'io'],
 		data: () => ({
