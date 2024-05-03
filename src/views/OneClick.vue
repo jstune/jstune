@@ -4,7 +4,6 @@
 			<div class="md:max-w-xs w-full">
 				<UtilityNavbar
 					:menu="menus.SidebarMenu"
-					:sidebar="true"
 					:color="''"
 					:groupBackgroundColorSubmenu="'#ffffffff'"
 					leftBorderWidth="3px"
@@ -22,6 +21,7 @@
 					groupBackgroundColor="#ffffffff"
 					groupPaddingBottom="5px"
 					groupPaddingTop="0px"
+					:side="true"
 				>
 				</UtilityNavbar>
 			</div>
@@ -52,8 +52,7 @@
 								d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
 								clip-rule="evenodd"
 							/>
-						</svg>
-						<span>
+						</svg> <span>
 							Install
 						</span> </button>
 					<div class="bg-slate-100 -bottom-5 absolute h-0.5 left-4 right-4">
