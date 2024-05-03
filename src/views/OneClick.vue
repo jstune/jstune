@@ -17,11 +17,12 @@
 					leftBorderColor="#efebf0ff"
 					leftBorderColorHover="#efebf0ff"
 					groupSize="15px"
-					groupColor="#545454ff"
+					groupColor="#0f0b0bff"
 					groupBackgroundColor="#ffffffff"
-					groupPaddingBottom="5px"
+					groupPaddingBottom="0px"
 					groupPaddingTop="0px"
 					:side="true"
+					groupWeight="606"
 				>
 				</UtilityNavbar>
 			</div>

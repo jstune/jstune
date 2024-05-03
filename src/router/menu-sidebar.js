@@ -4,38 +4,57 @@ const icon = URL.createObjectURL(new Blob([home], {
     type: 'image/svg+xml'
 }))
 
-export default [{
-        label: 'Applications'
+export default [
+    {
+        label: 'General',
     },
     {
-        label: 'NodeJS',
-        route: '/',
+        label: 'Users',
+        route: '/db1'
     },
     {
-        label: 'PHP',
-        route: '/php',
+        label: 'Settings',
+        route: '/db1'
     },
     {
-        label: 'Databases',
+        label: 'Authentication',
     },
     {
-        label: `MySQL`,
-        children: [{
-            label: 'DB 1',
-            route: '/db1'
-        }, {
-            label: 'DB 2',
-            route: '/db2'
-        }]
+        label: 'OAuth',
+        route: '/db1'
     },
     {
-        label: `MongoDB`,
-        children: [{
-            label: 'DB 3',
-            route: '/db3'
-        }, {
-            label: 'DB 4',
-            route: '/db4'
-        }]
+        label: `Reverse Proxy`
     },
+    {
+        label: 'Routes',
+        route: '/db1'
+    },
+    {
+        label: 'Docker Swarm',
+    },
+    {
+        label: 'Services',
+        route: '/db4'
+    },
+    {
+        label: 'Tasks',
+        route: '/db4'
+    },
+    {
+        label: 'Networks',
+        route: '/db4'
+    },
+    {
+        label: 'Volumes',
+        route: '/db4'
+    },
+    {
+        label: 'Images',
+        route: '/db4'
+    },
+    {
+        label: 'Nodes',
+        route: '/db4'
+    }
 ]
