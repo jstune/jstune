@@ -41,7 +41,7 @@
 						@click="current = item"
 						class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
 					>
-						{{ item.name }}
+						{{ item.docker_task_id }}
 					</button>
 				</div>
 				<div class="p-4 hidden md:flex">
@@ -84,7 +84,7 @@
 		},
 		inject: ['menus', 'io'],
 		data: () => ({
-			service: 'docker_services',
+			service: 'docker_tasks',
 			items: null,
 			current: null,
 			search: ''
@@ -100,7 +100,7 @@
 						query.$limit = this.items?.limit;
 					}
 					if (this.search) {
-						query.name = {
+						query.docker_task_id = {
 							$like: `%${this.search}%`
 						};
 					}
