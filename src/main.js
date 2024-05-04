@@ -10,7 +10,7 @@ import menus from '@/router/menus.js'
 import feathers from '@feathersjs/client'
 import sio from 'socket.io-client'
 
-let domain = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? 'http://localhost:5050' : '/'
+let domain = ['jstune.com', 'studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? 'http://localhost:5050' : '/'
 const socket = sio(domain, {
     transports: ['websocket', 'polling']
 })
