@@ -6,25 +6,30 @@
 				<div class="flex px-4">
 
 					<input
+						v-model="search"
 						placeholder="Search"
+						@keypress.enter="getItems"
 						class="rounded-l bg-slate-50 grow p-2"
-					/><button class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100">
+					/><button
+						@click="getItems"
+						class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					>
 						Search
 					</button>
 				</div>
 				<div class="px-4 pt-4 md:hidden flex">
 					<button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
-						disabled="!items.skip"
+						disabled="!items?.skip"
 						@click="previous()"
 					>
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						{{items.skip}} - {{items.skip + items.data?.length}} of {{items.total}}
+						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
-						disabled="(items.skip + items.data?.length) >= items.data?.length"
+						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
 						@click="next()"
 					>
 						Next
@@ -42,16 +47,16 @@
 				<div class="p-4 hidden md:flex">
 					<button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
-						disabled="!items.skip"
+						disabled="!items?.skip"
 						@click="previous()"
 					>
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						{{items.skip}} - {{items.skip + items.data?.length}} of {{items.total}}
+						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
-						disabled="(items.skip + items.data?.length) >= items.data?.length"
+						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
 						@click="next()"
 					>
 						Next
@@ -81,7 +86,8 @@
 		data: () => ({
 			service: 'docker_nodes',
 			items: null,
-			current: null
+			current: null,
+			search: ''
 		}),
 		async created() {
 			await this.getItems();
@@ -92,6 +98,9 @@
 					const query = {};
 					if (this.items) {
 						query.$limit = this.items?.limit;
+					}
+					if (this.search) {
+						query.$like = `%${this.search}%`;
 					}
 					this.items = await this.io.service(this.service)
 						.find({
