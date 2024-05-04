@@ -13,31 +13,58 @@
 					</button>
 				</div>
 				<div class="px-4 pt-4 md:hidden flex">
-					<button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+					<button
+						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
+						disabled="!items.skip"
+						@click="previous()"
+					>
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						Page 1 of 2
-					</div><button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+						{{items.skip}} - {{items.skip + items.data?.length}} of {{items.total}}
+					</div><button
+						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
+						disabled="(items.skip + items.data?.length) >= items.data?.length"
+						@click="next()"
+					>
 						Next
 					</button>
 				</div>
 				<div class="px-4 pt-4 grow">
-					<button class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2">Button</button><button class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2">Button</button><button class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2">Button</button>
+					<button
+						v-for="item in items?.data"
+						@click="current = item"
+						class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
+					>
+						{{ item.hostname }}
+					</button>
 				</div>
 				<div class="p-4 hidden md:flex">
-					<button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+					<button
+						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
+						disabled="!items.skip"
+						@click="previous()"
+					>
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						Page 1 of 2
-					</div><button class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100">
+						{{items.skip}} - {{items.skip + items.data?.length}} of {{items.total}}
+					</div><button
+						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
+						disabled="(items.skip + items.data?.length) >= items.data?.length"
+						@click="next()"
+					>
 						Next
 					</button>
 				</div>
 			</div>
 			<div class="grow p-4">
-				Details & Actions
+				<h2 class="font-light text-lg max-w-full">
+					Details & Actions
+				</h2>
+				<pre>
+				{{current}}
+				</pre>
 			</div>
 		</div>
 	</TemplateSidemenu>
@@ -52,8 +79,9 @@
 		},
 		inject: ['menus', 'io'],
 		data: () => ({
-			service: 'apps',
-			items: null
+			service: 'docker_nodes',
+			items: null,
+			current: null
 		}),
 		async created() {
 			await this.getItems();
@@ -61,21 +89,26 @@
 		methods: {
 			async getItems() {
 				try {
+					const query = {};
+					if (this.items) {
+						query.$limit = this.items?.limit;
+					}
 					this.items = await this.io.service(this.service)
 						.find({
-							query: {
-								all: true,
-								limit: 100,
-								since: '',
-								// container ID or name
-								before: '' // container ID or name
-							}
+							query
 						});
-					console.log(this.items);
 				} catch (e) {
 					this.items = null;
 					console.error(e);
 				}
+			},
+			next() {
+				if (!this.items) return;
+				this.items.skip += this.items.limit;
+			},
+			previous() {
+				if (!this.items) return;
+				this.items.skip -= this.items.limit;
 			}
 		}
 	};

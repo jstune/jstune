@@ -40,6 +40,10 @@ export default [
         label: 'Docker Swarm',
         children: [
             {
+                label: 'Nodes',
+                route: '/db4'
+            },
+            {
                 label: 'Services',
                 route: '/db4'
             },
@@ -57,10 +61,6 @@ export default [
             },
             {
                 label: 'Images',
-                route: '/db4'
-            },
-            {
-                label: 'Nodes',
                 route: '/db4'
             }
         ]
