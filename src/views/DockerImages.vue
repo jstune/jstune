@@ -3,7 +3,7 @@
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
 				<h2 class="font-light text-lg p-4 max-w-full">
-					Docker Tasks
+					Docker Image
 				</h2>
 				<div class="flex px-4">
 
@@ -43,7 +43,7 @@
 						@click="current = item"
 						class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
 					>
-						{{ item.docker_task_id }}
+						{{ item.repo_tags || item.repo_digests }}
 					</button>
 				</div>
 				<div class="p-4 hidden md:flex">
@@ -86,7 +86,7 @@
 		},
 		inject: ['menus', 'io'],
 		data: () => ({
-			service: 'docker_tasks',
+			service: 'docker_images',
 			items: null,
 			current: null,
 			search: ''
@@ -102,9 +102,15 @@
 						query.$limit = this.items?.limit;
 					}
 					if (this.search) {
-						query.docker_task_id = {
-							$like: `%${this.search}%`
-						};
+						query.$or = [{
+							repo_tags: {
+								$like: `%${this.search}%`
+							}
+						}, {
+							repo_digests: {
+								$like: `%${this.search}%`
+							}
+						}];
 					}
 					this.items = await this.io.service(this.service)
 						.find({

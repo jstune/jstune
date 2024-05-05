@@ -2,7 +2,9 @@
 	<TemplateSidemenu title="Applications">
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
-				<h2 class="font-light text-lg p-4 max-w-full">Header H2</h2>
+				<h2 class="font-light text-lg p-4 max-w-full">
+					Docker Nodes
+				</h2>
 				<div class="flex px-4">
 
 					<input
@@ -26,7 +28,7 @@
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
+						{{items?.skip + 1}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
 						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
@@ -53,7 +55,7 @@
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
+						{{items?.skip + 1}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
 						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
