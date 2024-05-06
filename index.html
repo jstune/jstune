@@ -16,16 +16,23 @@
 	<!-- 404 redirect -->
 	<script type="text/javascript">
 		(function(l) {
+			console.log('ey', l)
 			if (l.search[1] === '/') {
+				console.log('passed')
 				var decoded = l.search.slice(1)
 					.split('&')
 					.map(function(s) {
 						return s.replace(/~and~/g, '&')
 					})
 					.join('?');
-				window.history.replaceState(null, null,
+				console.log('decoded', decoded)
+				console.log('hash', l.hash)
+				console.log('pathname', l.pathname)
+				console.log('pathname slices', l.pathname.slice(0, -1))
+				console.log('final', l.pathname.slice(0, -1) + decoded + l.hash)
+				/*window.history.replaceState(null, null,
 					l.pathname.slice(0, -1) + decoded + l.hash
-				);
+				);*/
 			}
 		}(window.location))
 
