@@ -13,16 +13,16 @@ export default [{
         route: '/router'
     },
     {
+        label: 'Settings',
+        route: '/settings'
+    },
+    {
         label: 'OAuth',
         route: '/oauth-providers'
     },
     {
         label: 'Users',
         route: '/users'
-    },
-    {
-        label: 'Settings',
-        route: '/settings'
     },
     {
         label: 'Docker Swarm',
