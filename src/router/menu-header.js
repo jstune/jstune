@@ -9,16 +9,16 @@ export default [{
         route: '/dashboard'
     },
     {
-        label: 'Apps',
-        route: '/apps'
-    },
-    {
         label: 'Router',
         route: '/router'
     },
     {
-        label: 'Swarm',
-        route: '/swarm'
+        label: 'OAuth',
+        route: '/oauth-providers'
+    },
+    {
+        label: 'Docker Swarm',
+        route: '/docker/nodes'
     },
     {
         label: 'Users',
@@ -27,13 +27,5 @@ export default [{
     {
         label: 'Settings',
         route: '/settings'
-    },
-    {
-        label: 'OAuth',
-        route: '/oauth-providers'
-    },
-    {
-        label: 'One Click Apps',
-        route: '/one-click'
-    },
+    }
 ]

@@ -9,16 +9,8 @@ const routes = [
         component: () => import('@/views/Dashboard.vue')
     },
     {
-        path: '/apps',
-        component: () => import('@/views/DockerServices.vue')
-    },
-    {
         path: '/router',
         component: () => import('@/views/Router.vue')
-    },
-    {
-        path: '/swarm',
-        component: () => import('@/views/Swarm.vue')
     },
     {
         path: '/settings',
@@ -31,44 +23,6 @@ const routes = [
     {
         path: '/users',
         component: () => import('@/views/Users.vue')
-    },
-    {
-        path: '/one-click',
-        component: () => import('@/views/OneClick.vue')
-    },
-    {
-        path: '/videos',
-        component: () => import('@/views/Videos.vue')
-    },
-    {
-        path: '/videos/:id',
-        component: () => import('@/views/Video.vue')
-    },
-    {
-        path: '/blog',
-        component: () => import('@/views/Blog.vue')
-    },
-    {
-        path: '/blog/:id',
-        component: () => import('@/views/BlogPost.vue'),
-        props: true
-    },
-    {
-        path: '/products',
-        component: () => import('@/views/Products.vue')
-    },
-    {
-        path: '/products/:id',
-        component: () => import('@/views/ProductDetail.vue'),
-        props: true
-    },
-    {
-        path: '/contact',
-        component: () => import('@/views/Contact.vue')
-    },
-    {
-        path: '/documentation',
-        component: () => import('@/views/Documentation.vue')
     },
     {
         path: '/profile',
@@ -141,6 +95,11 @@ const routes = [
         component: () => import('@/components/TemplateSidemenu.vue'),
         props: { renderer: 'view' },
         children: [
+            {
+                path: '',
+                component: () => import('@/views/DockerNodes.vue'),
+                props: { renderer: 'slot' }
+            },
             {
                 path: 'nodes',
                 component: () => import('@/views/DockerNodes.vue'),
