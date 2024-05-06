@@ -17,15 +17,15 @@ export default [{
         route: '/oauth-providers'
     },
     {
-        label: 'Docker Swarm',
-        route: '/docker/nodes'
-    },
-    {
         label: 'Users',
         route: '/users'
     },
     {
         label: 'Settings',
         route: '/settings'
+    },
+    {
+        label: 'Docker Swarm',
+        route: '/docker/nodes'
     }
 ]
