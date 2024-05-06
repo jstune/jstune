@@ -152,7 +152,7 @@
 			</div>
 		</div>
 		<SectionFooter class="flex flex-shrink-0">
-			<WrapperPage class="flex-col justify-center items-center h-full">
+			<WrapperPage class="flex-col justify-center items-center h-full max-w-full">
 				<UtilityNavbar
 					:menu="menus.FooterMenu"
 					topBorderHeight="1px"
