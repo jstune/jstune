@@ -1,5 +1,8 @@
 <template>
-	<TemplateSidemenu title="Applications" :renderer="renderer">
+	<TemplateSidemenu
+		title="Applications"
+		:renderer="renderer"
+	>
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
 				<h2 class="font-light text-lg p-4 max-w-full">
@@ -68,7 +71,12 @@
 			<div class="grow p-4">
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
-				</h2>
+				</h2><button
+					class="rounded p-2 bg-slate-200 ml-2"
+					@click="sync()"
+				>
+					Sync Docker
+				</button>
 				<pre>
 				{{current}}
 				</pre>
@@ -96,6 +104,10 @@
 			await this.getItems();
 		},
 		methods: {
+			async sync() {
+				await this.io.service(this.service)
+					.get('sync');
+			},
 			async getItems() {
 				try {
 					const query = {};
