@@ -72,7 +72,7 @@
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
 				</h2><button
-					class="rounded p-2 bg-slate-200 ml-2"
+					class="rounded p-2 bg-slate-200"
 					@click="sync()"
 				>
 					Sync Docker
@@ -105,8 +105,9 @@
 		},
 		methods: {
 			async sync() {
-				await this.io.service(this.service)
+				const result = await this.io.service(this.service)
 					.get('sync');
+				alert(JSON.stringify(result));
 			},
 			async getItems() {
 				try {
