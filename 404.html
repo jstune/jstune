@@ -6,31 +6,24 @@
 	<title>GitHub Pages Issue</title>
 	<script type="text/javascript">
 		var pathSegmentsToKeep = 0; // Set to 0 for custom domain
-        var l = window.location;
+		var l = window.location;
+        var replaceUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+			l.pathname.split('/')
+			.slice(0, 1 + pathSegmentsToKeep)
+			.join('/') + '/?/' +
+			l.pathname.slice(1)
+			.split('/')
+			.slice(pathSegmentsToKeep)
+			.join('/')
+			.replace(/&/g, '~and~') +
+			(l.search ? '&' + l.search.slice(1)
+				.replace(/&/g, '~and~') : '') +
+			l.hash
+		
+        console.log('replaceUrl', replaceUrl)
 
-        // Split pathname by '/'
-        var pathSegments = l.pathname.split('/');
 
-        // Determine the number of path segments
-        var numPathSegments = pathSegments.length;
-
-        // Reconstruct the URL with history mode
-        var newPath = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '');
-
-        // Add the path segments to the new path
-        for (var i = 0; i < numPathSegments - pathSegmentsToKeep; i++) {
-            newPath += '/' + pathSegments[i];
-        }
-
-        // Add the rest of the URL components
-        newPath += '/?/' + pathSegments.slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~');
-        if (l.search) {
-            newPath += '&' + l.search.slice(1).replace(/&/g, '~and~');
-        }
-        newPath += l.hash;
-
-        // Redirect to the new path
-        l.replace(newPath);
+        //l.replace(replaceUrl);
 
 	</script>
 </head>
