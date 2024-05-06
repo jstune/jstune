@@ -41,27 +41,45 @@ export default [
         children: [
             {
                 label: 'Nodes',
-                route: '/db4'
+                route: '/docker/nodes'
             },
             {
                 label: 'Services',
-                route: '/db4'
+                route: '/docker/services',
+                children: [
+                    {
+                        label: 'Environments',
+                        route: '/docker/services/environments'
+                    },
+                    {
+                        label: 'Networks',
+                        route: '/docker/services/networks'
+                    },
+                    {
+                        label: 'Ports',
+                        route: '/docker/services/ports'
+                    },
+                    {
+                        label: 'Volumes',
+                        route: '/docker/services/volumes'
+                    },
+                ]
             },
             {
                 label: 'Tasks',
-                route: '/db4'
+                route: '/docker/tasks'
             },
             {
                 label: 'Networks',
-                route: '/db4'
+                route: '/docker/networks'
             },
             {
                 label: 'Volumes',
-                route: '/db4'
+                route: '/docker/volumes'
             },
             {
                 label: 'Images',
-                route: '/db4'
+                route: '/docker/images'
             }
         ]
     }

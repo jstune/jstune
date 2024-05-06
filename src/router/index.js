@@ -137,6 +137,53 @@ const routes = [
         ]
     },
     {
+        path: '/docker',
+        children: [
+            {
+                path: 'nodes',
+                component: () => import('@/views/DockerNodes.vue')
+            },
+            {
+                path: 'services',
+                component: () => import('@/views/DockerServices.vue'),
+                children: [
+                    {
+                        path: 'environments',
+                        component: () => import('@/views/DockerServicesEnvironments.vue')
+                    },
+                    {
+                        path: 'networks',
+                        component: () => import('@/views/DockerServicesNetworks.vue')
+                    },
+                    {
+                        path: 'ports',
+                        component: () => import('@/views/DockerServicesPorts.vue')
+                    },
+                    {
+                        path: 'volumes',
+                        component: () => import('@/views/DockerServicesVolumes.vue')
+                    }
+                ]
+            },
+            {
+                path: 'tasks',
+                component: () => import('@/views/DockerTasks.vue')
+            },
+            {
+                path: 'networks',
+                component: () => import('@/views/DockerNetworks.vue')
+            },
+            {
+                path: 'volumes',
+                component: () => import('@/views/DockerVolumes.vue')
+            },
+            {
+                path: 'images',
+                component: () => import('@/views/DockerImages.vue')
+            }
+        ]
+    },
+    {
         path: '/:catchAll(.*)',
         component: () => import('@/views/NotFound.vue'),
         props: true
