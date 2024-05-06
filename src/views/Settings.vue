@@ -10,7 +10,7 @@
 				>
 					Reload
 				</button><button
-					class="rounded p-2 bg-slate-200"
+					class="rounded p-2 bg-slate-200 ml-2"
 					@click="renewSSLCertificates"
 				>
 					Renew certificates
