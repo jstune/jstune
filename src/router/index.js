@@ -138,51 +138,63 @@ const routes = [
     },
     {
         path: '/docker',
+        component: () => import('@/components/TemplateSidemenu.vue'),
+        props: { renderer: 'view' },
         children: [
             {
                 path: 'nodes',
-                component: () => import('@/views/DockerNodes.vue')
+                component: () => import('@/views/DockerNodes.vue'),
+                props: { renderer: 'slot' }
             },
             {
                 path: 'services',
                 children: [
                     {
                         path: '',
-                        component: () => import('@/views/DockerServices.vue')
+                        component: () => import('@/views/DockerServices.vue'),
+                        props: { renderer: 'slot' }
                     },
                     {
                         path: 'environments',
-                        component: () => import('@/views/DockerServicesEnvironments.vue')
+                        component: () => import('@/views/DockerServicesEnvironments.vue'),
+                        props: { renderer: 'slot' }
                     },
                     {
                         path: 'networks',
-                        component: () => import('@/views/DockerServicesNetworks.vue')
+                        component: () => import('@/views/DockerServicesNetworks.vue'),
+                        props: { renderer: 'slot' }
                     },
                     {
                         path: 'ports',
-                        component: () => import('@/views/DockerServicesPorts.vue')
+                        component: () => import('@/views/DockerServicesPorts.vue'),
+                        props: { renderer: 'slot' }
                     },
                     {
                         path: 'volumes',
-                        component: () => import('@/views/DockerServicesVolumes.vue')
+                        component: () => import('@/views/DockerServicesVolumes.vue'),
+                        props: { renderer: 'slot' }
                     }
                 ]
             },
             {
                 path: 'tasks',
-                component: () => import('@/views/DockerTasks.vue')
+                component: () => import('@/views/DockerTasks.vue'),
+                props: { renderer: 'slot' }
             },
             {
                 path: 'networks',
-                component: () => import('@/views/DockerNetworks.vue')
+                component: () => import('@/views/DockerNetworks.vue'),
+                props: { renderer: 'slot' }
             },
             {
                 path: 'volumes',
-                component: () => import('@/views/DockerVolumes.vue')
+                component: () => import('@/views/DockerVolumes.vue'),
+                props: { renderer: 'slot' }
             },
             {
                 path: 'images',
-                component: () => import('@/views/DockerImages.vue')
+                component: () => import('@/views/DockerImages.vue'),
+                props: { renderer: 'slot' }
             }
         ]
     },
