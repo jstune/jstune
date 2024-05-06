@@ -145,8 +145,11 @@ const routes = [
             },
             {
                 path: 'services',
-                component: () => import('@/views/DockerServices.vue'),
                 children: [
+                    {
+                        path: '',
+                        component: () => import('@/views/DockerServices.vue')
+                    },
                     {
                         path: 'environments',
                         component: () => import('@/views/DockerServicesEnvironments.vue')
