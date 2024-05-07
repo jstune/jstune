@@ -12,21 +12,16 @@
 					<h2 class="my-4">
 						Basic app settings
 					</h2> <input
-						placeholder="App name"
+						placeholder="Name"
 						class="px-4 py-2"
 					/><input
-						placeholder="App port"
+						placeholder="Slug"
 						class="ml-4 px-4 py-2"
 					/>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<h2 class="my-4">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
-					</h2>
-				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<h2 class="my-4">
-						One click installation browsing images from docker hub
 					</h2>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
@@ -45,7 +40,20 @@
 						Clone using Github (With option to autodeploy using push webhooks)
 					</h2><input
 						placeholder="Repository"
-						class="px-4 py-2"
+						class="px-4 py-2 w-full"
+					/>
+				</div>
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
+					<h2 class="my-4">
+						One click installation browsing images from docker hub
+					</h2>
+				</div>
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
+					<label class="block mb-2">Docker Compose</label> <textarea
+						class="w-full p-4"
+						v-model="dockerComposeFile"
+						rows="10"
+						placeholder="docker-compose.override.yml"
 					/>
 				</div>
 				<div class="text-right">
@@ -71,7 +79,9 @@
 			SectionHero
 		},
 		props: ['renderer'],
-		data: () => ({})
+		data: () => ({
+			dockerComposeFile: ``
+		})
 	};
 
 </script>
