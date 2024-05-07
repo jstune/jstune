@@ -9,29 +9,29 @@
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
-					<h2 class="my-4">
+					<label class="block my-2">
 						Basic app settings
-					</h2> <input
+					</label> <input
 						placeholder="Name"
-						class="px-4 py-2"
+						class="px-4 py-2 block w-full mb-4"
 					/><input
 						placeholder="Slug"
-						class="ml-4 px-4 py-2"
+						class="px-4 py-2 block w-full"
 					/>
 				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<h2 class="my-4">
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
-						<button
-							class="rounded p-2 bg-slate-200 block w-full mt-2"
-							@click="connect()"
-						>
-							Select file
-						</button>
-					</h2>
+					</label><button
+						class="rounded p-2 bg-slate-200 block w-full mt-2"
+						@click="connect()"
+					>
+						Select file
+					</button>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<button
+					<label class="block my-2">
+						Clone using Github (With option to autodeploy using push webhooks)
+					</label><button
 						class="rounded p-2 bg-slate-200"
 						@click="connect()"
 					>
@@ -41,21 +41,18 @@
 						@click="connect()"
 					>
 						Select repository
-					</button>
-					<h2 class="my-4">
-						Clone using Github (With option to autodeploy using push webhooks)
-					</h2><input
+					</button> <input
 						placeholder="Repository url"
-						class="px-4 py-2 w-full"
+						class="mt-2 px-4 py-2 w-full"
 					/>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<h2 class="my-4">
+					<label class="block my-2">
 						One click installation browsing images from docker hub
-					</h2>
+					</label>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="block mb-2">Docker Compose</label> <textarea
+					<label class="block my-2">Docker Compose</label> <textarea
 						class="w-full p-4"
 						v-model="dockerComposeFile"
 						rows="10"
