@@ -138,12 +138,16 @@
 		}),
 		methods: {
 			async deploy() {
+				this.io.service('apps')
+					.create({
+						name: this.name
+					});
 				let repository = this.repository;
 				if (this.files.length) {
-					repository = (await this.packTar())
-						.buffer;
+					repository = await this.packTar();
+					console.log('repo', repository.buffer);
 				}
-				this.io.service('deploy')
+				const res = await this.io.service('apps')
 					.create({
 						name: this.name,
 						slug: this.slug,
@@ -151,6 +155,7 @@
 						autodeploy: this.autodeploy,
 						dockerComposeFile: this.dockerComposeFile
 					});
+				console.log('res', res);
 			},
 			async packTar() {
 				let tape = new Tar();
