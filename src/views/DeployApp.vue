@@ -47,26 +47,7 @@
 						placeholder="Repository"
 						class="px-4 py-2"
 					/>
-				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<button
-						class="rounded p-2 bg-slate-200"
-						@click="connect()"
-					>
-						Connect to Gitlab
-					</button><button
-						class="rounded p-2 bg-slate-200 ml-4"
-						@click="connect()"
-					>
-						Select repository
-					</button>
-					<h2 class="my-4">
-						Clone using Gitlab (With option to autodeploy using push webhook)
-					</h2><input
-						placeholder="Repository"
-						class="px-4 py-2"
-					/>
-				</div><button
+				</div> <button
 					class="rounded p-2 bg-slate-200"
 					@click="connect()"
 				>
