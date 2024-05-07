@@ -28,7 +28,7 @@
 						Select files
 					</button><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
-						@click="uploadFold()"
+						@click="uploadFolde()"
 					>
 						Select folder
 					</button><button
@@ -126,7 +126,7 @@
 					input.multiple = false;
 					input.onchange = async () => {
 						let file = Array.from(input.files)[0];
-						let files = await untar(buffer);
+						let files = await untar(await file.arrayBuffer());
 						for await (let file of files) {
 							this.files.push({
 								buffer: file.buffer,
