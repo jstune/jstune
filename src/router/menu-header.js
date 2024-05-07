@@ -25,11 +25,11 @@ export default [{
         route: '/users'
     },
     {
-        label: 'Docker',
-        route: '/docker/apps'
-    },
-    {
         label: 'Deploy',
         route: '/deploy'
+    },
+    {
+        label: 'Docker',
+        route: '/docker/apps'
     }
 ]
