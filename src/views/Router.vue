@@ -16,14 +16,8 @@
 				<h2 class="text-center">
 					Feathers = 5050, Static = 6060, Admin = 9090, Fallback = 8080, Http = 8000, Https = 443
 				</h2>
-				<h2
-					class="text-center"
-					style="height:24px"
-				>
-					?app_url= will redirect to another url (oauth origin required)
-				</h2>
 				<h2 class="text-center">
-					Ex: http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
+					Custom redir: http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
 				</h2>
 				<div class="flex-row-reverse flex">
 					<button
