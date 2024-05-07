@@ -65,6 +65,11 @@
 						@click="connect()"
 					>
 						Select repository
+					</button><button
+						class="rounded p-2 bg-slate-200 ml-4"
+						@click="autodeploy = !autodeploy"
+					>
+						{{ autodeploy ? 'Autodeploy on' : 'Autodeploy off' }}
 					</button> <input
 						v-model="repository"
 						placeholder="Repository url"
