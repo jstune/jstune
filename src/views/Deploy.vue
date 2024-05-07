@@ -92,7 +92,7 @@
 				<div class="text-right">
 					<button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="connect()"
+						@click="deploy()"
 					>
 						Launch
 					</button>
