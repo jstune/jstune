@@ -53,6 +53,11 @@
 						@click="packTar()"
 					>
 						Pack tar
+					</button><button
+						class="rounded p-2 bg-slate-200 block w-full mt-2"
+						@click="resolveDockerCompose()"
+					>
+						Find docker compose
 					</button> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						{{files.length}}
@@ -154,6 +159,10 @@
 				}
 				return tape.out;
 			},
+			async resolveDockerCompose() {
+				const file = this.files.find(f => f.name.endsWith('docker-compose.yml'));
+				console.log('found it', file);
+			},
 			async uploadZip() {
 				return new Promise(resolve => {
 					let input = document.createElement('input');
@@ -163,14 +172,12 @@
 						let file = Array.from(input.files)[0];
 						const {
 							entries
-						} = await unzip(buffer);
-						console.log('entries', entries);
-						for await (let file of Object.entries(entries)) {
-							console.log('file', file);
-							/*this.files.push({
-								buffer: file.buffer,
-								name: file.name
-							})*/
+						} = await unzip(await file.arrayBuffer());
+						for await (const [name, entry] of Object.entries(entries)) {
+							this.files.push({
+								buffer: await entry.arrayBuffer(),
+								name
+							});
 						}
 						resolve();
 					};
