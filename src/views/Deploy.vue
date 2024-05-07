@@ -12,9 +12,11 @@
 					<label class="block my-2">
 						Basic app settings
 					</label> <input
+						v-model="name"
 						placeholder="Name"
 						class="px-4 py-2 block w-full mb-4"
 					/><input
+						v-model="slug"
 						placeholder="Slug"
 						class="px-4 py-2 block w-full"
 					/>
@@ -64,6 +66,7 @@
 					>
 						Select repository
 					</button> <input
+						v-model="repository"
 						placeholder="Repository url"
 						class="mt-2 px-4 py-2 w-full"
 					/>
@@ -106,18 +109,37 @@
 			SectionHero
 		},
 		props: ['renderer'],
+		inject: ['io'],
 		data: () => ({
 			dockerComposeFile: ``,
-			files: []
+			files: [],
+			name: '',
+			slug: '',
+			repository: '',
+			autodeploy: false
 		}),
 		methods: {
+			async deploy() {
+				let repository = this.repository;
+				if (this.files.length) {
+					repository = (await this.packTar())
+						.buffer;
+				}
+				this.io.service('deploy')
+					.create({
+						name: this.name,
+						slug: this.slug,
+						repository,
+						autodeploy: this.autodeploy,
+						dockerComposeFile: this.dockerComposeFile
+					});
+			},
 			async packTar() {
 				let tape = new Tar();
 				for await (let file of this.files) {
 					tape.append(file.name, new Uint8Array(file.buffer));
 				}
-				let result = tape.out;
-				console.log(result);
+				return tape.out;
 			},
 			async uploadTar() {
 				return new Promise(resolve => {
