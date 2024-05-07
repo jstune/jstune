@@ -40,6 +40,11 @@
 						Select tar
 					</button><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
+						@click="uploadZip()"
+					>
+						Select zip
+					</button><button
+						class="rounded p-2 bg-slate-200 block w-full mt-2"
 						@click="files = []"
 					>
 						Clear files
@@ -107,6 +112,9 @@
 	import SectionHero from '@/components/SectionHero.vue';
 	import Tar from 'tar-js';
 	import untar from 'js-untar';
+	import {
+		unzip
+	} from 'unzipit';
 	export default {
 		components: {
 			WrapperPage,
@@ -145,6 +153,29 @@
 					tape.append(file.name, new Uint8Array(file.buffer));
 				}
 				return tape.out;
+			},
+			async uploadZip() {
+				return new Promise(resolve => {
+					let input = document.createElement('input');
+					input.type = 'file';
+					input.multiple = false;
+					input.onchange = async () => {
+						let file = Array.from(input.files)[0];
+						const {
+							entries
+						} = await unzip(buffer);
+						console.log('entries', entries);
+						for await (let file of Object.entries(entries)) {
+							console.log('file', file);
+							/*this.files.push({
+								buffer: file.buffer,
+								name: file.name
+							})*/
+						}
+						resolve();
+					};
+					input.click();
+				});
 			},
 			async uploadTar() {
 				return new Promise(resolve => {
