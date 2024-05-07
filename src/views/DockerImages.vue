@@ -4,7 +4,7 @@
 		:renderer="renderer"
 	>
 		<div class="flex h-full flex-col md:flex-row">
-			<div class="flex-col flex w-full md:w-1/2">
+			<div class="flex-col flex w-full md:w-1/2 flex-shrink-0">
 				<h2 class="font-light text-lg p-4 max-w-full">
 					Images
 				</h2>
@@ -68,7 +68,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="grow p-4">
+			<div class="grow p-4 overflow-auto">
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
 				</h2>
