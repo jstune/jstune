@@ -33,6 +33,11 @@ const routes = [
                 path: 'users',
                 component: () => import('@/views/Users.vue'),
                 props: { renderer: 'slot' },
+            },
+            {
+                path: 'deploy',
+                component: () => import('@/views/Deploy.vue'),
+                props: { renderer: 'slot' },
             }
         ]
     },

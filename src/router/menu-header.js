@@ -27,5 +27,9 @@ export default [{
     {
         label: 'Docker',
         route: '/docker/apps'
+    },
+    {
+        label: 'Deploy',
+        route: '/deploy'
     }
 ]
