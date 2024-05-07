@@ -1,5 +1,5 @@
 <template>
-	<TemplateDefault>
+	<TemplateDefault :renderer="renderer">
 		<WrapperPage class="flex-col">
 
 			<div class="flex-col max-w-md place-self-center mt-8 mb-24 w-full flex md:max-w-4xl">
@@ -126,6 +126,7 @@
 			WrapperPage,
 			TemplateDefault
 		},
+		props: ['renderer'],
 		data: () => ({})
 	};
 

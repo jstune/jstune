@@ -1,5 +1,9 @@
 <template>
-	<div class="h-screen flex-col flex">
+	<slot v-if="renderer === 'slot'" />
+	<div
+		v-else=""
+		class="h-screen flex-col flex"
+	>
 		<SectionHeader class="flex-col md:h-28 flex flex-shrink-0">
 			<div class="flex bg-blue-950 h-10 w-full flex-shrink-0">
 				<WrapperPage class="h-full max-w-full">
@@ -108,7 +112,8 @@
 			</WrapperPage>
 		</SectionHeader>
 		<div class="flex-grow flex-col">
-			<slot>
+			<render-view v-if="renderer === 'view'" />
+			<slot v-else="">
 				<div class="py-8 px-6">
 					Add Some Content To Template...
 				</div>
@@ -147,6 +152,7 @@
 	import UtilityNavbar from '@/components/UtilityNavbar.vue';
 	export default {
 		inject: ['menus'],
+		props: ['renderer'],
 		components: {
 			WrapperPage,
 			SectionFooter,

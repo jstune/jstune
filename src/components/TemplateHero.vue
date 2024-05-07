@@ -1,4 +1,5 @@
 <template>
+	<slot v-if="renderer==='slot'" />
 	<div class="h-screen flex-col flex">
 		<SectionHeader class="flex-col md:h-28 flex flex-shrink-0">
 			<div class="flex bg-blue-950 h-10 w-full flex-shrink-0">
@@ -113,7 +114,8 @@
 			</h1>
 		</SectionHero>
 		<div class="flex-grow flex-col">
-			<slot>
+			<router-view v-if="renderer==='view'" />
+			<slot v-else="">
 				<div class="py-8 px-6">
 					Add Some Content To Template...
 				</div>
@@ -157,6 +159,10 @@
 			title: {
 				type: String,
 				default: 'Vue Play Hero Title'
+			},
+			renderer: {
+				type: String,
+				default: ''
 			}
 		},
 		components: {
