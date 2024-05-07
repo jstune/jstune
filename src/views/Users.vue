@@ -1,5 +1,5 @@
 <template>
-	<TemplateHero title="Users">
+	<TemplateHero title="Users" :renderer="renderer">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<button

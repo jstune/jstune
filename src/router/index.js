@@ -5,24 +5,36 @@ import {
 
 const routes = [
     {
-        path: '/dashboard',
-        component: () => import('@/views/Dashboard.vue')
-    },
-    {
-        path: '/router',
-        component: () => import('@/views/Router.vue')
-    },
-    {
-        path: '/settings',
-        component: () => import('@/views/Settings.vue')
-    },
-    {
-        path: '/oauth-providers',
-        component: () => import('@/views/OAuthProviders.vue')
-    },
-    {
-        path: '/users',
-        component: () => import('@/views/Users.vue')
+        path: '/',
+        component: () => import('@/components/TemplateHero.vue'),
+        props: { renderer: 'view' },
+        children: [
+            {
+                path: 'dashboard',
+                component: () => import('@/views/Dashboard.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'router',
+                component: () => import('@/views/Router.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'settings',
+                component: () => import('@/views/Settings.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'oauth-providers',
+                component: () => import('@/views/OAuthProviders.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'users',
+                component: () => import('@/views/Users.vue'),
+                props: { renderer: 'slot' },
+            }
+        ]
     },
     {
         path: '/profile',

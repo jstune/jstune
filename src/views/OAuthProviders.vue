@@ -1,5 +1,5 @@
 <template>
-	<TemplateHero title="OAuth Providers">
+	<TemplateHero title="OAuth Providers" :renderer="renderer">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<h2 class="text-center">
@@ -285,6 +285,7 @@
 			TemplateHero
 		},
 		inject: ['menus', 'io'],
+		props: ['renderer'],
 		data: () => ({
 			items: null,
 			service: 'oauth_providers',

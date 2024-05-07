@@ -1,5 +1,5 @@
 <template>
-	<TemplateHero title="Settings">
+	<TemplateHero title="Settings" :renderer="renderer">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<h2 class="text-center">
@@ -170,6 +170,7 @@
 	import TemplateHero from '@/components/TemplateHero.vue';
 	export default {
 		inject: ['menus', 'io'],
+		props: ['renderer'],
 		components: {
 			WrapperPage,
 			TemplateHero

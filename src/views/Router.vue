@@ -1,9 +1,9 @@
 <template>
-	<TemplateHero title="Hostname port routing">
+	<TemplateHero title="Hostname port routing" :renderer="renderer">
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<h2 class="text-center">
-					Make an A Record on your domain to 127.0.0.1.
+					Make an A Record on your domain to 127.0.0.1. {{renderer}}
 				</h2>
 				<h2 class="text-center">
 					Add hostname below and point it to wanted port or redirect url.
@@ -346,6 +346,7 @@
 			TemplateHero
 		},
 		inject: ['menus', 'io'],
+		props: ['renderer'],
 		data: () => ({
 			items: null,
 			service: 'proxy',

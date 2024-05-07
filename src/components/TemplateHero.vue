@@ -1,6 +1,6 @@
 <template>
 	<slot v-if="renderer==='slot'" />
-	<div class="h-screen flex-col flex">
+	<div v-else class="h-screen flex-col flex">
 		<SectionHeader class="flex-col md:h-28 flex flex-shrink-0">
 			<div class="flex bg-blue-950 h-10 w-full flex-shrink-0">
 				<WrapperPage class="h-full max-w-full">
