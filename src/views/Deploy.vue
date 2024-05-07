@@ -22,6 +22,12 @@
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<h2 class="my-4">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
+						<button
+							class="rounded p-2 bg-slate-200 block w-full mt-2"
+							@click="connect()"
+						>
+							Select file
+						</button>
 					</h2>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
@@ -39,7 +45,7 @@
 					<h2 class="my-4">
 						Clone using Github (With option to autodeploy using push webhooks)
 					</h2><input
-						placeholder="Repository"
+						placeholder="Repository url"
 						class="px-4 py-2 w-full"
 					/>
 				</div>
