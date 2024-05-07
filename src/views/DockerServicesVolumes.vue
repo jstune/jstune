@@ -1,9 +1,12 @@
 <template>
-	<TemplateSidemenu title="Applications" :renderer="renderer">
+	<TemplateSidemenu
+		title="Applications"
+		:renderer="renderer"
+	>
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
 				<h2 class="font-light text-lg p-4 max-w-full">
-					Docker Services Volumes
+					App Volumes
 				</h2>
 				<div class="flex px-4">
 
@@ -85,6 +88,7 @@
 			TemplateSidemenu
 		},
 		inject: ['menus', 'io'],
+		props: ['renderer'],
 		data: () => ({
 			service: 'docker_services_volumes',
 			items: null,

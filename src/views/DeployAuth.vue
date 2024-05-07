@@ -2,7 +2,7 @@
 	<TemplateDefault :renderer="renderer">
 		<SectionHero>
 			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
-				Deploy
+				Deploy OAuth2 Provider
 			</h1>
 		</SectionHero>
 		<WrapperPage class="p-6">
@@ -10,65 +10,50 @@
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
 					<h2 class="my-4">
-						Basic app settings
-					</h2> <input
-						placeholder="App name"
+						General settings
+					</h2><input
+						placeholder="Client ID"
 						class="px-4 py-2"
 					/><input
-						placeholder="App port"
+						placeholder="Client Secret"
+						class="ml-4 px-4 py-2"
+					/><input
+						placeholder="Scopes"
 						class="ml-4 px-4 py-2"
 					/>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<h2 class="my-4">
-						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
+						Select which provider, then try to automate most possible
 					</h2>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<h2 class="my-4">
-						One click installation browsing images from docker hub
-					</h2>
-				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<button
+						Select provider
+					</h2> <button
 						class="rounded p-2 bg-slate-200"
-						@click="connect()"
+						@click="getItems()"
 					>
-						Connect to Github
+						Google
 					</button><button
 						class="rounded p-2 bg-slate-200 ml-4"
-						@click="connect()"
+						@click="getItems()"
 					>
-						Select repository
-					</button>
-					<h2 class="my-4">
-						Clone using Github (With option to autodeploy using push webhooks)
-					</h2><input
-						placeholder="Repository"
-						class="px-4 py-2"
-					/>
-				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<button
-						class="rounded p-2 bg-slate-200"
-						@click="connect()"
-					>
-						Connect to Gitlab
+						Github
 					</button><button
 						class="rounded p-2 bg-slate-200 ml-4"
-						@click="connect()"
+						@click="getItems()"
 					>
-						Select repository
+						Facebook
+					</button><button
+						class="rounded p-2 bg-slate-200 ml-4"
+						@click="getItems()"
+					>
+						iCloud
 					</button>
-					<h2 class="my-4">
-						Clone using Gitlab (With option to autodeploy using push webhook)
-					</h2><input
-						placeholder="Repository"
-						class="px-4 py-2"
-					/>
-				</div><button
+				</div> <button
 					class="rounded p-2 bg-slate-200"
-					@click="connect()"
+					@click="getItems()"
 				>
 					Submit
 				</button>

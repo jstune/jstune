@@ -1,5 +1,10 @@
 <template>
-	<TemplateHero title="Applications / Create">
+	<TemplateDefault :renderer="renderer">
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+				Deploy Ap
+			</h1>
+		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="relative overflow-auto w-full">
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
@@ -27,12 +32,12 @@
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<button
 						class="rounded p-2 bg-slate-200"
-						@click="getItems"
+						@click="connect()"
 					>
 						Connect to Github
 					</button><button
 						class="rounded p-2 bg-slate-200 ml-4"
-						@click="getItems"
+						@click="connect()"
 					>
 						Select repository
 					</button>
@@ -46,12 +51,12 @@
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<button
 						class="rounded p-2 bg-slate-200"
-						@click="getItems"
+						@click="connect()"
 					>
 						Connect to Gitlab
 					</button><button
 						class="rounded p-2 bg-slate-200 ml-4"
-						@click="getItems"
+						@click="connect()"
 					>
 						Select repository
 					</button>
@@ -63,50 +68,26 @@
 					/>
 				</div><button
 					class="rounded p-2 bg-slate-200"
-					@click="getItems"
+					@click="connect()"
 				>
 					Submit
 				</button>
 			</div>
 		</WrapperPage>
-	</TemplateHero>
+	</TemplateDefault>
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
-	import TemplateHero from '@/components/TemplateHero.vue';
+	import TemplateDefault from '@/components/TemplateDefault.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	export default {
 		components: {
 			WrapperPage,
-			TemplateHero
+			TemplateDefault,
+			SectionHero
 		},
-		inject: ['menus', 'io'],
-		data: () => ({
-			service: 'apps',
-			items: null
-		}),
-		async created() {
-			await this.getItems();
-		},
-		methods: {
-			async getItems() {
-				try {
-					this.items = await this.io.service(this.service)
-						.find({
-							query: {
-								all: true,
-								limit: 100,
-								since: '',
-								// container ID or name
-								before: '' // container ID or name
-							}
-						});
-					console.log(this.items);
-				} catch (e) {
-					this.items = null;
-					console.error(e);
-				}
-			}
-		}
+		props: ['renderer'],
+		data: () => ({})
 	};
 
 </script>

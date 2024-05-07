@@ -1,9 +1,12 @@
 <template>
-	<TemplateSidemenu title="Applications" :renderer="renderer">
+	<TemplateSidemenu
+		title="Applications"
+		:renderer="renderer"
+	>
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
 				<h2 class="font-light text-lg p-4 max-w-full">
-					Docker Tasks
+					Tasks
 				</h2>
 				<div class="flex px-4">
 
