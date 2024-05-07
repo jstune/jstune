@@ -6,7 +6,7 @@ import {
 const routes = [
     {
         path: '/',
-        component: () => import('@/components/TemplateHero.vue'),
+        component: () => import('@/components/TemplateDefault.vue'),
         props: { renderer: 'view' },
         children: [
             {

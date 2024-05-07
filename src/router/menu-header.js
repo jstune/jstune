@@ -17,7 +17,7 @@ export default [{
         route: '/settings'
     },
     {
-        label: 'OAuth',
+        label: 'Authentication',
         route: '/oauth-providers'
     },
     {
@@ -25,7 +25,7 @@ export default [{
         route: '/users'
     },
     {
-        label: 'Docker Swarm',
+        label: 'Docker',
         route: '/docker/nodes'
     }
 ]

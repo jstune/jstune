@@ -1,5 +1,13 @@
 <template>
-	<TemplateHero title="Settings" :renderer="renderer">
+	<TemplateDefault
+		title="Settings"
+		:renderer="renderer"
+	>
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+				Settings
+			</h1>
+		</SectionHero>
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<h2 class="text-center">
@@ -163,17 +171,19 @@
 				</div>
 			</div>
 		</WrapperPage>
-	</TemplateHero>
+	</TemplateDefault>
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
-	import TemplateHero from '@/components/TemplateHero.vue';
+	import TemplateDefault from '@/components/TemplateDefault.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	export default {
 		inject: ['menus', 'io'],
 		props: ['renderer'],
 		components: {
 			WrapperPage,
-			TemplateHero
+			TemplateDefault,
+			SectionHero
 		},
 		data: () => ({
 			items: null,

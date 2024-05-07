@@ -6,14 +6,14 @@ const icon = URL.createObjectURL(new Blob([home], {
 
 export default [
     {
-        label: 'Docker Swarm'
+        label: 'Swarm'
     },
     {
-        label: 'Nodes',
+        label: 'Machines',
         route: '/docker/nodes'
     },
     {
-        label: 'Services',
+        label: 'Apps',
         route: '/docker/services',
         children: [
             {

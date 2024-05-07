@@ -113,6 +113,11 @@
 				</div>
 			</WrapperPage>
 		</SectionHeader>
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center">
+				Docker
+			</h1>
+		</SectionHero>
 		<div class="flex-grow flex-col">
 			<div class="min-h-full flex flex-col md:flex-row">
 				<div class="min-h-full w-full md:w-56 flex-shrink-0">
@@ -179,6 +184,7 @@
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	import SectionHeader from '@/components/SectionHeader.vue';
 	import SectionFooter from '@/components/SectionFooter.vue';
 	import UtilityNavbar from '@/components/UtilityNavbar.vue';
@@ -187,6 +193,7 @@
 		props: ['renderer'],
 		components: {
 			WrapperPage,
+			SectionHero,
 			SectionFooter,
 			SectionHeader,
 			UtilityNavbar

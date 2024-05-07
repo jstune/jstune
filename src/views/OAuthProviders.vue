@@ -1,16 +1,21 @@
 <template>
-	<TemplateHero title="OAuth Providers" :renderer="renderer">
+	<TemplateDefault :renderer="renderer">
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+				Authentication
+			</h1>
+		</SectionHero>
 		<WrapperPage class="max-w-screen-2xl p-6">
-			<div class="relative overflow-auto w-full">
-				<h2 class="text-center">
-					Simply key value pairs
-				</h2><button
-					class="rounded p-2 bg-slate-200"
-					@click="getItems"
-				>
-					Reload
-				</button>
-				<div class="shadow-sm my-8">
+			<div class="flex-col flex relative overflow-auto w-full">
+				<div class="flex-row-reverse flex">
+					<button
+						class="rounded p-2 bg-slate-200"
+						@click="getItems"
+					>
+						Reload
+					</button>
+				</div>
+				<div class="overflow-auto shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
 						<thead>
 							<tr>
@@ -274,15 +279,17 @@
 				</div>
 			</div>
 		</WrapperPage>
-	</TemplateHero>
+	</TemplateDefault>
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
-	import TemplateHero from '@/components/TemplateHero.vue';
+	import TemplateDefault from '@/components/TemplateDefault.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	export default {
 		components: {
 			WrapperPage,
-			TemplateHero
+			TemplateDefault,
+			SectionHero
 		},
 		inject: ['menus', 'io'],
 		props: ['renderer'],
@@ -305,8 +312,8 @@
 		},
 		methods: {
 			consent(url) {
-				if (!url) return
-				window.open(url, '_blank')
+				if (!url) return;
+				window.open(url, '_blank');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)

@@ -1,5 +1,10 @@
 <template>
-	<TemplateHero title="Users" :renderer="renderer">
+	<TemplateDefault :renderer="renderer">
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+				Users
+			</h1>
+		</SectionHero>
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<button
@@ -19,7 +24,7 @@
 									Email
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Email
+									Email Verified
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Name
@@ -283,16 +288,19 @@
 				</div>
 			</div>
 		</WrapperPage>
-	</TemplateHero>
+	</TemplateDefault>
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
-	import TemplateHero from '@/components/TemplateHero.vue';
+	import TemplateDefault from '@/components/TemplateDefault.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	export default {
 		inject: ['menus', 'io'],
+		props: ['renderer'],
 		components: {
 			WrapperPage,
-			TemplateHero
+			TemplateDefault,
+			SectionHero
 		},
 		data: () => ({
 			items: null,

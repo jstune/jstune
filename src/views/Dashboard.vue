@@ -1,5 +1,10 @@
 <template>
 	<TemplateDefault :renderer="renderer">
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+				Dashboard
+			</h1>
+		</SectionHero>
 		<WrapperPage class="flex-col">
 
 			<div class="flex-col max-w-md place-self-center mt-8 mb-24 w-full flex md:max-w-4xl">
@@ -121,10 +126,12 @@
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
 	import TemplateDefault from '@/components/TemplateDefault.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	export default {
 		components: {
 			WrapperPage,
-			TemplateDefault
+			TemplateDefault,
+			SectionHero
 		},
 		props: ['renderer'],
 		data: () => ({})

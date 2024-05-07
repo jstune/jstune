@@ -1,60 +1,44 @@
 <template>
-	<TemplateHero title="Hostname port routing" :renderer="renderer">
+	<TemplateDefault
+		title="Hostname port routing"
+		:renderer="renderer"
+	>
+		<SectionHero>
+			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+				Router
+			</h1>
+		</SectionHero>
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<h2 class="text-center">
-					Make an A Record on your domain to 127.0.0.1. {{renderer}}
+					@todo - Show leader node ip address here
 				</h2>
 				<h2 class="text-center">
-					Add hostname below and point it to wanted port or redirect url.
-				</h2>
-				<h2 class="text-center">
-					Feathers port is 5050.
-				</h2>
-				<h2 class="text-center">
-					Static port is 6060.
-				</h2>
-				<h2 class="text-center">
-					Admin port is 9090.
-				</h2>
-				<h2 class="text-center">
-					Fallback port is 8080.
-				</h2>
-				<h2 class="text-center">
-					Http proxy port is 8000.
-				</h2>
-				<h2 class="text-center">
-					Https proxy port is 443.
-				</h2>
-				<h2 class="text-center">
-					Set oauth_origin in settings to match feathers url, so oauth callbacks is routed correctly
+					Feathers = 5050, Static = 6060, Admin = 9090, Fallback = 8080, Http = 8000, Https = 443
 				</h2>
 				<h2
 					class="text-center"
 					style="height:24px"
 				>
-					Use ?app_url= to be redirected to another frontend url (Must be one below with oauth origin checked).
+					?app_url= will redirect to another url (oauth origin required)
 				</h2>
 				<h2 class="text-center">
-					If url should not be routed here, uncheck Auto SSL
+					Ex: http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
 				</h2>
-				<h2 class="text-center">
-					To allow redirect, url must be registered here
-				</h2>
-				<h2 class="text-center">
-					http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
-				</h2><button
-					class="rounded p-2 bg-slate-200"
-					@click="getItems"
-				>
-					Reload
-				</button><button
-					class="ml-2 rounded p-2 bg-slate-200"
-					@click="saveItems"
-				>
-					Save all
-				</button>
-				<div class="shadow-sm my-8">
+				<div class="flex-row-reverse flex">
+					<button
+						class="rounded p-2 bg-slate-200"
+						@click="getItems"
+					>
+						Reload
+					</button><button
+						class="mr-2 rounded p-2 bg-slate-200"
+						@click="saveItems"
+					>
+						Save all
+					</button>
+				</div>
+				<div class="overflow-auto shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
 						<thead>
 							<tr>
@@ -335,15 +319,17 @@
 				</div>
 			</div>
 		</WrapperPage>
-	</TemplateHero>
+	</TemplateDefault>
 </template>
 <script>
 	import WrapperPage from '@/components/WrapperPage.vue';
-	import TemplateHero from '@/components/TemplateHero.vue';
+	import TemplateDefault from '@/components/TemplateDefault.vue';
+	import SectionHero from '@/components/SectionHero.vue';
 	export default {
 		components: {
 			WrapperPage,
-			TemplateHero
+			TemplateDefault,
+			SectionHero
 		},
 		inject: ['menus', 'io'],
 		props: ['renderer'],

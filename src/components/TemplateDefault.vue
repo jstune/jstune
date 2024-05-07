@@ -112,7 +112,7 @@
 			</WrapperPage>
 		</SectionHeader>
 		<div class="flex-grow flex-col">
-			<render-view v-if="renderer === 'view'" />
+			<router-view v-if="renderer === 'view'" />
 			<slot v-else="">
 				<div class="py-8 px-6">
 					Add Some Content To Template...

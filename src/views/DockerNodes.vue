@@ -1,8 +1,5 @@
 <template>
-	<TemplateSidemenu
-		title="Applications"
-		:renderer="renderer"
-	>
+	<TemplateSidemenu title="Applications">
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2">
 				<h2 class="font-light text-lg p-4 max-w-full">
@@ -31,7 +28,7 @@
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						{{items?.skip + 1}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
+						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
 						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
@@ -58,7 +55,7 @@
 						Previous
 					</button>
 					<div class="text-sm justify-items-center content-center text-center grow">
-						{{items?.skip + 1}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
+						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
 						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
@@ -71,12 +68,7 @@
 			<div class="grow p-4">
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
-				</h2><button
-					class="rounded p-2 bg-slate-200"
-					@click="sync()"
-				>
-					Sync Docker
-				</button>
+				</h2>
 				<pre>
 				{{current}}
 				</pre>
@@ -93,7 +85,6 @@
 			TemplateSidemenu
 		},
 		inject: ['menus', 'io'],
-		props: ['renderer'],
 		data: () => ({
 			service: 'docker_nodes',
 			items: null,
@@ -104,11 +95,6 @@
 			await this.getItems();
 		},
 		methods: {
-			async sync() {
-				const result = await this.io.service(this.service)
-					.get('sync');
-				alert(JSON.stringify(result));
-			},
 			async getItems() {
 				try {
 					const query = {};
