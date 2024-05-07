@@ -9,28 +9,24 @@ export default [
         label: 'Swarm'
     },
     {
-        label: 'Machines',
-        route: '/docker/nodes'
-    },
-    {
         label: 'Apps',
-        route: '/docker/services',
+        route: '/docker/apps',
         children: [
             {
                 label: 'Environments',
-                route: '/docker/services/environments'
+                route: '/docker/apps/environments'
             },
             {
                 label: 'Networks',
-                route: '/docker/services/networks'
+                route: '/docker/apps/networks'
             },
             {
                 label: 'Ports',
-                route: '/docker/services/ports'
+                route: '/docker/apps/ports'
             },
             {
                 label: 'Volumes',
-                route: '/docker/services/volumes'
+                route: '/docker/apps/volumes'
             },
         ]
     },
@@ -39,15 +35,19 @@ export default [
         route: '/docker/tasks'
     },
     {
+        label: 'Images',
+        route: '/docker/images'
+    },
+    {
+        label: 'Machines',
+        route: '/docker/nodes'
+    },
+    {
         label: 'Networks',
         route: '/docker/networks'
     },
     {
         label: 'Volumes',
         route: '/docker/volumes'
-    },
-    {
-        label: 'Images',
-        route: '/docker/images'
     }
 ]

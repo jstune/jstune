@@ -109,16 +109,11 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import('@/views/DockerNodes.vue'),
+                component: () => import('@/views/DockerServices.vue'),
                 props: { renderer: 'slot' }
             },
             {
-                path: 'nodes',
-                component: () => import('@/views/DockerNodes.vue'),
-                props: { renderer: 'slot' }
-            },
-            {
-                path: 'services',
+                path: 'apps',
                 children: [
                     {
                         path: '',
@@ -146,6 +141,11 @@ const routes = [
                         props: { renderer: 'slot' }
                     }
                 ]
+            },
+            {
+                path: 'nodes',
+                component: () => import('@/views/DockerNodes.vue'),
+                props: { renderer: 'slot' }
             },
             {
                 path: 'tasks',

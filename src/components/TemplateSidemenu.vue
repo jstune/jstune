@@ -6,27 +6,8 @@
 	>
 		<SectionHeader class="flex-col md:h-28 flex flex-shrink-0">
 			<div class="flex bg-blue-950 h-10 w-full flex-shrink-0">
-				<WrapperPage class="max-w-full h-full">
-					<div class="flex-row w-1/2 h-full flex"><input
-							style="height:25px;margin-top:7px;margin-left:15px"
-							class="w-32 px-2 rounded md:min-w-fit bg-sky-50"
-							v-model="term"
-							@keypress.enter="$router.push('/search/' + term) "
-						/><button
-							class="hover:bg-blue-900 ml-2 px-2 h-full"
-							@click="$router.push('/search/' + term)"
-						><svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24"
-								fill="currentColor"
-								class="text-slate-50 w-6 h-6"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
-									clip-rule="evenodd"
-								/>
-							</svg> </button> </div>
+				<WrapperPage class="h-full max-w-full">
+					<div class="flex-row w-1/2 h-full flex"> </div>
 					<div class="flex-row-reverse w-1/2 h-full flex"><button
 							class="hover:bg-blue-900 px-2 h-full"
 							@click="$router.push('/logout')"
@@ -38,7 +19,7 @@
 							>
 								<path
 									fill-rule="evenodd"
-									d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+									d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
 									clip-rule="evenodd"
 								/>
 							</svg> </button> <button
@@ -55,22 +36,7 @@
 							>
 								<path
 									fill-rule="evenodd"
-									d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z"
-									clip-rule="evenodd"
-								/>
-							</svg> </button><button
-							class="hover:bg-blue-900 px-2 h-full"
-							@click="alert('Darkmode Switch')"
-						><svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24"
-								fill="currentColor"
-								class="text-slate-50 w-6 h-6"
-							>
-								<path d="M12 .75a8.25 8.25 0 00-4.135 15.39c.686.398 1.115 1.008 1.134 1.623a.75.75 0 00.577.706c.352.083.71.148 1.074.195.323.041.6-.218.6-.544v-4.661a6.714 6.714 0 01-.937-.171.75.75 0 11.374-1.453 5.261 5.261 0 002.626 0 .75.75 0 11.374 1.452 6.712 6.712 0 01-.937.172v4.66c0 .327.277.586.6.545.364-.047.722-.112 1.074-.195a.75.75 0 00.577-.706c.02-.615.448-1.225 1.134-1.623A8.25 8.25 0 0012 .75z" />
-								<path
-									fill-rule="evenodd"
-									d="M9.013 19.9a.75.75 0 01.877-.597 11.319 11.319 0 004.22 0 .75.75 0 11.28 1.473 12.819 12.819 0 01-4.78 0 .75.75 0 01-.597-.876zM9.754 22.344a.75.75 0 01.824-.668 13.682 13.682 0 002.844 0 .75.75 0 11.156 1.492 15.156 15.156 0 01-3.156 0 .75.75 0 01-.668-.824z"
+									d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
 									clip-rule="evenodd"
 								/>
 							</svg> </button> </div>
