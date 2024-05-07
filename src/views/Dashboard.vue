@@ -187,7 +187,7 @@
 								Authentication
 							</h2>
 						</router-link> <router-link
-							to="/user"
+							to="/users"
 							class="bg-slate-700 from-slate-800 aspect-video shadow-md rounded-lg items-center justify-center flex-col bg-gradient-to-tr flex cursor-pointer hover:opacity-80"
 						>
 							<svg
