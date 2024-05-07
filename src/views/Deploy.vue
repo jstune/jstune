@@ -23,11 +23,28 @@
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
 					</label><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
-						@click="connect()"
+						@click="uploadFiles()"
 					>
-						Select file
-					</button>
-				</div>
+						Select files
+					</button><button
+						class="rounded p-2 bg-slate-200 block w-full mt-2"
+						@click="uploadFold()"
+					>
+						Select folder
+					</button><button
+						class="rounded p-2 bg-slate-200 block w-full mt-2"
+						@click="uploadTar()"
+					>
+						Select tar
+					</button><button
+						class="rounded p-2 bg-slate-200 block w-full mt-2"
+						@click="files = []"
+					>
+						Clear files
+					</button> </div>
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
+						{{files.length}}
+					</label> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="block my-2">
 						Clone using Github (With option to autodeploy using push webhooks)
@@ -75,6 +92,8 @@
 	import WrapperPage from '@/components/WrapperPage.vue';
 	import TemplateDefault from '@/components/TemplateDefault.vue';
 	import SectionHero from '@/components/SectionHero.vue';
+	import Tar from 'tar-js';
+	import untar from 'js-untar';
 	export default {
 		components: {
 			WrapperPage,
@@ -83,8 +102,77 @@
 		},
 		props: ['renderer'],
 		data: () => ({
-			dockerComposeFile: ``
-		})
+			dockerComposeFile: ``,
+			files: []
+		}),
+		methods: {
+			async packTar() {
+				let tape = new Tar();
+				for await (let file of this.files) {
+					tape.append(file.name, new Uint8Array(file.buffer));
+				}
+				let result = tape.out;
+				console.log(result);
+			},
+			async uploadTar() {
+				return new Promise(resolve => {
+					let input = document.createElement('input');
+					input.type = 'file';
+					input.multiple = false;
+					input.onchange = async () => {
+						let file = Array.from(input.files)[0];
+						let files = await untar(buffer);
+						for await (let file of files) {
+							this.files.push({
+								buffer: file.buffer,
+								name: file.name
+							});
+						}
+						resolve();
+					};
+					input.click();
+				});
+			},
+			async uploadFolder() {
+				return new Promise(resolve => {
+					let input = document.createElement('input');
+					input.type = 'file';
+					input.multiple = true;
+					input.webkitdirectory = true;
+					input.dir = true;
+					input.onchange = async () => {
+						let files = Array.from(input.files);
+						for await (let file of files) {
+							this.files.push({
+								buffer: await file.arrayBuffer(),
+								name: file.webkitRelativePath
+							});
+						}
+						resolve();
+					};
+					input.click();
+				});
+			},
+			async uploadFile(item) {
+				return new Promise(resolve => {
+					let input = document.createElement('input');
+					input.type = 'file';
+					input.multiple = true;
+					input.onchange = async () => {
+						let files = Array.from(input.files);
+						for await (let file of files) {
+							let buffer = await file.arrayBuffer();
+							this.files.push({
+								buffer,
+								name: file.name
+							});
+						}
+						resolve();
+					};
+					input.click();
+				});
+			}
+		}
 	};
 
 </script>
