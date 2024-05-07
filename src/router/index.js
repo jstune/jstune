@@ -15,8 +15,8 @@ const routes = [
                 props: { renderer: 'slot' },
             },
             {
-                path: 'router',
-                component: () => import('@/views/Router.vue'),
+                path: 'routes',
+                component: () => import('@/views/Routes.vue'),
                 props: { renderer: 'slot' },
             },
             {
@@ -25,7 +25,7 @@ const routes = [
                 props: { renderer: 'slot' },
             },
             {
-                path: 'oauth-providers',
+                path: 'auth',
                 component: () => import('@/views/OAuthProviders.vue'),
                 props: { renderer: 'slot' },
             },

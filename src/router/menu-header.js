@@ -9,8 +9,8 @@ export default [{
         route: '/dashboard'
     },
     {
-        label: 'Router',
-        route: '/router'
+        label: 'Routes',
+        route: '/routes'
     },
     {
         label: 'Settings',
@@ -18,7 +18,7 @@ export default [{
     },
     {
         label: 'Authentication',
-        route: '/oauth-providers'
+        route: '/auth'
     },
     {
         label: 'Users',
