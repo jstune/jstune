@@ -161,7 +161,11 @@
 			},
 			async resolveDockerCompose() {
 				const file = this.files.find(f => f.name.endsWith('docker-compose.yml'));
-				console.log('found it', file);
+				if (file) {
+					const content = new TextDecoder()
+						.decode(file.buffer);
+					this.dockerComposeFile = content;
+				}
 			},
 			async uploadZip() {
 				return new Promise(resolve => {
