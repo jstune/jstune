@@ -10,20 +10,20 @@
 		</SectionHero>
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
-				<h2 class="text-center">
-					Simply key value pairs
-				</h2><button
-					class="rounded p-2 bg-slate-200"
-					@click="getItems"
-				>
-					Reload
-				</button><button
-					class="rounded p-2 bg-slate-200 ml-2"
-					@click="renewSSLCertificates"
-				>
-					Renew certificates
-				</button>
-				<div class="shadow-sm my-8">
+				<div class="flex-row-reverse flex">
+					<button
+						class="rounded p-2 bg-slate-200"
+						@click="getItems"
+					>
+						Reload
+					</button><button
+						class="rounded p-2 bg-slate-200 mr-2"
+						@click="renewSSLCertificates"
+					>
+						Renew certificates
+					</button>
+				</div>
+				<div class="overflow-auto shadow-sm my-8">
 					<table class="border-collapse table-auto w-full text-sm">
 						<thead>
 							<tr>
