@@ -320,13 +320,13 @@
 	import TemplateDefault from '@/components/TemplateDefault.vue';
 	import SectionHero from '@/components/SectionHero.vue';
 	export default {
+		inject: ['menus', 'io'],
+		props: ['renderer'],
 		components: {
 			WrapperPage,
 			TemplateDefault,
 			SectionHero
 		},
-		inject: ['menus', 'io'],
-		props: ['renderer'],
 		data: () => ({
 			items: null,
 			service: 'proxy',
@@ -335,10 +335,10 @@
 				redirect_url: '',
 				redirect_status: '',
 				port: '',
-				force_https: true,
-				auto_ssl: true,
-				subdomain_fallback: true,
-				oauth_origin: true
+				force_https: false,
+				auto_ssl: false,
+				subdomain_fallback: false,
+				oauth_origin: false
 			}
 		}),
 		async created() {
@@ -405,10 +405,10 @@
 					redirect_url: '',
 					redirect_status: '',
 					port: '',
-					force_https: true,
-					auto_ssl: true,
-					subdomain_fallback: true,
-					oauth_origin: true
+					force_https: false,
+					auto_ssl: false,
+					subdomain_fallback: false,
+					oauth_origin: false
 				};
 			}
 		}
