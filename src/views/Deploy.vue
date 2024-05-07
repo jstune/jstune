@@ -6,7 +6,7 @@
 			</h1>
 		</SectionHero>
 		<WrapperPage class="p-6">
-			<div class="relative overflow-auto w-full">
+			<div class="mt-8 mb-20 relative overflow-auto w-full">
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
 					<h2 class="my-4">
@@ -47,12 +47,15 @@
 						placeholder="Repository"
 						class="px-4 py-2"
 					/>
-				</div> <button
-					class="rounded p-2 bg-slate-200"
-					@click="connect()"
-				>
-					Submit
-				</button>
+				</div>
+				<div class="text-right">
+					<button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="connect()"
+					>
+						Launch
+					</button>
+				</div>
 			</div>
 		</WrapperPage>
 	</TemplateDefault>

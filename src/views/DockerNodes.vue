@@ -66,6 +66,12 @@
 				</div>
 			</div>
 			<div class="grow p-4 overflow-auto">
+				<button
+					@click="sync()"
+					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+				>
+					Sync
+				</button>
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
 				</h2>
@@ -95,6 +101,11 @@
 			await this.getItems();
 		},
 		methods: {
+			async sync() {
+				const result = await this.io.service(this.service)
+					.get('sync');
+				alert(JSON.stringify(result));
+			},
 			async getItems() {
 				try {
 					const query = {};
