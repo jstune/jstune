@@ -158,7 +158,7 @@
 					input.click();
 				});
 			},
-			async uploadFile(item) {
+			async uploadFiles() {
 				return new Promise(resolve => {
 					let input = document.createElement('input');
 					input.type = 'file';
