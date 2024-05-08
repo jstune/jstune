@@ -25,6 +25,10 @@ export default [{
         route: '/users'
     },
     {
+        label: 'Deploy Static',
+        route: '/deploy-static'
+    },
+    {
         label: 'Deploy',
         route: '/deploy'
     },

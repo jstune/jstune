@@ -38,6 +38,11 @@ const routes = [
                 path: 'deploy',
                 component: () => import('@/views/Deploy.vue'),
                 props: { renderer: 'slot' },
+            },
+            {
+                path: 'deploy-static',
+                component: () => import('@/views/DeployStatic.vue'),
+                props: { renderer: 'slot' },
             }
         ]
     },
