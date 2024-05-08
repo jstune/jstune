@@ -70,6 +70,10 @@
 						v-model="repository"
 						placeholder="Repository url"
 						class="mt-2 px-4 py-2 w-full"
+					/> <input
+						v-model="branch"
+						placeholder="Branch name"
+						class="mt-2 px-4 py-2 w-full"
 					/>
 				</div>
 				<div class="text-right">
@@ -78,6 +82,21 @@
 						@click="deploy()"
 					>
 						Launch
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="attach()"
+					>
+						Attach webhook
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="detach()"
+					>
+						Detach webhook
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="status()"
+					>
+						Status webhook
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="list()"
@@ -115,13 +134,44 @@
 			files: [],
 			hostname: '',
 			repository: '',
+			branch: 'main',
 			autodeploy: false
 		}),
 		methods: {
 			async remove() {
-				const slug = prompt('Slug', this.slug);
+				const hostname = prompt('Hostname', this.hostname);
 				const res = await this.io.service('static')
-					.remove(slug);
+					.remove(hostname);
+				console.log('res', res);
+			},
+			async attach() {
+				const hostname = prompt('Hostname', this.hostname);
+				const res = await this.io.service('static')
+					.patch(hostname, {
+						attach: true,
+						repository: this.repository,
+						branch: this.branch
+					});
+				console.log('res', res);
+			},
+			async detach() {
+				const hostname = prompt('Hostname', this.hostname);
+				const res = await this.io.service('static')
+					.patch(hostname, {
+						detach: true,
+						repository: this.repository,
+						branch: this.branch
+					});
+				console.log('res', res);
+			},
+			async status() {
+				const hostname = prompt('Hostname', this.hostname);
+				const res = await this.io.service('static')
+					.patch(hostname, {
+						status: true,
+						repository: this.repository,
+						branch: this.branch
+					});
 				console.log('res', res);
 			},
 			async list() {
@@ -131,15 +181,12 @@
 			},
 			async deploy() {
 				try {
-					let repository = this.repository;
 					console.log('files', this.files);
-					if (this.files.length) {
-						repository = await this.packTar();
-					}
 					const res = await this.io.service('static')
 						.create({
 							hostname: this.hostname,
-							repository,
+							buffer: this.files?.length ? await this.packTar() : null,
+							repository: this.repository,
 							autodeploy: this.autodeploy
 						});
 					console.log('res', res);
