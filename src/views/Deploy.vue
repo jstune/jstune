@@ -27,37 +27,22 @@
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
 						@click="uploadFiles()"
 					>
-						Select files
+						Upload files
 					</button><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
 						@click="uploadFolde()"
 					>
-						Select folder
+						Upload folder
 					</button><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
 						@click="uploadTar()"
 					>
-						Select tar
+						Upload tar
 					</button><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
 						@click="uploadZip()"
 					>
-						Select zip
-					</button><button
-						class="rounded p-2 bg-slate-200 block w-full mt-2"
-						@click="files = []"
-					>
-						Clear files
-					</button><button
-						class="rounded p-2 bg-slate-200 block w-full mt-2"
-						@click="packTar()"
-					>
-						Pack tar
-					</button><button
-						class="rounded p-2 bg-slate-200 block w-full mt-2"
-						@click="resolveDockerCompose()"
-					>
-						Find docker compose
+						Upload zip
 					</button> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						{{files.length}}
@@ -138,24 +123,24 @@
 		}),
 		methods: {
 			async deploy() {
-				this.io.service('apps')
-					.create({
-						name: this.name
-					});
-				let repository = this.repository;
-				if (this.files.length) {
-					repository = await this.packTar();
-					console.log('repo', repository.buffer);
+				try {
+					let repository = this.repository;
+					console.log('files', this.files);
+					if (this.files.length) {
+						repository = await this.packTar();
+					}
+					const res = await this.io.service('apps')
+						.create({
+							name: this.name,
+							slug: this.slug,
+							repository,
+							autodeploy: this.autodeploy,
+							dockerComposeFile: this.dockerComposeFile
+						});
+					console.log('res', res);
+				} catch (e) {
+					console.log('error', e);
 				}
-				const res = await this.io.service('apps')
-					.create({
-						name: this.name,
-						slug: this.slug,
-						repository,
-						autodeploy: this.autodeploy,
-						dockerComposeFile: this.dockerComposeFile
-					});
-				console.log('res', res);
 			},
 			async packTar() {
 				let tape = new Tar();
@@ -173,31 +158,40 @@
 				}
 			},
 			async uploadZip() {
+				this.files = [];
+				this.dockerComposeFile = '';
 				return new Promise(resolve => {
 					let input = document.createElement('input');
 					input.type = 'file';
 					input.multiple = false;
+					input.accept = '.zip';
 					input.onchange = async () => {
 						let file = Array.from(input.files)[0];
 						const {
 							entries
 						} = await unzip(await file.arrayBuffer());
 						for await (const [name, entry] of Object.entries(entries)) {
-							this.files.push({
-								buffer: await entry.arrayBuffer(),
-								name
-							});
+							if (!entries[name].isDirectory) {
+								this.files.push({
+									buffer: await entry.arrayBuffer(),
+									name
+								});
+							}
 						}
+						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
 				});
 			},
 			async uploadTar() {
+				this.files = [];
+				this.dockerComposeFile = '';
 				return new Promise(resolve => {
 					let input = document.createElement('input');
 					input.type = 'file';
 					input.multiple = false;
+					input.accept = '.tar';
 					input.onchange = async () => {
 						let file = Array.from(input.files)[0];
 						let files = await untar(await file.arrayBuffer());
@@ -207,12 +201,15 @@
 								name: file.name
 							});
 						}
+						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
 				});
 			},
 			async uploadFolder() {
+				this.files = [];
+				this.dockerComposeFile = '';
 				return new Promise(resolve => {
 					let input = document.createElement('input');
 					input.type = 'file';
@@ -227,12 +224,15 @@
 								name: file.webkitRelativePath
 							});
 						}
+						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
 				});
 			},
 			async uploadFiles() {
+				this.files = [];
+				this.dockerComposeFile = '';
 				return new Promise(resolve => {
 					let input = document.createElement('input');
 					input.type = 'file';
@@ -243,9 +243,10 @@
 							let buffer = await file.arrayBuffer();
 							this.files.push({
 								buffer,
-								name: file.name
+								name: 'root/' + file.name
 							});
 						}
+						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
