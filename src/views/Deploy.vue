@@ -74,6 +74,10 @@
 						v-model="repository"
 						placeholder="Repository url"
 						class="mt-2 px-4 py-2 w-full"
+					/><input
+						v-model="branch"
+						placeholder="Branch"
+						class="mt-2 px-4 py-2 w-full"
 					/>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
@@ -100,6 +104,21 @@
 						@click="deploy()"
 					>
 						Launch
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="attach()"
+					>
+						Attach webhook
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="detach()"
+					>
+						Detach webhook
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="status()"
+					>
+						Status webhook
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="list()"
@@ -166,7 +185,8 @@
 			repository: '',
 			autodeploy: false,
 			adjustVolumes: true,
-			inherit: true
+			inherit: true,
+			branch: 'main'
 		}),
 		methods: {
 			async remove() {
@@ -178,6 +198,36 @@
 			async list() {
 				const res = await this.io.service('apps')
 					.find();
+				console.log('res', res);
+			},
+			async attach() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						attach: true,
+						repository: this.repository,
+						branch: this.branch
+					});
+				console.log('res', res);
+			},
+			async detach() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						detach: true,
+						repository: this.repository,
+						branch: this.branch
+					});
+				console.log('res', res);
+			},
+			async status() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						status: true,
+						repository: this.repository,
+						branch: this.branch
+					});
 				console.log('res', res);
 			},
 			async start() {
@@ -222,20 +272,18 @@
 			},
 			async deploy() {
 				try {
-					let repository = this.repository;
 					console.log('files', this.files);
-					if (this.files.length) {
-						repository = await this.packTar();
-					}
 					const res = await this.io.service('apps')
 						.create({
 							name: this.name,
 							slug: this.slug,
-							repository,
+							buffer: this.files?.length ? await this.packTar() : null,
+							repository: this.repository,
 							autodeploy: this.autodeploy,
 							adjustVolumes: this.adjustVolumes,
 							dockerComposeFile: this.dockerComposeFile,
-							inherit: this.inherit
+							inherit: this.inherit,
+							branch: this.branch
 						});
 					console.log('res', res);
 				} catch (e) {
