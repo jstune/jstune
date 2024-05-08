@@ -65,6 +65,11 @@
 						@click="autodeploy = !autodeploy"
 					>
 						{{ autodeploy ? 'Autodeploy on' : 'Autodeploy off' }}
+					</button><button
+						class="rounded p-2 bg-slate-200 ml-4"
+						@click="adjustVolumes = !adjustVolumes"
+					>
+						{{ adjustVolumes ? 'Adjust volumes on' : 'Adjust volumes off' }}
 					</button> <input
 						v-model="repository"
 						placeholder="Repository url"
@@ -77,7 +82,12 @@
 					</label>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="block my-2">Docker Compose</label> <textarea
+					<label class="block my-2">Docker Compose</label><button
+						class="rounded p-2 bg-slate-200 my-4"
+						@click="inherit = !inherit"
+					>
+						{{ inherit ? 'Inherit original on' : 'Inherit original off' }}
+					</button> <textarea
 						class="w-full p-4"
 						v-model="dockerComposeFile"
 						rows="10"
@@ -90,6 +100,41 @@
 						@click="deploy()"
 					>
 						Launch
+					</button> <button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="list()"
+					>
+						List
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="start()"
+					>
+						Start
+					</button> <button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="stop()"
+					>
+						Stop
+					</button> <button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="build()"
+					>
+						Build
+					</button> <button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="destroy()"
+					>
+						Destroy
+					</button> <button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="compose()"
+					>
+						Compose
+					</button> <button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="remove()"
+					>
+						Remove
 					</button>
 				</div>
 			</div>
@@ -119,9 +164,62 @@
 			name: '',
 			slug: '',
 			repository: '',
-			autodeploy: false
+			autodeploy: false,
+			adjustVolumes: true,
+			inherit: true
 		}),
 		methods: {
+			async remove() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.remove(slug);
+				console.log('res', res);
+			},
+			async list() {
+				const res = await this.io.service('apps')
+					.find();
+				console.log('res', res);
+			},
+			async start() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						start: true
+					});
+				console.log('res', res);
+			},
+			async stop() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						stop: true
+					});
+				console.log('res', res);
+			},
+			async build() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						build: true
+					});
+				console.log('res', res);
+			},
+			async destroy() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						destroy: true
+					});
+				console.log('res', res);
+			},
+			async compose() {
+				const slug = prompt('Slug', this.slug);
+				const res = await this.io.service('apps')
+					.patch(slug, {
+						compose: this.dockerComposeFile
+					});
+				console.log('res', res);
+			},
 			async deploy() {
 				try {
 					let repository = this.repository;
@@ -135,7 +233,9 @@
 							slug: this.slug,
 							repository,
 							autodeploy: this.autodeploy,
-							dockerComposeFile: this.dockerComposeFile
+							adjustVolumes: this.adjustVolumes,
+							dockerComposeFile: this.dockerComposeFile,
+							inherit: this.inherit
 						});
 					console.log('res', res);
 				} catch (e) {
