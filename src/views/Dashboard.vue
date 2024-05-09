@@ -8,8 +8,11 @@
 		<WrapperPage class="flex-col">
 
 			<div class="flex-col max-w-md place-self-center mt-8 mb-24 w-full flex md:max-w-4xl">
-				<h1 class="px-4 mb-4 mt-6 font-medium text-3xl w-full">
+				<h1 class="px-4 mb-2 mt-6 font-medium text-3xl w-full">
 					Platform as a Service
+				</h1>
+				<h1 class="px-4 mb-4 mt-2 font-medium text-xl w-full">
+					Leader node address: {{ address }}
 				</h1>
 				<div class="mt-6 relative mb-16 flex-col md:flex-row flex w-full px-4">
 					<div class="grid-cols-2 md:grid-cols-3 gap-11 grid w-full">
@@ -251,8 +254,25 @@
 		},
 		inject: ['io'],
 		props: ['renderer'],
-		data: () => ({}),
+		data: () => ({
+			address: ''
+		}),
+		async created() {
+			await this.inspectLeader();
+		},
 		methods: {
+			async inspectLeader() {
+				const leaders = await this.io.service('docker_nodes')
+					.find({
+						query: {
+							leader: true
+						}
+					});
+				const leader = leaders?.data?.[0];
+				if (leader) {
+					this.address = leader.address;
+				}
+			},
 			async update() {
 				if (!confirm(`Are you sure you want to update jstune?`)) {
 					return false;
