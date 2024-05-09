@@ -10,8 +10,8 @@
 		</SectionHero>
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
-				<h2 class="text-center">
-					@todo - Show leader node ip address here
+				<h2 class="font-semibold text-center">
+					Leader node address: {{address}}
 				</h2>
 				<h2 class="text-center">
 					Feathers = 5050, Static = 6060, Admin = 9090, Fallback = 8080, Http = 8000, Https = 443
@@ -328,6 +328,7 @@
 			SectionHero
 		},
 		data: () => ({
+			address: '',
 			items: null,
 			service: 'proxy',
 			create: {
@@ -344,8 +345,21 @@
 		async created() {
 			this.resetCreate();
 			await this.getItems();
+			await this.inspectLeader();
 		},
 		methods: {
+			async inspectLeader() {
+				const leaders = await this.io.service('docker_nodes')
+					.find({
+						query: {
+							leader: true
+						}
+					});
+				const leader = leaders?.data?.[0];
+				if (leader) {
+					this.address = leader.address;
+				}
+			},
 			openItem(item) {
 				let port = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? ':8000' : '';
 				window.open('http://' + item.hostname + port, '_blank');
