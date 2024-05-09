@@ -11,7 +11,7 @@
 		<WrapperPage class="max-w-screen-2xl p-6">
 			<div class="relative overflow-auto w-full">
 				<h2 class="font-semibold text-center">
-					Leader Node Address: {{address}}
+					Leader node address: {{address}}
 				</h2>
 				<h2 class="text-center">
 					Feathers = 5050, Static = 6060, Admin = 9090, Fallback = 8080, Http = 80 or 8000, Https = 443
