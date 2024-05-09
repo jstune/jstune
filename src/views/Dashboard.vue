@@ -237,6 +237,11 @@
 					@click="updateNPM()"
 				>
 					Update Node Packages
+				</button><button
+					class="rounded p-2 bg-slate-200 mt-2"
+					@click="updateUI()"
+				>
+					Update Admin UI
 				</button>
 			</div>
 		</WrapperPage>
@@ -286,8 +291,16 @@
 					return false;
 				}
 				await this.io.service('exec')
-					.patch('npm i');
+					.patch('update-npm');
 				alert('jstune will automtically be restarted after update is completed');
+			},
+			async updateUI() {
+				if (!confirm(`Are you sure you want to update packages?`)) {
+					return false;
+				}
+				await this.io.service('exec')
+					.patch('update-ui');
+				location.reload();
 			}
 		}
 	};
