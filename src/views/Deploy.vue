@@ -106,6 +106,11 @@
 						Launch
 					</button><button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						@click="update()"
+					>
+						Update
+					</button><button
+						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="attach()"
 					>
 						Attach webhook
@@ -204,9 +209,7 @@
 				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
 					.patch(slug, {
-						attach: true,
-						repository: this.repository,
-						branch: this.branch
+						attach: true
 					});
 				console.log('res', res);
 			},
@@ -214,9 +217,7 @@
 				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
 					.patch(slug, {
-						detach: true,
-						repository: this.repository,
-						branch: this.branch
+						detach: true
 					});
 				console.log('res', res);
 			},
@@ -224,9 +225,7 @@
 				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
 					.patch(slug, {
-						status: true,
-						repository: this.repository,
-						branch: this.branch
+						status: true
 					});
 				console.log('res', res);
 			},
@@ -279,11 +278,29 @@
 							slug: this.slug,
 							buffer: this.files?.length ? await this.packTar() : null,
 							repository: this.repository,
+							branch: this.branch,
 							autodeploy: this.autodeploy,
+							dockerComposeFile: this.dockerComposeFile,
 							adjustVolumes: this.adjustVolumes,
+							inherit: this.inherit
+						});
+					console.log('res', res);
+				} catch (e) {
+					console.log('error', e);
+				}
+			},
+			async update() {
+				try {
+					const res = await this.io.service('apps')
+						.update(this.slug, {
+							buffer: this.files?.length ? await this.packTar() : null,
+							repository: this.repository,
 							dockerComposeFile: this.dockerComposeFile,
 							inherit: this.inherit,
-							branch: this.branch
+							adjustVolumes: this.adjustVolumes,
+							branch: this.branch,
+							name: this.name,
+							autodeploy: this.autodeploy
 						});
 					console.log('res', res);
 				} catch (e) {
