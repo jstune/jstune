@@ -229,6 +229,11 @@
 					@click="update()"
 				>
 					Self Update
+				</button><button
+					class="rounded p-2 bg-slate-200 mt-2"
+					@click="updateNPM()"
+				>
+					Update Node Packages
 				</button>
 			</div>
 		</WrapperPage>
@@ -249,11 +254,19 @@
 		data: () => ({}),
 		methods: {
 			async update() {
-				if (!confirm(`Are you sure you want to update jstune`)) {
+				if (!confirm(`Are you sure you want to update jstune?`)) {
 					return false;
 				}
 				await this.io.service('exec')
 					.patch('update');
+				alert('jstune will automtically be restarted after update is completed');
+			},
+			async updateNPM() {
+				if (!confirm(`Are you sure you want to update packages?`)) {
+					return false;
+				}
+				await this.io.service('exec')
+					.patch('npm i');
 				alert('jstune will automtically be restarted after update is completed');
 			}
 		}
