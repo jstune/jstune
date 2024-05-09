@@ -295,7 +295,7 @@
 				alert('jstune will automtically be restarted after update is completed');
 			},
 			async updateUI() {
-				if (!confirm(`Are you sure you want to update packages?`)) {
+				if (!confirm(`Are you sure you want to update admin ui?`)) {
 					return false;
 				}
 				await this.io.service('exec')
