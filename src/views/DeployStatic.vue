@@ -43,7 +43,7 @@
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
 						@click="files = []"
 					>
-						Clear fi
+						Clear files
 					</button> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						{{files.length}}
