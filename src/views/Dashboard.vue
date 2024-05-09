@@ -224,7 +224,12 @@
 					</div>
 					<div class="-mb-8 bg-slate-100 -bottom-5 absolute h-0.5 left-4 right-4">
 					</div>
-				</div>
+				</div><button
+					class="rounded p-2 bg-slate-200"
+					@click="update()"
+				>
+					Self Update
+				</button>
 			</div>
 		</WrapperPage>
 	</TemplateDefault>
@@ -239,8 +244,19 @@
 			TemplateDefault,
 			SectionHero
 		},
+		inject: ['io'],
 		props: ['renderer'],
-		data: () => ({})
+		data: () => ({}),
+		methods: {
+			async update() {
+				if (!confirm(`Are you sure you want to update jstune`)) {
+					return false;
+				}
+				await this.io.service('exec')
+					.patch('update');
+				alert('jstune will automtically be restarted after update is completed');
+			}
+		}
 	};
 
 </script>
