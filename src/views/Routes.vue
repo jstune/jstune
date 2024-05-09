@@ -14,10 +14,10 @@
 					Leader node address: {{address}}
 				</h2>
 				<h2 class="text-center">
-					Feathers = 5050, Static = 6060, Admin = 9090, Fallback = 8080, Http = 8000, Https = 443
+					Feathers = 5050, Static = 6060, Admin = 9090, Fallback = 8080, Http = 80 or 8000, Https = 443
 				</h2>
 				<h2 class="text-center">
-					Custom redir: http://localhost:8000/oauth/github?app_url=http://banana.localhost:8000
+					Custom OAuth redirect: http://localhost:8000/oauth/github?app_url=http://any.localhost:8000
 				</h2>
 				<div class="flex-row-reverse flex">
 					<button
