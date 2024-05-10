@@ -8,6 +8,7 @@
 			placeholder="E-mail"
 		/><input
 			v-model="password"
+			type="password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password"
 		/><button
@@ -46,7 +47,7 @@
 		methods: {
 			async reset() {
 				try {
-					await this.io.service('')
+					await this.io.service('users_recover')
 						.patch(this.email, {
 							token: this.token,
 							password: this.password
