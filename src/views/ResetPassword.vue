@@ -3,13 +3,18 @@
 		<h2 class="mb-2">
 			JSTune
 		</h2><input
+			v-model="email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="E-mail / Username"
+			placeholder="E-mail"
 		/><input
+			v-model="password"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="Password"
-		/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
-			Recover
+		/><button
+			@click="reset()"
+			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+		>
+			Reset
 		</button><router-link
 			to="/login"
 			class="hover:text-slate-200 mt-6 inline-block text-center w-full"
@@ -29,7 +34,31 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		data: () => ({})
+		data: () => ({
+			token: '',
+			email: '',
+			password: ''
+		}),
+		inject: ['io'],
+		created() {
+			this.token = this.$route.query.token;
+		},
+		methods: {
+			async reset() {
+				try {
+					await this.io.service('')
+						.patch(this.email, {
+							token: this.token,
+							password: this.password
+						});
+					alert('Password has been reset, you can now log in using your new password');
+					this.$router.push('/login');
+				} catch (e) {
+					alert('Reset password failed');
+					console.log('Error', e);
+				}
+			}
+		}
 	};
 
 </script>

@@ -3,9 +3,13 @@
 		<h2 class="mb-2">
 			JSTune
 		</h2><input
+			v-model="email"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="E-mail / Username"
-		/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
+			placeholder="E-mail"
+		/><button
+			@click="recover()"
+			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+		>
 			Recover
 		</button><router-link
 			to="/login"
@@ -26,7 +30,23 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		data: () => ({})
+		inject: ['io'],
+		data: () => ({
+			email: ''
+		}),
+		methods: {
+			async recover() {
+				try {
+					await this.io.service('users_recover')
+						.create({
+							email: this.email
+						});
+					alert('Recovery email is sent');
+				} catch (e) {
+					console.log('error', e);
+				}
+			}
+		}
 	};
 
 </script>
