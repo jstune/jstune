@@ -61,7 +61,7 @@ router.beforeEach(async to => {
         })
         await Promise.race([authenticate, timeout])
         if (
-            ['/', '/setup', '/login', '/register', '/recover', '/disconnected'].includes(to.path) ||
+            ['/', '/setup', '/login', '/register', '/recover', '/reset-password', '/disconnected'].includes(to.path) ||
             to.path.startsWith('/setup/')
         ) return '/dashboard'
     } catch (e) {
@@ -86,7 +86,7 @@ router.beforeEach(async to => {
                 // Force going to next setup step if installation is not completed
                 return '/setup/' + uninstalled[0].name
             }
-            if (!uninstalled.length && !['/login', '/register', '/recover'].includes(to.path)) return '/login'
+            if (!uninstalled.length && !['/login', '/register', '/recover', '/reset-password'].includes(to.path)) return '/login'
         } catch(e) {
             if (!['/disconnected'].includes(to.path)) return '/disconnected'
         }

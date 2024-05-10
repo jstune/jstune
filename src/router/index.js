@@ -63,6 +63,10 @@ const routes = [
         component: () => import('@/views/Recover.vue')
     },
     {
+        path: '/reset-password',
+        component: () => import('@/views/ResetPassword.vue')
+    },
+    {
         path: '/terms',
         component: () => import('@/views/Terms.vue')
     },
