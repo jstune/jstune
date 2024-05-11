@@ -17,6 +17,12 @@
 			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
 		>
 			Login
+		</button><button
+			v-for="provider in providers"
+			@click="redirect(provider)"
+			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+		>
+			Login with {{provider}}
 		</button><router-link
 			to="/recover"
 			class="hover:text-slate-200 mt-6 inline-block text-center w-full"
@@ -36,15 +42,32 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		inject: ["io", "user", "userUpdate"],
+		inject: ["io", "server", "user", "userUpdate"],
 		data: () => ({
 			email: '',
-			password: ''
+			password: '',
+			providers: []
 		}),
-		mounted() {
+		async created() {
+			await this.getLoginProviders();
+		},
+		async mounted() {
 			this.$refs?.username?.focus();
 		},
 		methods: {
+			async redirect(provider) {
+				const path = this.server.endsWith('/') ? `oauth/${provider}?app_url=${location.href}` : `/oauth/${provider}?app_url=${location.href}`;
+				location.href = this.server + path;
+			},
+			async getLoginProviders() {
+				try {
+					await this.io.logout();
+					this.providers = await this.io.service('oauth_login')
+						.find();
+				} catch (e) {
+					console.log('error', e);
+				}
+			},
 			async login(creds) {
 				this.io.authenticate({
 						strategy: "local",
