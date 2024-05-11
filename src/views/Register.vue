@@ -5,14 +5,11 @@
 		</h2><input
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
 			placeholder="E-mail"
-		/><input
-			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Username"
-		/><input
-			class="font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Password"
-			type="password"
-		/><button class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3">
+			v-model="email"
+		/><button
+			@click="register"
+			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+		>
 			Request Access
 		</button><router-link
 			to="/login"
@@ -33,7 +30,23 @@
 		components: {
 			TemplateSetup: TemplateSetup
 		},
-		data: () => ({})
+		inject: ['io'],
+		data: () => ({
+			email: ''
+		}),
+		methods: {
+			async register() {
+				try {
+					await this.io.service('users')
+						.create({
+							email: this.email
+						});
+					alert('User has been created');
+				} catch (e) {
+					console.log('error creating user', e.message);
+				}
+			}
+		}
 	};
 
 </script>

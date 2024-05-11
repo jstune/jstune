@@ -343,9 +343,12 @@
 				}
 			},
 			async updateItem(oldItem) {
+				let clone = JSON.parse(JSON.stringify(oldItem));
+				delete clone.password;
+				console.log(clone);
 				try {
 					const newItem = await this.io.service(this.service)
-						.update(oldItem.id, oldItem);
+						.patch(oldItem.id, clone);
 					for (const key of Object.keys(oldItem)) {
 						oldItem[key] = newItem[key];
 					}
