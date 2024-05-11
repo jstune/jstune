@@ -14,13 +14,13 @@
 			type="password"
 		/><button
 			@click="login({ email, password })"
-			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+			class="hover:bg-fuchsia-950 mt-4 mb-2 rounded-lg bg-fuchsia-900 w-full p-3"
 		>
 			Login
 		</button><button
 			v-for="provider in providers"
 			@click="redirect(provider)"
-			class="hover:bg-fuchsia-950 mt-4 rounded-lg bg-fuchsia-900 w-full p-3"
+			class="hover:bg-sky-800 bg-sky-700 mt-2 rounded-lg w-full p-3"
 		>
 			Login with {{provider}}
 		</button><router-link
