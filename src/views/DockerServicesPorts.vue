@@ -72,6 +72,9 @@
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
 				</h2>
+				<pre>
+				{{current}}
+				</pre>
 				<div
 					v-for="provider in portProviders"
 					class="mb-2 p-2 bg-slate-50"
@@ -95,9 +98,6 @@
 						Close Port
 					</button>
 				</div>
-				<pre>
-				{{current}}
-				</pre>
 			</div>
 		</div>
 	</TemplateSidemenu>
