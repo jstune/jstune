@@ -343,9 +343,11 @@
 			}
 		}),
 		async created() {
-			this.resetCreate();
-			await this.getItems();
-			await this.inspectLeader();
+			try {
+				this.resetCreate();
+				await this.getItems();
+				await this.inspectLeader();
+			} catch (e) {}
 		},
 		methods: {
 			async inspectLeader() {

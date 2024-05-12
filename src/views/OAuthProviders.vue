@@ -307,8 +307,10 @@
 			}
 		}),
 		async created() {
-			this.resetCreate();
-			await this.getItems();
+			try {
+				this.resetCreate();
+				await this.getItems();
+			} catch (e) {}
 		},
 		methods: {
 			consent(url) {

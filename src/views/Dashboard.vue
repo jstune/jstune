@@ -263,7 +263,9 @@
 			address: ''
 		}),
 		async created() {
-			await this.inspectLeader();
+			try {
+				await this.inspectLeader();
+			} catch(e) {}
 		},
 		methods: {
 			async inspectLeader() {
