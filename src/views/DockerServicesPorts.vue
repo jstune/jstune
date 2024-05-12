@@ -72,6 +72,29 @@
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
 				</h2>
+				<div
+					v-for="provider in portProviders"
+					class="mb-2 p-2 bg-slate-50"
+				>
+					<h3>
+						{{provider}}
+					</h3><button
+						@click="inspectPort(provider)"
+						class="mb-2 mr-2 hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					>
+						Inspect Port
+					</button><button
+						@click="openPort(provider)"
+						class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					>
+						Open Port
+					</button><button
+						@click="closePort(provider)"
+						class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					>
+						Close Port
+					</button>
+				</div>
 				<pre>
 				{{current}}
 				</pre>
@@ -93,12 +116,40 @@
 			service: 'docker_services_ports',
 			items: null,
 			current: null,
-			search: ''
+			search: '',
+			portProviders: ['ufw', 'google', 'aws', 'azure']
 		}),
 		async created() {
 			await this.getItems();
 		},
 		methods: {
+			async inspectPort(provider = 'ufw') {
+				const port = prompt('Port to inspect');
+				const result = await this.io.service('ports')
+					.get({
+						port,
+						provider: 'ufw'
+					});
+				console.log(result);
+			},
+			async openPort(provider = 'ufw') {
+				const port = prompt('Port to inspect');
+				const result = await this.io.service('ports')
+					.create({
+						port,
+						provider: 'ufw'
+					});
+				console.log(result);
+			},
+			async closePort(provider = 'ufw') {
+				const port = prompt('Port to inspect');
+				const result = await this.io.service('ports')
+					.remove({
+						port,
+						provider: 'ufw'
+					});
+				console.log(result);
+			},
 			async getItems() {
 				try {
 					const query = {};
