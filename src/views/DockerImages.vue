@@ -44,7 +44,8 @@
 					<button
 						v-for="item in items?.data"
 						@click="current = item"
-						class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
+						class="overflow-hidden rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
+						:title="item.repo_tags || item.repo_digests"
 					>
 						{{ item.repo_tags || item.repo_digests }}
 					</button>
