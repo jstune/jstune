@@ -12,9 +12,8 @@
 			style="height:24px"
 			target="_blank"
 			href="https://security.google.com/settings/security/apppasswords"
-			v-if="config.user.includes('@gmail')"
 		>
-			Get your gmail app password
+			Get gmail app password (optional)
 		</a><input
 			v-model="config.pass"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
