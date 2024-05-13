@@ -85,6 +85,15 @@
 					this.$router.push('/login');
 				}
 				this.loading = false;
+			},
+			getIp() {
+				const hostname = location.hostname;
+				const ipv4Regex = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
+				const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+				const isIp = ipv4Regex.test(hostname) || ipv6Regex.test(hostname);
+				if (isIp) {
+					this.ip = hostname;
+				}
 			}
 		}
 	};
