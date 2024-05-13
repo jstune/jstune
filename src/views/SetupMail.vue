@@ -121,7 +121,7 @@
 						...this.config
 					});
 				if (test) {
-					alert(result);
+					alert('Test email sent');
 					this.loading = false;
 				} else {
 					this.resolve(result);
