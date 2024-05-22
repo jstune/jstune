@@ -44,6 +44,7 @@
 		}),
 		async created() {
 			await this.connect();
+			this.config.leaderIP = this.getIP()
 		},
 		methods: {
 			async connect() {
@@ -66,6 +67,13 @@
 					this.$router.push('/login');
 				}
 				this.loading = false;
+			},
+			getIP() {
+				const hostname = location.hostname
+				const ipPattern = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+				const isIpAddress = ipPattern.test(hostname)
+				if (isIpAddress) return hostname
+				return ''
 			}
 		}
 	};
