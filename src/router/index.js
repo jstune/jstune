@@ -90,6 +90,14 @@ const routes = [
                 component: () => import('@/views/SetupSwarm.vue')
             },
             {
+                path: 'redis',
+                component: () => import('@/views/SetupRedis.vue')
+            },
+            {
+                path: 'host',
+                component: () => import('@/views/SetupHost.vue')
+            },
+            {
                 path: 'database',
                 component: () => import('@/views/SetupDatabase.vue')
             },
