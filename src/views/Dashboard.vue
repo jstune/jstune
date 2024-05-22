@@ -269,15 +269,20 @@
 		},
 		methods: {
 			async inspectLeader() {
-				const leaders = await this.io.service('docker_nodes')
-					.find({
-						query: {
-							leader: true
-						}
-					});
-				const leader = leaders?.data?.[0];
-				if (leader) {
-					this.address = leader.address;
+				const state = await this.io.service('state').get()
+				if (state.leaderIP) {
+					this.address = state.leaderIP
+				} else {
+					const leaders = await this.io.service('docker_nodes')
+						.find({
+							query: {
+								leader: true
+							}
+						});
+					const leader = leaders?.data?.[0];
+					if (leader) {
+						this.address = leader.address;
+					}
 				}
 			},
 			async update() {

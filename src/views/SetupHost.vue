@@ -9,11 +9,11 @@
 		/><input
 			v-model="config.appURL"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Hostname: http://localhost:8000"
+			placeholder="API hostname: http://localhost"
 		/><input
 			v-model="config.adminHost"
 			class="mb-3 font-extralight text-slate-800 py-2.5 px-2 rounded-md w-full"
-			placeholder="Admin host: http://admin.localhost:8000"
+			placeholder="Admin url: http://admin.localhost"
 		/><button
 			@click="setup()"
 			:disabled="loading"
@@ -44,7 +44,7 @@
 		}),
 		async created() {
 			await this.connect();
-			this.config.leaderIP = this.getIP()
+			this.config.leaderIP = this.getIP();
 		},
 		methods: {
 			async connect() {
@@ -69,11 +69,11 @@
 				this.loading = false;
 			},
 			getIP() {
-				const hostname = location.hostname
+				const hostname = location.hostname;
 				const ipPattern = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
-				const isIpAddress = ipPattern.test(hostname)
-				if (isIpAddress) return hostname
-				return ''
+				const isIpAddress = ipPattern.test(hostname);
+				if (isIpAddress) return hostname;
+				return '';
 			}
 		}
 	};
