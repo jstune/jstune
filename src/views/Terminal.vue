@@ -48,6 +48,11 @@
 			try {
 				await this.inspectLeader();
 			} catch (e) {}
+			console.log('Listening to terminal events');
+			this.io.service('terminal')
+				.on('output', data => {
+					console.log(`Received output:`, data);
+				});
 		},
 		methods: {
 			async inspectLeader() {
