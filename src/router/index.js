@@ -40,6 +40,11 @@ const routes = [
                 props: { renderer: 'slot' },
             },
             {
+                path: 'monitor',
+                component: () => import('@/views/Monitor.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
                 path: 'users',
                 component: () => import('@/views/Users.vue'),
                 props: { renderer: 'slot' },
