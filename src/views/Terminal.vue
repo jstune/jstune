@@ -15,8 +15,11 @@
 					Leader node address: {{ address }}
 				</h1>
 				<div class="mt-6 relative mb-16 flex-col md:flex-row flex w-full">
-					<div class="h-64 w-full p-4 rounded bg-slate-50">
-					</div>
+					<textarea
+						readonly=""
+						v-model="output"
+						class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50"
+					/>
 					<div class="-mb-6 bg-slate-100 -bottom-5 absolute h-0.5 left-2 right-2">
 					</div>
 				</div><input class="p-4 my-4 bg-slate-50 rounded" /><button
@@ -42,7 +45,8 @@
 		inject: ['io'],
 		props: ['renderer'],
 		data: () => ({
-			address: ''
+			address: '',
+			output: ''
 		}),
 		async created() {
 			try {
@@ -50,8 +54,8 @@
 			} catch (e) {}
 			console.log('Listening to terminal events');
 			this.io.service('terminal')
-				.on('output', data => {
-					console.log(`Received output:`, data);
+				.on('output', line => {
+					this.output += `${line}\n`;
 				});
 		},
 		methods: {
