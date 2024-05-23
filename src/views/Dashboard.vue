@@ -242,6 +242,11 @@
 					@click="updateUI()"
 				>
 					Update Admin UI
+				</button><button
+					class="rounded p-2 bg-slate-200 mt-2"
+					@click="reboot()"
+				>
+					Restart system
 				</button>
 			</div>
 		</WrapperPage>
@@ -265,13 +270,14 @@
 		async created() {
 			try {
 				await this.inspectLeader();
-			} catch(e) {}
+			} catch (e) {}
 		},
 		methods: {
 			async inspectLeader() {
-				const state = await this.io.service('state').get()
+				const state = await this.io.service('state')
+					.get();
 				if (state.leaderIP) {
-					this.address = state.leaderIP
+					this.address = state.leaderIP;
 				} else {
 					const leaders = await this.io.service('docker_nodes')
 						.find({
@@ -308,6 +314,16 @@
 				await this.io.service('exec')
 					.patch('update-ui');
 				location.reload();
+			},
+			async reboot() {
+				if (!confirm(`Are you sure you want to reboot?`)) {
+					return false;
+				}
+				await this.io.service('exec')
+					.patch('reboot');
+				setTimeout(() => {
+					location.reload();
+				}, 3000);
 			}
 		}
 	};

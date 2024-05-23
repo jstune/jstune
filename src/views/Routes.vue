@@ -351,9 +351,10 @@
 		},
 		methods: {
 			async inspectLeader() {
-				const state = await this.io.service('state').get()
+				const state = await this.io.service('state')
+					.get();
 				if (state.leaderIP) {
-					this.address = state.leaderIP
+					this.address = state.leaderIP;
 				} else {
 					const leaders = await this.io.service('docker_nodes')
 						.find({

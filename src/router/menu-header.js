@@ -17,8 +17,12 @@ export default [{
         route: '/settings'
     },
     {
-        label: 'Authentication',
+        label: 'Auth',
         route: '/auth'
+    },
+    {
+        label: 'Env',
+        route: '/env'
     },
     {
         label: 'Users',
