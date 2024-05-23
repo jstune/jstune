@@ -26,7 +26,8 @@ io.io.on('disconnect', () => {
     }
 });
 
-io.io.on('connect', () => {
+io.io.on('connect', (test) => {
+    console.log('Connected to server')
     if (router.currentRoute.value.fullPath === '/disconnected') {
         router.push('/')
     }

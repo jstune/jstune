@@ -329,6 +329,13 @@
 				await this.inspectLeader();
 			} catch (e) {}
 		},
+		mounted() {
+			console.log('Listen to terminal events');
+			this.io.service('terminal')
+				.on('output', data => {
+					console.log(`Received terminal event`, data);
+				});
+		},
 		methods: {
 			async inspectLeader() {
 				const state = await this.io.service('state')
