@@ -52,6 +52,12 @@
 									App Port
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									DNS Challenge
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Challenge Ready
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Auto SSL
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
@@ -108,6 +114,19 @@
 										v-model="create.port"
 										type="number"
 										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.dns_challenge"
+										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.dns_challenge_ready"
+										class="shadow"
+										type="checkbox"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -224,6 +243,19 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
+										v-model="item.dns_challenge"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										type="checkbox"
+										v-model="item.dns_challenge_ready"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
 										type="checkbox"
 										v-model="item.auto_ssl"
 									/>
@@ -335,6 +367,8 @@
 				hostname: '',
 				redirect_url: '',
 				redirect_status: '',
+				dns_challenge: '',
+				dns_challenge_ready: false,
 				port: '',
 				force_https: false,
 				auto_ssl: false,
@@ -426,6 +460,8 @@
 					hostname: '',
 					redirect_url: '',
 					redirect_status: '',
+					dns_challenge: '',
+					dns_challenge_ready: false,
 					port: '',
 					force_https: false,
 					auto_ssl: false,
