@@ -52,7 +52,10 @@
 									App Port
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									DNS Challenge
+									DNS Challenge Host
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									DNS Challenge Digest
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Challenge Ready
@@ -118,7 +121,13 @@
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
-										v-model="create.dns_challenge"
+										v-model="create.dns_challenge_host"
+										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.dns_challenge_digest"
 										class="shadow"
 									/>
 								</td>
@@ -243,7 +252,13 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
-										v-model="item.dns_challenge"
+										v-model="item.dns_challenge_host"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										v-model="item.dns_challenge_digest"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -367,7 +382,8 @@
 				hostname: '',
 				redirect_url: '',
 				redirect_status: 302,
-				dns_challenge: '',
+				dns_challenge_host: '',
+				dns_challenge_digest: '',
 				dns_challenge_ready: false,
 				port: '',
 				force_https: false,
@@ -460,7 +476,8 @@
 					hostname: '',
 					redirect_url: '',
 					redirect_status: 302,
-					dns_challenge: '',
+					dns_challenge_host: '',
+					dns_challenge_digest: '',
 					dns_challenge_ready: false,
 					port: '',
 					force_https: false,
