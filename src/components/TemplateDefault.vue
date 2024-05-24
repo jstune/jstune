@@ -54,7 +54,7 @@
 					<UtilityNavbar
 						:menu="menus.HeaderMenu"
 						topBorderHeight="1px"
-						align="center-right"
+						align="right"
 						paddingX="10px"
 						topLeftRadius="2px"
 						topRightRadius="2px"
