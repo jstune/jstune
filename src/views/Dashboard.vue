@@ -291,6 +291,11 @@
 					Self Update
 				</button><button
 					class="rounded p-2 bg-slate-200 mt-2"
+					@click="migrate()"
+				>
+					Migrate
+				</button><button
+					class="rounded p-2 bg-slate-200 mt-2"
 					@click="updateNPM()"
 				>
 					Update Node Packages
@@ -363,6 +368,14 @@
 				await this.io.service('exec')
 					.patch('update-npm');
 				alert('jstune will automtically be restarted after update is completed');
+			},
+			async migrate() {
+				if (!confirm(`Are you sure you want to migrate database?`)) {
+					return false;
+				}
+				await this.io.service('exec')
+					.patch('migrate');
+				alert('Migration completed');
 			},
 			async updateUI() {
 				if (!confirm(`Are you sure you want to update admin ui?`)) {
