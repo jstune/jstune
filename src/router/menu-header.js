@@ -17,27 +17,45 @@ export default [{
         route: '/settings'
     },
     {
-        label: 'Auth',
-        route: '/auth'
-    },
-    {
         label: 'Env',
         route: '/env'
+    },
+    {
+        label: 'Auth',
+        route: '/auth'
     },
     {
         label: 'Users',
         route: '/users'
     },
     {
-        label: 'Deploy Static',
-        route: '/deploy-static'
+        label: 'Tools',
+        children: [
+            {
+                label: 'Terminal',
+                route: '/terminal'
+            },
+            {
+                label: 'Monitor',
+                route: '/monitor'
+            },
+            {
+                label: 'Docker',
+                route: '/docker/apps'
+            },
+        ]
     },
     {
         label: 'Deploy',
-        route: '/deploy'
-    },
-    {
-        label: 'Docker',
-        route: '/docker/apps'
+        children: [
+            {
+                label: 'Static App',
+                route: '/deploy-static'
+            },
+            {
+                label: 'Docker App',
+                route: '/deploy'
+            },
+        ]
     }
 ]
