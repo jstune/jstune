@@ -49,7 +49,7 @@ router.beforeEach(async to => {
     }
     try {
         const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Re-authentication timed out')), 300)
+            setTimeout(() => reject(new Error('Re-authentication timed out')), 3000)
         })
         const authenticate = new Promise(async (resolve, reject) => {
             try {
