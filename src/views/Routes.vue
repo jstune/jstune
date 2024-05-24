@@ -366,7 +366,7 @@
 			create: {
 				hostname: '',
 				redirect_url: '',
-				redirect_status: '302',
+				redirect_status: 302,
 				dns_challenge: '',
 				dns_challenge_ready: false,
 				port: '',
@@ -459,7 +459,7 @@
 				this.create = {
 					hostname: '',
 					redirect_url: '',
-					redirect_status: '302',
+					redirect_status: 302,
 					dns_challenge: '',
 					dns_challenge_ready: false,
 					port: '',
