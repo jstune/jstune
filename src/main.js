@@ -61,10 +61,13 @@ router.beforeEach(async to => {
             }
         })
         await Promise.race([authenticate, timeout])
+        /*
         if (
             ['/', '/setup', '/login', '/register', '/recover', '/reset-password', '/disconnected'].includes(to.path) ||
             to.path.startsWith('/setup/')
         ) return '/dashboard'
+        */
+        console.log('to', to.path)
     } catch (e) {
         let uninstalled = []
         const timeout = new Promise((_, reject) => {
