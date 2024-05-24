@@ -22,6 +22,7 @@ io.configure(feathers.authentication())
 io.io.on('disconnect', () => {
     console.log('Disconnected from server') // @todo - Show a dialog notice
     if (router.currentRoute.value.fullPath === '/login') {
+        console.log('going to disconnected route')
         router.push('/disconnected')
     }
 });
@@ -29,6 +30,7 @@ io.io.on('disconnect', () => {
 io.io.on('connect', (test) => {
     console.log('Connected to server')
     if (router.currentRoute.value.fullPath === '/disconnected') {
+        console.log('going to root route')
         router.push('/')
     }
 });
@@ -41,6 +43,7 @@ io.reAuthenticate().then(user => {
 
 router.beforeEach(async to => {
     if (to.path === '/logout') {
+        console.log('logging out')
         await io.logout()
         return '/login'
     }
@@ -69,6 +72,9 @@ router.beforeEach(async to => {
         */
         console.log('to', to.path)
     } catch (e) {
+
+        console.log('Something bad happened', e.message)
+
         let uninstalled = []
         const timeout = new Promise((_, reject) => {
             setTimeout(() => reject(new Error('Fetching facilities timed out')), 1000)
@@ -90,8 +96,10 @@ router.beforeEach(async to => {
                 // Force going to next setup step if installation is not completed
                 return '/setup/' + uninstalled[0].name
             }
+            console.log('Something is wrong... Going to login route')
             if (!uninstalled.length && !['/login', '/register', '/recover', '/reset-password'].includes(to.path)) return '/login'
         } catch(e) {
+            console.log('disconnected ..')
             if (!['/disconnected'].includes(to.path)) return '/disconnected'
         }
     }
