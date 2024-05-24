@@ -49,11 +49,17 @@ router.beforeEach(async to => {
     }
     try {
         const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Re-authentication timed out')), 3000)
+            console.log('Tick')
+            setTimeout(() => {
+                console.log('Tack')
+                reject(new Error('Re-authentication timed out'))
+            }, 10000)
         })
         const authenticate = new Promise(async (resolve, reject) => {
             try {
+                console.log('Authing')
                 user.value = (await io.reAuthenticate())?.user
+                console.log('user', user)
                 if (user.value) {
                     resolve()
                 } else {
