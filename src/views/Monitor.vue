@@ -9,22 +9,27 @@
 
 			<div class="flex-col max-w-md place-self-center mt-8 mb-24 w-full flex md:max-w-4xl">
 				<h1 class="px-4 mb-2 mt-6 font-medium text-3xl w-full">
-					Important monitoring statistics should be added here
+					Cluster Workers
 				</h1>
 				<h1 class="px-4 mb-4 mt-2 font-medium text-xl w-full">
 					Leader node address: {{ address }}
 				</h1>
-				<div class="mt-6 relative mb-16 flex-col md:flex-row flex w-full">
-					<div class="h-64 w-full p-4 rounded bg-slate-50">
+				<div class="mt-6 relative mb-16 flex-col md:flex-row flex w-full px-4">
+					<div class="grid-cols-2 md:grid-cols-3 gap-11 grid w-full">
+						<div
+							v-for="worker in workers"
+							class="p-4 bg-slate-700 from-slate-800 aspect-video shadow-md rounded-lg items-center justify-center flex-col bg-gradient-to-tr flex cursor-pointer hover:opacity-80"
+						>
+							<h2 class="text-slate-100">
+								ID: {{ worker.id }} <br />
+								PID: {{ worker.pid }} <br />
+								State: {{ worker.state }}
+							</h2>
+						</div>
 					</div>
-					<div class="-mb-6 bg-slate-100 -bottom-5 absolute h-0.5 left-2 right-2">
+					<div class="-mb-8 bg-slate-100 -bottom-5 absolute h-0.5 left-4 right-4">
 					</div>
-				</div><input class="p-4 my-4 bg-slate-50 rounded" /><button
-					class="p-4 rounded bg-slate-200"
-					@click="update()"
-				>
-					Go
-				</button>
+				</div>
 			</div>
 		</WrapperPage>
 	</TemplateDefault>
@@ -42,14 +47,20 @@
 		inject: ['io'],
 		props: ['renderer'],
 		data: () => ({
-			address: ''
+			address: '',
+			workers: []
 		}),
 		async created() {
 			try {
 				await this.inspectLeader();
+				await this.getWorkers();
 			} catch (e) {}
 		},
 		methods: {
+			async getWorkers() {
+				this.workers = await this.io.service('workers')
+					.find();
+			},
 			async inspectLeader() {
 				const state = await this.io.service('state')
 					.get();
@@ -67,40 +78,6 @@
 						this.address = leader.address;
 					}
 				}
-			},
-			async update() {
-				if (!confirm(`Are you sure you want to update jstune?`)) {
-					return false;
-				}
-				await this.io.service('exec')
-					.patch('update');
-				alert('jstune will automtically be restarted after update is completed');
-			},
-			async updateNPM() {
-				if (!confirm(`Are you sure you want to update packages?`)) {
-					return false;
-				}
-				await this.io.service('exec')
-					.patch('update-npm');
-				alert('jstune will automtically be restarted after update is completed');
-			},
-			async updateUI() {
-				if (!confirm(`Are you sure you want to update admin ui?`)) {
-					return false;
-				}
-				await this.io.service('exec')
-					.patch('update-ui');
-				location.reload();
-			},
-			async reboot() {
-				if (!confirm(`Are you sure you want to reboot?`)) {
-					return false;
-				}
-				await this.io.service('exec')
-					.patch('reboot');
-				setTimeout(() => {
-					location.reload();
-				}, 3000);
 			}
 		}
 	};
