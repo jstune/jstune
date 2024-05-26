@@ -70,10 +70,17 @@
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
+									<select
 										v-model="create.provider_key"
-										class="shadow"
-									/>
+										class="h-5 w-40 shadow"
+									>
+										<option
+											v-for="provider in dnsProvidersSupported"
+											:value="provider"
+										>
+											{{provider}}
+										</option>
+									</select>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
@@ -142,10 +149,17 @@
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										class="shadow"
+									<select
 										v-model="item.provider_key"
-									/>
+										class="h-5 w-40 shadow"
+									>
+										<option
+											v-for="provider in dnsProvidersSupported"
+											:value="provider"
+										>
+											{{provider}}
+										</option>
+									</select>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
@@ -231,6 +245,7 @@
 		},
 		data: () => ({
 			items: null,
+			dnsProvidersSupported: [],
 			service: 'dns_providers',
 			create: {
 				name: '',
@@ -244,6 +259,7 @@
 			try {
 				this.resetCreate();
 				await this.getItems();
+				await this.getDNSProvidersSupported();
 			} catch (e) {}
 		},
 		methods: {
@@ -256,6 +272,10 @@
 					.find({
 						query: {}
 					});
+			},
+			async getDNSProvidersSupported() {
+				this.dnsProvidersSupported = await this.io.service('dns_providers_supported')
+					.find();
 			},
 			async createItem() {
 				try {

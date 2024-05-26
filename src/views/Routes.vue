@@ -128,7 +128,7 @@
 										class="h-5 w-40 shadow"
 									>
 										<option
-											v-for="provider of providers"
+											v-for="provider of providers?.data"
 											:value="provider.provider_key"
 										>
 											{{provider.name}}
@@ -271,7 +271,7 @@
 										class="h-5 w-40 shadow"
 									>
 										<option
-											v-for="provider of providers"
+											v-for="provider of providers?.data"
 											:value="provider.provider_key"
 										>
 											{{provider.name}}
@@ -426,6 +426,7 @@
 		async created() {
 			try {
 				this.resetCreate();
+				await this.getProviders();
 				await this.getItems();
 				await this.inspectLeader();
 			} catch (e) {}
@@ -515,6 +516,7 @@
 					hostname: '',
 					redirect_url: '',
 					redirect_status: 302,
+					dns_provider: '',
 					dns_challenge_host: '',
 					dns_challenge_digest: '',
 					dns_challenge_ready: false,
