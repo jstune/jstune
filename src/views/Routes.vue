@@ -52,6 +52,9 @@
 									App Port
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									DNS Provider
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									DNS Challenge Host
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
@@ -118,6 +121,19 @@
 										type="number"
 										class="shadow"
 									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<select
+										v-model="create.dns_provider"
+										class="h-5 w-40 shadow"
+									>
+										<option
+											v-for="provider of providers"
+											:value="provider.provider_key"
+										>
+											{{provider.name}}
+										</option>
+									</select>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
@@ -250,6 +266,19 @@
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<select
+										v-model="item.dns_provider"
+										class="h-5 w-40 shadow"
+									>
+										<option
+											v-for="provider of providers"
+											:value="provider.provider_key"
+										>
+											{{provider.name}}
+										</option>
+									</select>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
 										v-model="item.dns_challenge_host"
@@ -378,10 +407,12 @@
 			address: '',
 			items: null,
 			service: 'proxy',
+			providers: [],
 			create: {
 				hostname: '',
 				redirect_url: '',
 				redirect_status: 302,
+				dns_provider: '',
 				dns_challenge_host: '',
 				dns_challenge_digest: '',
 				dns_challenge_ready: false,
@@ -428,6 +459,14 @@
 						.find({
 							query: {}
 						});
+				} catch (e) {
+					console.log(e.message);
+				}
+			},
+			async getProviders() {
+				try {
+					this.providers = await this.io.service('dns_providers')
+						.find();
 				} catch (e) {
 					console.log(e.message);
 				}

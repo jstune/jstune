@@ -25,6 +25,11 @@ const routes = [
                 props: { renderer: 'slot' },
             },
             {
+                path: 'dns-providers',
+                component: () => import('@/views/DNSProviders.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
                 path: 'auth',
                 component: () => import('@/views/OAuthProviders.vue'),
                 props: { renderer: 'slot' },

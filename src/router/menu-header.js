@@ -43,6 +43,10 @@ export default [{
                 label: 'Docker',
                 route: '/docker/apps'
             },
+            {
+                label: 'DNS Providers',
+                route: '/dns-providers'
+            }
         ]
     },
     {
