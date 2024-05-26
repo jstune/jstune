@@ -31,19 +31,19 @@
 									ID
 								</th>
 								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Key
-								</th>
-								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Key
-								</th>
-								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Key
-								</th>
-								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
-									Key
-								</th>
-								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Name
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Provider Key
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Key
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Secret
+								</th>
+								<th class="text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									Base URL
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Created at
@@ -65,31 +65,31 @@
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
-										v-model="create.key"
-										class="shadow"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										v-model="create.key"
-										class="shadow"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										v-model="create.key"
-										class="shadow"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										v-model="create.key"
-										class="shadow"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
 										v-model="create.name"
+										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.provider_key"
+										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.key"
+										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.secret"
+										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.base_url"
 										class="shadow"
 									/>
 								</td>
@@ -138,32 +138,31 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
-										v-model="item.key"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										class="shadow"
-										v-model="item.key"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										class="shadow"
-										v-model="item.key"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										class="shadow"
-										v-model="item.key"
-									/>
-								</td>
-								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-									<input
-										class="shadow"
 										v-model="item.name"
-										style="height:20px"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										v-model="item.provider_key"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										v-model="item.key"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										v-model="item.secret"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
+										v-model="item.base_url"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
