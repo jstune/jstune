@@ -16,11 +16,6 @@
 						@click="getItems"
 					>
 						Reload
-					</button><button
-						class="rounded p-2 bg-slate-200 mr-2"
-						@click="renewSSLCertificates"
-					>
-						Renew certificates
 					</button>
 				</div>
 				<div class="overflow-auto shadow-sm my-8">
@@ -263,10 +258,6 @@
 			} catch (e) {}
 		},
 		methods: {
-			async renewSSLCertificates() {
-				await this.io.service('jobs')
-					.remove('renew-ssl-certificates');
-			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
 					.find({
