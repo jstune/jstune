@@ -376,9 +376,7 @@
 											clip-rule="evenodd"
 											@click="sslRenewIds(item)"
 										/>
-									</svg>
-
-								</td>
+									</svg> </td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
 
 									<svg
@@ -513,6 +511,11 @@
 						.find({
 							query: {}
 						});
+					for (const item of items?.data) {
+						for (const key of Object.keys(item)) {
+							if (item[key] === null) item[key] = '';
+						}
+					}
 				} catch (e) {
 					console.log(e.message);
 				}
