@@ -511,7 +511,7 @@
 						.find({
 							query: {}
 						});
-					for (const item of items?.data) {
+					for (const item of this.items?.data) {
 						for (const key of Object.keys(item)) {
 							if (item[key] === null) item[key] = '';
 						}
