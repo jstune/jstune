@@ -367,7 +367,7 @@
 										class="w-6 h-6 mx-auto cursor-pointer hover:text-slate-700"
 										title="Renew SSL Certificate"
 										:class="{
-'animate-spin': true
+'animate-spin': sslRenewIds.includes(item.id)
 }"
 									>
 										<path
