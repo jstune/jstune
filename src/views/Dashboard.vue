@@ -359,7 +359,7 @@
 				}
 				await this.io.service('exec')
 					.patch('update');
-				alert('jstune will automtically be restarted after update is completed');
+				alert('jstune will automatically be restarted after update is completed');
 			},
 			async updateNPM() {
 				if (!confirm(`Are you sure you want to update packages?`)) {
@@ -367,7 +367,7 @@
 				}
 				await this.io.service('exec')
 					.patch('update-npm');
-				alert('jstune will automtically be restarted after update is completed');
+				alert('jstune will automatically be restarted after update is completed');
 			},
 			async migrate() {
 				if (!confirm(`Are you sure you want to migrate database?`)) {
