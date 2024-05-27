@@ -61,6 +61,9 @@
 									DNS Challenge Digest
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
+									SSL Days Left
+								</th>
+								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
 									Challenge Ready
 								</th>
 								<th class="whitespace-nowrap text-center border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200">
@@ -145,6 +148,13 @@
 									<input
 										v-model="create.dns_challenge_digest"
 										class="shadow"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										v-model="create.cert_days_left"
+										class="shadow"
+										type="number"
 									/>
 								</td>
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
@@ -293,6 +303,13 @@
 								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
 									<input
 										class="shadow"
+										v-model="item.cert_days_left"
+										type="number"
+									/>
+								</td>
+								<td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+									<input
+										class="shadow"
 										type="checkbox"
 										v-model="item.dns_challenge_ready"
 									/>
@@ -416,6 +433,7 @@
 				dns_challenge_host: '',
 				dns_challenge_digest: '',
 				dns_challenge_ready: false,
+				cert_days_left: 0,
 				port: '',
 				force_https: false,
 				auto_ssl: false,
@@ -520,6 +538,7 @@
 					dns_challenge_host: '',
 					dns_challenge_digest: '',
 					dns_challenge_ready: false,
+					cert_days_left: 0,
 					port: '',
 					force_https: false,
 					auto_ssl: false,

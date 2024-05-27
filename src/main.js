@@ -48,7 +48,7 @@ router.beforeEach(async to => {
         const timeout = new Promise((_, reject) => {
             setTimeout(() => {
                 reject(new Error('Re-authentication timed out'))
-            }, 30000) // 30 sec timeout
+            }, 800) // ms before timeout
         })
         const authenticate = new Promise(async (resolve, reject) => {
             try {
