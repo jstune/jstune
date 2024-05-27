@@ -135,7 +135,7 @@
 									>
 										<option
 											v-for="provider of providers?.data"
-											:value="provider.id"
+											:value="String(provider.id)"
 										>
 											{{provider.name}}
 										</option>
@@ -288,7 +288,7 @@
 									>
 										<option
 											v-for="provider of providers?.data"
-											:value="provider.id"
+											:value="String(provider.id)"
 										>
 											{{provider.name}}
 										</option>
