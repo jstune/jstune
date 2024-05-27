@@ -477,11 +477,9 @@
 		},
 		methods: {
 			async sslrenew(oldItem) {
-				console.log('renewing...', oldItem);
 				this.sslRenewIds.push(oldItem?.id);
 				try {
 					this.socket.emit('sslrenew', 'proxy', oldItem, {}, (error, newItem) => {
-						console.log('Called sslrenew on proxy service', newItem);
 						for (const key of Object.keys(oldItem)) {
 							oldItem[key] = newItem[key];
 						}
@@ -491,15 +489,6 @@
 					console.log('error', e);
 					this.sslRenewIds = this.sslRenewIds.filter(id => id !== oldItem?.id);
 				}
-				/*
-				const newItem = await this.io.service(this.service)
-					.sslrenew(oldItem);
-				for (const key of Object.keys(oldItem)) {
-					oldItem[key] = newItem[key];
-				}
-				this.sslRenewIds = this.sslRenewIds.filter(id => id !== oldItem?.id);
-				console.log('renew completed');
-				*/
 			},
 			async inspectLeader() {
 				const state = await this.io.service('state')
