@@ -67,21 +67,31 @@
 			</div>
 			<div class="grow p-4 overflow-auto">
 				<h2 v-if="current">Connected to {{current.container_id}}</h2>
-				<h2 v-else="">Not connected</h2> <button
+				<h2 class="overflow-hidden">Not connected</h2> <button
 					@click="connect()"
-					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					class="mb-1 w-full hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
 				>
 					Connect
-				</button> <input
+				</button><textarea
+					ref="output"
+					readonly=""
+					v-model="output"
+					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50"
+				/> <input
 					@keypress.enter="send()"
 					v-model="command"
 					placeholder="cmd"
 					class="w-full p-2"
 				/> <button
 					@click="send()"
-					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					class="w-full hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
 				>
 					Send
+				</button> <button
+					class="mt-1 w-full hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+					@click="autoscroll = !autoscroll"
+				>
+					Autoscroll {{ autoscroll ? 'on' :'off' }}
 				</button>
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
@@ -107,7 +117,9 @@
 			items: null,
 			current: null,
 			search: '',
-			command: ''
+			command: '',
+			output: '',
+			autoscroll: true
 		}),
 		async created() {
 			await this.getItems();
@@ -140,11 +152,10 @@
 				}
 				this.io.service('containers')
 					.on('output', data => {
-						console.log('Data output', data);
-					});
-				this.io.service('containers')
-					.on('command', data => {
-						console.log('Command output', data);
+						this.output += `${line}\n`;
+						if (this.autoscroll) {
+							this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
+						}
 					});
 				await this.io.service('containers')
 					.get(this.current.container_id);
