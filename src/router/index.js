@@ -190,6 +190,11 @@ const routes = [
                 props: { renderer: 'slot' }
             },
             {
+                path: 'containers',
+                component: () => import('@/views/DockerContainers.vue'),
+                props: { renderer: 'slot' }
+            },
+            {
                 path: 'networks',
                 component: () => import('@/views/DockerNetworks.vue'),
                 props: { renderer: 'slot' }

@@ -35,6 +35,10 @@ export default [
         route: '/docker/tasks'
     },
     {
+        label: 'Containers',
+        route: '/docker/containers'
+    },
+    {
         label: 'Images',
         route: '/docker/images'
     },
