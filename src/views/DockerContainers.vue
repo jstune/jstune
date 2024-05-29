@@ -165,13 +165,13 @@
 						}
 					});
 				await this.io.service('containers')
-					.get(this.current.container_id);
+					.get(this.current.docker_container_id);
 			},
 			async send() {
 				if (!this.current) return;
 				if (!this.command) return;
 				await this.io.service('containers')
-					.patch(this.current.container_id, {
+					.patch(this.current.docker_container_id, {
 						command: this.command
 					});
 				this.command = '';
