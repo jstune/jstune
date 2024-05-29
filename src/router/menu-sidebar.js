@@ -9,7 +9,7 @@ export default [
         label: 'Swarm'
     },
     {
-        label: 'Apps',
+        label: 'Apps (Services)',
         route: '/docker/apps',
         children: [
             {
