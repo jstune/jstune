@@ -128,7 +128,7 @@
 				const result = await this.io.service('ports')
 					.get({
 						port,
-						provider: 'ufw'
+						provider
 					});
 				console.log(result);
 			},
@@ -137,7 +137,7 @@
 				const result = await this.io.service('ports')
 					.create({
 						port,
-						provider: 'ufw'
+						provider
 					});
 				console.log(result);
 			},
@@ -146,7 +146,7 @@
 				const result = await this.io.service('ports')
 					.remove({
 						port,
-						provider: 'ufw'
+						provider
 					});
 				console.log(result);
 			},
