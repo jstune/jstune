@@ -157,8 +157,8 @@
 					.patch(this.containerId, {
 						command
 					});
-				if (result?.output) {
-					console.log('Command output', result?.output);
+				if (result?.data) {
+					console.log('Command output', result.data);
 				} else {
 					console.log(result);
 				}
