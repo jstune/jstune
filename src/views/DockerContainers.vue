@@ -3,7 +3,7 @@
 		<div class="flex h-full flex-col md:flex-row">
 			<div class="flex-col flex w-full md:w-1/2 flex-shrink-0">
 				<h2 class="font-light text-lg p-4 max-w-full">
-					Machines
+					Containers
 				</h2>
 				<div class="flex px-4">
 
@@ -41,9 +41,9 @@
 					<button
 						v-for="item in items?.data"
 						@click="current = item"
-						class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
+						class="overflow-hidden rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
 					>
-						{{ item.hostname }}
+						{{ item.name }}
 					</button>
 				</div>
 				<div class="p-4 hidden md:flex">
@@ -66,11 +66,22 @@
 				</div>
 			</div>
 			<div class="grow p-4 overflow-auto">
-				<button
-					@click="sync()"
+				<h2 v-if="current">Connected to {{current.container_id}}</h2>
+				<h2 v-else="">Not connected</h2> <button
+					@click="connect()"
 					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
 				>
-					Sync
+					Connect
+				</button> <input
+					@keypress.enter="send()"
+					v-model="command"
+					placeholder="cmd"
+					class="w-full p-2"
+				/> <button
+					@click="send()"
+					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+				>
+					Send
 				</button>
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
@@ -92,20 +103,16 @@
 		},
 		inject: ['menus', 'io'],
 		data: () => ({
-			service: 'docker_nodes',
+			service: 'docker_containers',
 			items: null,
 			current: null,
-			search: ''
+			search: '',
+			command: ''
 		}),
 		async created() {
 			await this.getItems();
 		},
 		methods: {
-			async sync() {
-				const result = await this.io.service(this.service)
-					.get('sync');
-				alert(JSON.stringify(result));
-			},
 			async getItems() {
 				try {
 					const query = {};
@@ -125,6 +132,31 @@
 					this.items = null;
 					console.error(e);
 				}
+			},
+			async connect() {
+				if (!this.current) {
+					alert('Select container before connect');
+					return;
+				}
+				this.io.service('containers')
+					.on('output', data => {
+						console.log('Data output', data);
+					});
+				this.io.service('containers')
+					.on('command', data => {
+						console.log('Command output', data);
+					});
+				await this.io.service('containers')
+					.get(this.current.container_id);
+			},
+			async send() {
+				if (!this.current) return;
+				if (!this.command) return;
+				await this.io.service('containers')
+					.patch(this.current.container_id, {
+						command: this.command
+					});
+				this.command = '';
 			},
 			next() {
 				if (!this.items) return;
