@@ -158,7 +158,7 @@
 					return;
 				}
 				this.io.service('containers')
-					.on('output', data => {
+					.on('output', line => {
 						this.output += `${line}\n`;
 						if (this.autoscroll) {
 							this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
