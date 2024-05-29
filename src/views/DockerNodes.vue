@@ -71,6 +71,16 @@
 					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
 				>
 					Sync
+				</button><button
+					@click="container()"
+					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+				>
+					Container
+				</button><button
+					@click="send()"
+					class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+				>
+					Send
 				</button>
 				<h2 class="font-light text-lg max-w-full">
 					Details & Actions
@@ -95,7 +105,8 @@
 			service: 'docker_nodes',
 			items: null,
 			current: null,
-			search: ''
+			search: '',
+			containerId: ''
 		}),
 		async created() {
 			await this.getItems();
@@ -124,6 +135,32 @@
 				} catch (e) {
 					this.items = null;
 					console.error(e);
+				}
+			},
+			async container() {
+				this.containerId = prompt('container id');
+				this.io.service('containers')
+					.on('output', data => {
+						console.log('Data output', data);
+					});
+				this.io.service('containers')
+					.on('command', data => {
+						console.log('Command output', data);
+					});
+				await this.io.service('containers')
+					.get(this.containerId);
+			},
+			async send() {
+				const command = prompt('Command');
+				if (!command) return;
+				const result = await this.io.service('containers')
+					.patch(this.containerId, {
+						command
+					});
+				if (result?.output) {
+					console.log('Command output', result?.output);
+				} else {
+					console.log(result);
 				}
 			},
 			next() {
