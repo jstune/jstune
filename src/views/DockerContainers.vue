@@ -66,8 +66,15 @@
 				</div>
 			</div>
 			<div class="grow p-4 overflow-auto">
-				<h2 v-if="current">Connected to {{current.container_id}}</h2>
-				<h2 class="overflow-hidden">Not connected</h2> <button
+				<h2 v-if="current">
+					Selected {{current.docker_container_id}}
+				</h2>
+				<h2
+					v-if="!current"
+					class="overflow-hidden"
+				>
+					Select Container
+				</h2> <button
 					@click="connect()"
 					class="mb-1 w-full hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
 				>
