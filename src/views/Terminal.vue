@@ -20,6 +20,7 @@
 						readonly=""
 						v-model="output"
 						class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50"
+						style="font-family:monospace"
 					/>
 					<div class="-mb-6 bg-slate-100 -bottom-5 absolute h-0.5 left-2 right-2">
 					</div>
