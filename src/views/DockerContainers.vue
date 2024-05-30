@@ -170,7 +170,7 @@
 						.off('output', this.listener);
 				}
 				this.listener = line => {
-					if (this.$refs?.output?.scrollTop === null) {
+					if (this.$refs?.output?.scrollTop === null || this.$refs?.output?.scrollHeight === null) {
 						this.io.service('containers')
 							.off('output', this.listener);
 					} else {

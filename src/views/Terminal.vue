@@ -68,7 +68,7 @@
 			} catch (e) {}
 			console.log('Listening to terminal events');
 			this.listener = line => {
-				if (this.$refs?.output?.scrollTop === null) {
+				if (this.$refs?.output?.scrollTop === null || this.$refs?.output?.scrollHeight === null) {
 					this.io.service('terminal').off('output', this.listener);
 				} else {
 					this.output += `${line}\n`;
