@@ -135,6 +135,7 @@
 		},
 		async beforeUnmount() {
 			if (this.listener) {
+				console.log('Killing container terminal session')
 				this.io.service('containers')
 					.off('output', this.listener);
 			}
