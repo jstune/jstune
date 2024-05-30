@@ -139,6 +139,12 @@
 					.off('output', this.listener);
 			}
 		},
+		async beforeUnmount() {
+			if (this.listener) {
+				this.io.service('containers')
+					.off('output', this.listener);
+			}
+		},
 		methods: {
 			async getItems() {
 				try {
@@ -170,7 +176,7 @@
 						.off('output', this.listener);
 				}
 				this.listener = line => {
-					if (this.$refs?.output?.scrollTop === null || this.$refs?.output?.scrollHeight === null) {
+					if (this.$refs?.output) {
 						this.io.service('containers')
 							.off('output', this.listener);
 					} else {

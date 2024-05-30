@@ -68,7 +68,7 @@
 			} catch (e) {}
 			console.log('Listening to terminal events');
 			this.listener = line => {
-				if (this.$refs?.output?.scrollTop === null || this.$refs?.output?.scrollHeight === null) {
+				if (!this.$refs?.output) {
 					this.io.service('terminal').off('output', this.listener);
 				} else {
 					this.output += `${line}\n`;
@@ -80,6 +80,11 @@
 			this.io.service('terminal').on('output', this.listener);
 		},
 		beforeDestroy() {
+			console.log('Terminal will be detached')
+			this.io.service('terminal').off('output', this.listener);
+		},
+		beforeUnmount() {
+			console.log('Unmount terminal')
 			this.io.service('terminal').off('output', this.listener);
 		},
 		methods: {
