@@ -133,12 +133,6 @@
 		async created() {
 			await this.getItems();
 		},
-		async beforeDestroy() {
-			if (this.listener) {
-				this.io.service('containers')
-					.off('output', this.listener);
-			}
-		},
 		async beforeUnmount() {
 			if (this.listener) {
 				this.io.service('containers')
