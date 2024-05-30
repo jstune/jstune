@@ -59,20 +59,28 @@
 			command: '',
 			address: '',
 			output: '',
-			autoscroll: true
+			autoscroll: true,
+			listener: null
 		}),
 		async created() {
 			try {
 				await this.inspectLeader();
 			} catch (e) {}
 			console.log('Listening to terminal events');
-			this.io.service('terminal')
-				.on('output', line => {
+			this.listener = line => {
+				if (this.$refs?.output?.scrollTop === null) {
+					this.io.service('terminal').off('output', this.listener);
+				} else {
 					this.output += `${line}\n`;
 					if (this.autoscroll) {
 						this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
 					}
-				});
+				}
+			}
+			this.io.service('terminal').on('output', this.listener);
+		},
+		beforeDestroy() {
+			this.io.service('terminal').off('output', this.listener);
 		},
 		methods: {
 			async inspectLeader() {
