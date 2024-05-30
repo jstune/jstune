@@ -172,11 +172,14 @@
 					return;
 				}
 				if (this.listener) {
+					console.log('Killing previous terminal session')
 					this.io.service('containers')
 						.off('output', this.listener);
 				}
+				console.log('Generating new terminal session')
 				this.listener = line => {
-					if (this.$refs?.output) {
+					if (!this.$refs?.output) {
+						console.log('Killing previous terminal session')
 						this.io.service('containers')
 							.off('output', this.listener);
 					} else {
@@ -186,8 +189,10 @@
 						}
 					}
 				};
+				console.log('Start listener')
 				this.io.service('containers')
 					.on('output', this.listener);
+				console.log('Que terminal session')
 				await this.io.service('containers')
 					.get(this.current.docker_container_id);
 			},
