@@ -84,6 +84,7 @@
 					readonly=""
 					v-model="output"
 					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50"
+					style="font-family:monospace"
 				/> <input
 					@keypress.enter="send()"
 					v-model="command"
@@ -126,10 +127,17 @@
 			search: '',
 			command: '',
 			output: '',
-			autoscroll: true
+			autoscroll: true,
+			listener: null
 		}),
 		async created() {
 			await this.getItems();
+		},
+		async beforeDestroy() {
+			if (this.listener) {
+				this.io.service('containers')
+					.off('output', this.listener);
+			}
 		},
 		methods: {
 			async getItems() {
@@ -157,13 +165,23 @@
 					alert('Select container before connect');
 					return;
 				}
-				this.io.service('containers')
-					.on('output', line => {
+				if (this.listener) {
+					this.io.service('containers')
+						.off('output', this.listener);
+				}
+				this.listener = line => {
+					if (this.$refs?.output?.scrollTop === null) {
+						this.io.service('containers')
+							.off('output', this.listener);
+					} else {
 						this.output += `${line.data}\n`;
 						if (this.autoscroll) {
 							this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
 						}
-					});
+					}
+				};
+				this.io.service('containers')
+					.on('output', this.listener);
 				await this.io.service('containers')
 					.get(this.current.docker_container_id);
 			},
