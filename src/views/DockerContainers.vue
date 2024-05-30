@@ -192,13 +192,17 @@
 					.get(this.current.docker_container_id);
 			},
 			async send() {
-				if (!this.current) return;
-				if (!this.command) return;
-				await this.io.service('containers')
-					.patch(this.current.docker_container_id, {
-						command: this.command
-					});
-				this.command = '';
+				if (!this.current) return console.log('current not set', this.current);
+				if (!this.command) return console.log('command not set', this.command);
+				try {
+					await this.io.service('containers')
+						.patch(this.current.docker_container_id, {
+							command: this.command
+						});
+					this.command = '';
+				} catch(e) {
+					console.log('error', e.message)
+				}
 			},
 			next() {
 				if (!this.items) return;
