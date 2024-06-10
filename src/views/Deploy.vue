@@ -69,11 +69,6 @@
 						Select repository
 					</button><button
 						class="rounded p-2 bg-slate-200 ml-4"
-						@click="autodeploy = !autodeploy"
-					>
-						{{ autodeploy ? 'Autodeploy on' : 'Autodeploy off' }}
-					</button><button
-						class="rounded p-2 bg-slate-200 ml-4"
 						@click="adjustVolumes = !adjustVolumes"
 					>
 						{{ adjustVolumes ? 'Adjust volumes on' : 'Adjust volumes off' }}
@@ -196,7 +191,6 @@
 			slug: '',
 			repository: '',
 			branch: 'main',
-			autodeploy: false,
 			adjustVolumes: true,
 			inherit: true,
 			running: false,
@@ -220,7 +214,6 @@
 				this.slug = item.id;
 				this.repository = item.repository;
 				this.branch = item.branch;
-				this.autodeploy = item.autodeploy;
 				this.adjustVolumes = item.adjustVolumes;
 				this.inherit = item.inherit;
 				this.running = item.running;
@@ -299,7 +292,6 @@
 							buffer: this.files?.length ? await this.packTar() : null,
 							repository: this.repository,
 							branch: this.branch,
-							autodeploy: this.autodeploy,
 							dockerComposeFile: this.dockerComposeFile,
 							adjustVolumes: this.adjustVolumes,
 							inherit: this.inherit
@@ -319,8 +311,7 @@
 							inherit: this.inherit,
 							adjustVolumes: this.adjustVolumes,
 							branch: this.branch,
-							name: this.name,
-							autodeploy: this.autodeploy
+							name: this.name
 						});
 					console.log('res', res);
 				} catch (e) {

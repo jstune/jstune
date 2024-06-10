@@ -19,10 +19,10 @@
 						<div
 							v-for="item in items"
 							class="p-4 bg-slate-700 from-slate-800 aspect-video shadow-md rounded-lg items-center justify-center flex-col bg-gradient-to-tr flex cursor-pointer hover:opacity-80"
-							@click="$router.push('/apps-static/' + item)"
+							@click="$router.push('/apps-static/' + item.id)"
 						>
 							<h2 class="text-slate-100">
-								{{ item }}
+								{{ item.id }}
 							</h2>
 						</div>
 					</div>

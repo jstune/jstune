@@ -12,8 +12,15 @@
 					<label class="block my-2">
 						Basic app settings
 					</label> <input
+						v-if="!$route.params.id"
 						v-model="hostname"
 						placeholder="Hostname"
+						class="px-4 py-2 block w-full mb-4"
+					/> <input
+						v-if="$route.params.id"
+						v-model="id"
+						placeholder="Hostname"
+						readonly=""
 						class="px-4 py-2 block w-full mb-4"
 					/>
 				</div>
@@ -61,11 +68,6 @@
 						@click="connect()"
 					>
 						Select repository
-					</button><button
-						class="rounded p-2 bg-slate-200 ml-4"
-						@click="autodeploy = !autodeploy"
-					>
-						{{ autodeploy ? 'Autodeploy on' : 'Autodeploy off' }}
 					</button> <input
 						v-model="repository"
 						placeholder="Repository url"
@@ -78,36 +80,31 @@
 				</div>
 				<div class="text-right">
 					<button
+						v-if="!$route.params.id && hostname"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="deploy()"
 					>
 						Launch
 					</button><button
+						v-if="$route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="update()"
 					>
 						Update
 					</button><button
+						v-if="!webhook"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="attach()"
 					>
 						Attach webhook
 					</button><button
+						v-if="webhook"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="detach()"
 					>
 						Detach webhook
 					</button><button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="status()"
-					>
-						Status webhook
-					</button> <button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="list()"
-					>
-						List
-					</button><button
+						v-if="$route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="remove()"
 					>
@@ -139,59 +136,65 @@
 			files: [],
 			hostname: '',
 			repository: '',
-			branch: 'main',
-			autodeploy: false
+			branch: '',
+			webhook: false
 		}),
 		computed: {
 			id() {
-				return this.$route.params.id;
+				return this.$route.params.id || this.hostname;
+			}
+		},
+		async created() {
+			if (this.id) {
+				await this.getItem();
+			} else {
+				this.branch = 'main';
 			}
 		},
 		methods: {
-			async remove() {
-				const hostname = prompt('Hostname', this.hostname);
+			async getItem() {
 				const res = await this.io.service('static')
-					.remove(hostname);
+					.get(this.id);
+				this.hostname = res.id;
+				this.repository = res.repository;
+				this.branch = res.branch;
+				this.webhook = res.webhook;
+				console.log('res', res);
+			},
+			async remove() {
+				const res = await this.io.service('static')
+					.remove(this.id);
 				console.log('res', res);
 			},
 			async attach() {
-				const hostname = prompt('Hostname', this.hostname);
 				const res = await this.io.service('static')
-					.patch(hostname, {
+					.patch(this.id, {
 						attach: true
 					});
 				console.log('res', res);
 			},
 			async detach() {
-				const hostname = prompt('Hostname', this.hostname);
 				const res = await this.io.service('static')
-					.patch(hostname, {
+					.patch(this.id, {
 						detach: true
 					});
 				console.log('res', res);
 			},
 			async status() {
-				const hostname = prompt('Hostname', this.hostname);
 				const res = await this.io.service('static')
-					.patch(hostname, {
+					.patch(this.id, {
 						status: true
 					});
-				console.log('res', res);
-			},
-			async list() {
-				const res = await this.io.service('static')
-					.find();
 				console.log('res', res);
 			},
 			async update() {
 				try {
 					console.log('files', this.files);
 					const res = await this.io.service('static')
-						.update(this.hostname, {
+						.update(this.id, {
 							buffer: this.files?.length ? await this.packTar() : null,
 							repository: this.repository,
-							branch: this.branch,
-							autodeploy: this.autodeploy
+							branch: this.branch
 						});
 					console.log('res', res);
 				} catch (e) {
@@ -203,10 +206,9 @@
 					console.log('files', this.files);
 					const res = await this.io.service('static')
 						.create({
-							hostname: this.hostname,
+							hostname: this.id,
 							buffer: this.files?.length ? await this.packTar() : null,
 							repository: this.repository,
-							autodeploy: this.autodeploy,
 							branch: this.branch
 						});
 					console.log('res', res);
