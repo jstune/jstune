@@ -142,6 +142,11 @@
 			branch: 'main',
 			autodeploy: false
 		}),
+		computed: {
+			id() {
+				return this.$route.params.id;
+			}
+		},
 		methods: {
 			async remove() {
 				const hostname = prompt('Hostname', this.hostname);

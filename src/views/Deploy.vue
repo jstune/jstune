@@ -180,7 +180,7 @@
 			TemplateDefault,
 			SectionHero
 		},
-		props: ['renderer'],
+		props: ['renderer', 'id'],
 		inject: ['io'],
 		data: () => ({
 			dockerComposeFile: ``,
@@ -193,6 +193,11 @@
 			inherit: true,
 			branch: 'main'
 		}),
+		computed: {
+			id() {
+				return this.$route.params.id;
+			}
+		},
 		methods: {
 			async remove() {
 				const slug = prompt('Slug', this.slug);

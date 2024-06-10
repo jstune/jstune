@@ -53,12 +53,20 @@ export default [{
         label: 'Deploy',
         children: [
             {
-                label: 'Static App',
-                route: '/deploy-static'
+                label: 'Docker Apps',
+                route: '/apps'
             },
             {
-                label: 'Docker App',
+                label: 'New Docker App',
                 route: '/deploy'
+            },
+            {
+                label: 'Static Apps',
+                route: '/apps-static'
+            },
+            {
+                label: 'New Static App',
+                route: '/deploy-static'
             },
         ]
     }

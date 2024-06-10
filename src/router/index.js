@@ -55,6 +55,26 @@ const routes = [
                 props: { renderer: 'slot' },
             },
             {
+                path: 'apps',
+                component: () => import('@/views/Apps.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'apps/:id',
+                component: () => import('@/views/Deploy.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'apps-static',
+                component: () => import('@/views/AppsStatic.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
+                path: 'apps-static/:id',
+                component: () => import('@/views/DeployStatic.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
                 path: 'deploy',
                 component: () => import('@/views/Deploy.vue'),
                 props: { renderer: 'slot' },
