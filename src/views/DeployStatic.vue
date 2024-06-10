@@ -53,7 +53,7 @@
 						Clear files
 					</button> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
-						{{files.length}}
+						Files count: {{files.length}}
 					</label> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="block my-2">
