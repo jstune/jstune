@@ -92,13 +92,13 @@
 					>
 						Update
 					</button><button
-						v-if="!webhook"
+						v-if="!webhook && repository"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="attach()"
 					>
 						Attach webhook
 					</button><button
-						v-if="webhook"
+						v-if="webhook && repository"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="detach()"
 					>

@@ -114,13 +114,13 @@
 					>
 						Update
 					</button><button
-						v-if="!webhook && $route.params.id"
+						v-if="!webhook && $route.params.id && repository"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="attach()"
 					>
 						Attach webhook
 					</button><button
-						v-if="webhook && $route.params.id"
+						v-if="webhook && $route.params.id && repository"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="detach()"
 					>
