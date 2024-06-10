@@ -2,7 +2,7 @@
 	<TemplateDefault :renderer="renderer">
 		<SectionHero>
 			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
-				{{id ? id : 'Deploy Docker App'}}
+				{{ id || 'Deploy Docker App'}}
 			</h1>
 		</SectionHero>
 		<WrapperPage class="p-6">
@@ -16,8 +16,15 @@
 						placeholder="Name"
 						class="px-4 py-2 block w-full mb-4"
 					/><input
+						v-if="!$route.params.id"
 						v-model="slug"
 						placeholder="Slug"
+						class="px-4 py-2 block w-full"
+					/> <input
+						v-if="$route.params.id"
+						v-model="id"
+						placeholder="Slug"
+						readonly=""
 						class="px-4 py-2 block w-full"
 					/>
 				</div>
@@ -45,7 +52,7 @@
 						Upload zip
 					</button> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
-						{{files.length}}
+						Files count: {{files.length}}
 					</label> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="block my-2">
@@ -100,62 +107,62 @@
 				</div>
 				<div class="text-right">
 					<button
+						v-if="!$route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="deploy()"
 					>
 						Launch
 					</button><button
+						v-if="$route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="update()"
 					>
 						Update
 					</button><button
+						v-if="!webhook && $route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="attach()"
 					>
 						Attach webhook
 					</button><button
+						v-if="webhook && $route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="detach()"
 					>
 						Detach webhook
 					</button><button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="status()"
-					>
-						Status webhook
-					</button> <button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="list()"
-					>
-						List
-					</button><button
+						v-if="!running && $route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="start()"
 					>
 						Start
 					</button> <button
+						v-if="running && $route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="stop()"
 					>
 						Stop
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						v-if="$route.params.id"
 						@click="build()"
 					>
 						Build
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						v-if="$route.params.id"
 						@click="destroy()"
 					>
 						Destroy
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						v-if="$route.params.id"
 						@click="compose()"
 					>
 						Compose
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						v-if="$route.params.id"
 						@click="remove()"
 					>
 						Remove
@@ -180,7 +187,7 @@
 			TemplateDefault,
 			SectionHero
 		},
-		props: ['renderer', 'id'],
+		props: ['renderer'],
 		inject: ['io'],
 		data: () => ({
 			dockerComposeFile: ``,
@@ -188,88 +195,96 @@
 			name: '',
 			slug: '',
 			repository: '',
+			branch: 'main',
 			autodeploy: false,
 			adjustVolumes: true,
 			inherit: true,
-			branch: 'main'
+			running: false,
+			webhook: false
 		}),
 		computed: {
 			id() {
-				return this.$route.params.id;
+				return this.$route.params.id || this.slug;
+			}
+		},
+		async created() {
+			if (this.id) {
+				await this.getItem();
 			}
 		},
 		methods: {
-			async remove() {
-				const slug = prompt('Slug', this.slug);
-				const res = await this.io.service('apps')
-					.remove(slug);
-				console.log('res', res);
+			async getItem() {
+				const item = await this.io.service('apps')
+					.get(this.id);
+				this.name = item.name;
+				this.slug = item.id;
+				this.repository = item.repository;
+				this.branch = item.branch;
+				this.autodeploy = item.autodeploy;
+				this.adjustVolumes = item.adjustVolumes;
+				this.inherit = item.inherit;
+				this.running = item.running;
+				this.dockerComposeFile = item.dockerComposeFile;
+				this.webhook = item.webhook;
+				console.log(item);
 			},
-			async list() {
+			async remove() {
 				const res = await this.io.service('apps')
-					.find();
+					.remove(this.id);
 				console.log('res', res);
 			},
 			async attach() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						attach: true
 					});
 				console.log('res', res);
 			},
 			async detach() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						detach: true
 					});
 				console.log('res', res);
 			},
 			async status() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						status: true
 					});
 				console.log('res', res);
 			},
 			async start() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						start: true
 					});
 				console.log('res', res);
 			},
 			async stop() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						stop: true
 					});
 				console.log('res', res);
 			},
 			async build() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						build: true
 					});
 				console.log('res', res);
 			},
 			async destroy() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						destroy: true
 					});
 				console.log('res', res);
 			},
 			async compose() {
-				const slug = prompt('Slug', this.slug);
 				const res = await this.io.service('apps')
-					.patch(slug, {
+					.patch(this.id, {
 						compose: this.dockerComposeFile
 					});
 				console.log('res', res);
@@ -280,7 +295,7 @@
 					const res = await this.io.service('apps')
 						.create({
 							name: this.name,
-							slug: this.slug,
+							slug: this.id,
 							buffer: this.files?.length ? await this.packTar() : null,
 							repository: this.repository,
 							branch: this.branch,
@@ -297,7 +312,7 @@
 			async update() {
 				try {
 					const res = await this.io.service('apps')
-						.update(this.slug, {
+						.update(this.id, {
 							buffer: this.files?.length ? await this.packTar() : null,
 							repository: this.repository,
 							dockerComposeFile: this.dockerComposeFile,
