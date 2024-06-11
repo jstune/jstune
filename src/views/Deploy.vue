@@ -285,6 +285,13 @@
 				if (repo) {
 					this.branch = repo.default_branch;
 					await this.getBranches(repo);
+					await this.getDockerCompose(repo);
+				}
+			},
+			async branch(value) {
+				const repo = this.repositories?.items.find(repo => repo.clone_url === this.repository);
+				if (repo) {
+					await this.getDockerCompose(repo);
 				}
 			}
 		},
@@ -315,6 +322,26 @@
 			}
 		},
 		methods: {
+			async getDockerCompose(repo) {
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
+				if (provider) {
+					try {
+						let response = await fetch(repo.contents_url.replace('{+path}', 'docker-compose.yml') + `?ref=${this.branch}`, {
+							headers: {
+								Accept: 'application/vnd.github+json',
+								Authorization: `Bearer ${provider.token}`
+							}
+						});
+						const json = await response.json();
+						if (json.download_url) {
+							this.dockerComposeFile = await (await fetch(json.download_url))
+								.text();
+						}
+					} catch (e) {
+						console.error('Could not fetch docker-compose.yml', error);
+					}
+				}
+			},
 			async getUser() {
 				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
 				if (provider) {
