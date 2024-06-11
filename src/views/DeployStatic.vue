@@ -2,7 +2,7 @@
 	<TemplateDefault :renderer="renderer">
 		<SectionHero>
 			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
-				{{id ? id : 'Deploy Static App'}}
+				{{id ? id : 'Deploy Static App'}} {{loading ? 'loading ' + loading + ' ...' : '' }}
 			</h1>
 		</SectionHero>
 		<WrapperPage class="p-6">
@@ -190,7 +190,8 @@
 			user: null,
 			query: '',
 			organisations: [],
-			repositories: null
+			repositories: null,
+			loading: ''
 		}),
 		watch: {
 			async searchRepos(open) {
@@ -242,6 +243,7 @@
 		},
 		methods: {
 			async getUser() {
+				this.loading = 'user'
 				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
 				if (provider) {
 					let response = await fetch('https://api.github.com/user', {
@@ -253,8 +255,10 @@
 					this.user = await response.json()
 					console.log('user', this.user)
 				}
+				this.loading = ''
 			},
 			async getOrganisations() {
+				this.loading = 'organisations'
 				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
 				if (provider) {
 					let response = await fetch('https://api.github.com/user/memberships/orgs' + '?per_page=150', {
@@ -266,8 +270,10 @@
 					this.organisations = await response.json()
 					console.log('orgs', this.organisations)
 				}
+				this.loading = ''
 			},
 			async getRepositories() {
+				this.loading = 'repositories'
 				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
 				if (provider) {
 					let search = 'q=' + encodeURIComponent(
@@ -282,8 +288,10 @@
 					this.repositories = await response.json()
 					console.log('repos', this.repositories)
 				}
+				this.loading = ''
 			},
 			async getBranches(repo) {
+				this.loading = 'branches'
 				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
 				if (provider) {
 					let response = await fetch(repo.branches_url.replace('{/branch}', '') + '?per_page=150', {
@@ -295,19 +303,23 @@
 					this.branches = await response.json()
 					console.log('branches', this.branches)
 				}
+				this.loading = ''
 			},
 			consent(url) {
 				if (!url) return;
 				window.open(url, '_blank');
 			},
 			async getOAuthProviders() {
+				this.loading = 'providers'
 				const result = await this.io.service('oauth_providers')
 					.find({
 						query: {}
 					});
 				this.oauthProviders = result?.data
+				this.loading = ''
 			},
 			async getItem() {
+				this.loading = 'app'
 				const res = await this.io.service('static')
 					.get(this.id);
 				this.hostname = res.id;
@@ -315,38 +327,38 @@
 				this.branch = res.branch;
 				this.webhook = res.webhook;
 				console.log('res', res);
+				this.loading = ''
 			},
 			async remove() {
+				this.loading = 'remove app'
 				const res = await this.io.service('static')
 					.remove(this.id);
 				console.log('res', res);
 				this.$router.push('/apps-static')
+				this.loading = ''
 			},
 			async attach() {
+				this.loading = 'attach webhook'
 				const res = await this.io.service('static')
 					.patch(this.id, {
 						attach: true
 					});
 				console.log('res', res);
 				await this.getItem();
+				this.loading = ''
 			},
 			async detach() {
+				this.loading = 'detach webhook'
 				const res = await this.io.service('static')
 					.patch(this.id, {
 						detach: true
 					});
 				console.log('res', res);
 				await this.getItem();
-			},
-			async status() {
-				const res = await this.io.service('static')
-					.patch(this.id, {
-						status: true
-					});
-				console.log('res', res);
-				await this.getItem();
+				this.loading = ''
 			},
 			async update() {
+				this.loading = 'update app'
 				try {
 					console.log('files', this.files);
 					const res = await this.io.service('static')
@@ -360,8 +372,10 @@
 				} catch (e) {
 					console.log('error', e);
 				}
+				this.loading = ''
 			},
 			async deploy() {
+				this.loading = 'deploy app'
 				try {
 					console.log('files', this.files);
 					const res = await this.io.service('static')
@@ -376,6 +390,7 @@
 				} catch (e) {
 					console.log('error', e);
 				}
+				this.loading = ''
 			},
 			async packTar() {
 				let tape = new Tar();
@@ -404,7 +419,6 @@
 								});
 							}
 						}
-						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
@@ -426,7 +440,6 @@
 								name: file.name
 							});
 						}
-						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
@@ -448,7 +461,6 @@
 								name: file.webkitRelativePath
 							});
 						}
-						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
@@ -469,7 +481,6 @@
 								name: 'root/' + file.name
 							});
 						}
-						await this.resolveDockerCompose();
 						resolve();
 					};
 					input.click();
