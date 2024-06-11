@@ -123,8 +123,9 @@
 				</div>
 				<div class="text-right">
 					<button
-						v-if="!$route.params.id && hostname"
+						v-if="!$route.params.id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						:disabled="!hostname"
 						@click="deploy()"
 					>
 						Launch
@@ -472,4 +473,8 @@
 	};
 
 </script>
-<style scoped></style>
+<style scoped>
+[disabled] {
+	opacity: .5;
+}
+</style>
