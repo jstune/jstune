@@ -57,18 +57,61 @@
 					</label> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="block my-2">
-						Clone using Github (With option to autodeploy using push webhooks)
-					</label><button
-						class="rounded p-2 bg-slate-200"
-						@click="connect()"
-					>
-						Connect to Github
-					</button><button
-						class="rounded p-2 bg-slate-200 ml-4"
-						@click="connect()"
-					>
-						Select repository
-					</button> <input
+						Clone using a git provider
+					</label>
+					<div v-for="provider in oauthProvidersFiltered" class="mr-4 inline-block">
+						<button
+							class="rounded p-2 bg-slate-200 mr-1"
+							@click="consent(provider.consent_url)"
+						>
+							Connect to {{provider.provider}}
+						</button>
+						<button
+							class="rounded p-2 bg-slate-200"
+							@click="searchRepos = !searchRepos"
+						>
+							{{ searchRepos ? 'Close' : 'Select repository' }}
+						</button>
+					</div>
+					<div v-if="searchRepos">
+						<label class="block my-2">
+							Select user / organisation ({{orgs?.length || '0'}})
+						</label>
+						<select v-model="query" class="mt-2 px-4 py-2 w-full">
+							<option v-for="org in orgs" :value="org.query">
+								{{org.title}}
+							</option>
+						</select>
+						<input
+							v-model="search"
+							placeholder="Search for repository ..."
+							class="mt-2 px-4 py-2 w-full"
+							@keypress.enter="getRepositories()"
+						/>
+						<button
+							class="rounded p-2 mt-2 w-full bg-slate-200"
+							@click="getRepositories()"
+						>
+							Search
+						</button>
+						<label class="block my-2">
+							Select Repository ({{repositories?.items?.length || '0'}})
+						</label>
+						<select v-model="repository" class="mt-2 px-4 py-2 w-full">
+							<option v-for="repo in repositories?.items" :value="repo.clone_url">
+								{{repo.full_name}}
+							</option>
+						</select>
+						<label class="block my-2">
+							Select Branch ({{branches?.length || '0'}})
+						</label>
+						<select v-model="branch" class="mt-2 px-4 py-2 w-full">
+							<option v-for="repoBranch in branches" :value="repoBranch.name">
+								{{repoBranch.name}}
+							</option>
+						</select>
+					</div>
+					<input
 						v-model="repository"
 						placeholder="Repository url"
 						class="mt-2 px-4 py-2 w-full"
@@ -137,14 +180,59 @@
 			hostname: '',
 			repository: '',
 			branch: '',
-			webhook: false
+			branches: [],
+			webhook: false,
+			searchRepos: false,
+			oauthProviders: [],
+			consentUrl: '',
+			search: '',
+			user: null,
+			query: '',
+			organisations: [],
+			repositories: null
 		}),
+		watch: {
+			async searchRepos(open) {
+				if (open) {
+					await this.getOAuthProviders()
+					await this.getUser()
+					await this.getOrganisations()
+					if (!this.query && this.orgs.length) {
+						this.query = this.orgs[0].query
+						await this.getRepositories()
+					}
+				}
+			},
+			async query() {
+				await this.getRepositories()
+			},
+			async repository(value) {
+				const repo = this.repositories?.items.find(repo => repo.clone_url === value)
+				if (repo) {
+					this.branch = repo.default_branch
+					await this.getBranches(repo)
+				}
+			}
+		},
 		computed: {
 			id() {
 				return this.$route.params.id || this.hostname;
+			},
+			oauthProvidersFiltered() {
+				const supported = ['github']
+				return this.oauthProviders.filter(provider => supported.includes(provider.provider))
+			},
+			orgs() {
+				return [
+					{ title: this.user?.login, query: `user:${this.user?.login}` },
+					...this.organisations.map(org => {
+						return { title: org?.organization?.login, query: `org:${org?.organization?.login}` }
+					})
+				]
 			}
 		},
 		async created() {
+			await this.getOAuthProviders()
 			if (this.id) {
 				await this.getItem();
 			} else {
@@ -152,6 +240,72 @@
 			}
 		},
 		methods: {
+			async getUser() {
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				if (provider) {
+					let response = await fetch('https://api.github.com/user', {
+						headers: {
+							Accept: 'application/vnd.github+json',
+							Authorization: `Bearer ${provider.token}`
+						}
+					})
+					this.user = await response.json()
+					console.log('user', this.user)
+				}
+			},
+			async getOrganisations() {
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				if (provider) {
+					let response = await fetch('https://api.github.com/user/memberships/orgs' + '?per_page=150', {
+						headers: {
+							Accept: 'application/vnd.github+json',
+							Authorization: `Bearer ${provider.token}`
+						}
+					})
+					this.organisations = await response.json()
+					console.log('orgs', this.organisations)
+				}
+			},
+			async getRepositories() {
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				if (provider) {
+					let search = 'q=' + encodeURIComponent(
+						this.search + ((' ' + this.query) || (' user:' + this.user.login))
+					)
+					let response = await fetch(`https://api.github.com/search/repositories?${search}&per_page=150`, {
+						headers: {
+							Accept: 'application/vnd.github+json',
+							Authorization: `Bearer ${provider.token}`
+						}
+					})
+					this.repositories = await response.json()
+					console.log('repos', this.repositories)
+				}
+			},
+			async getBranches(repo) {
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				if (provider) {
+					let response = await fetch(repo.branches_url.replace('{/branch}', '') + '?per_page=150', {
+						headers: {
+							Accept: 'application/vnd.github+json',
+							Authorization: `Bearer ${provider.token}`
+						}
+					})
+					this.branches = await response.json()
+					console.log('branches', this.branches)
+				}
+			},
+			consent(url) {
+				if (!url) return;
+				window.open(url, '_blank');
+			},
+			async getOAuthProviders() {
+				const result = await this.io.service('oauth_providers')
+					.find({
+						query: {}
+					});
+				this.oauthProviders = result?.data
+			},
 			async getItem() {
 				const res = await this.io.service('static')
 					.get(this.id);
