@@ -58,8 +58,14 @@
 		},
 		methods: {
 			async getItems() {
-				this.items = await this.io.service(this.service)
-					.find();
+				console.log('fetching apps')
+				try {
+					this.items = await this.io.service(this.service)
+						.find();
+					console.log('apps', this.items)
+				} catch(e) {
+					console.log('apps error', e)
+				}
 			},
 			async inspectLeader() {
 				const state = await this.io.service('state')
