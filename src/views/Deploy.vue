@@ -424,6 +424,7 @@
 				const res = await this.io.service('apps')
 					.remove(this.id);
 				console.log('res', res);
+				this.$router.push('/apps')
 			},
 			async attach() {
 				const res = await this.io.service('apps')
@@ -431,6 +432,7 @@
 						attach: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async detach() {
 				const res = await this.io.service('apps')
@@ -438,13 +440,7 @@
 						detach: true
 					});
 				console.log('res', res);
-			},
-			async status() {
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						status: true
-					});
-				console.log('res', res);
+				await this.getItem();
 			},
 			async start() {
 				const res = await this.io.service('apps')
@@ -452,6 +448,7 @@
 						start: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async stop() {
 				const res = await this.io.service('apps')
@@ -459,6 +456,7 @@
 						stop: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async build() {
 				const res = await this.io.service('apps')
@@ -466,6 +464,7 @@
 						build: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async destroy() {
 				const res = await this.io.service('apps')
@@ -473,6 +472,7 @@
 						destroy: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async compose() {
 				const res = await this.io.service('apps')
@@ -480,6 +480,7 @@
 						compose: this.dockerComposeFile
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async deploy() {
 				try {
@@ -496,6 +497,7 @@
 							inherit: this.inherit
 						});
 					console.log('res', res);
+					await this.getItem();
 				} catch (e) {
 					console.log('error', e);
 				}
@@ -513,6 +515,7 @@
 							name: this.name
 						});
 					console.log('res', res);
+					await this.getItem();
 				} catch (e) {
 					console.log('error', e);
 				}

@@ -320,6 +320,7 @@
 				const res = await this.io.service('static')
 					.remove(this.id);
 				console.log('res', res);
+				this.$router.push('/apps-static')
 			},
 			async attach() {
 				const res = await this.io.service('static')
@@ -327,6 +328,7 @@
 						attach: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async detach() {
 				const res = await this.io.service('static')
@@ -334,6 +336,7 @@
 						detach: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async status() {
 				const res = await this.io.service('static')
@@ -341,6 +344,7 @@
 						status: true
 					});
 				console.log('res', res);
+				await this.getItem();
 			},
 			async update() {
 				try {
@@ -352,6 +356,7 @@
 							branch: this.branch
 						});
 					console.log('res', res);
+					await this.getItem();
 				} catch (e) {
 					console.log('error', e);
 				}
@@ -367,6 +372,7 @@
 							branch: this.branch
 						});
 					console.log('res', res);
+					await this.getItem();
 				} catch (e) {
 					console.log('error', e);
 				}
