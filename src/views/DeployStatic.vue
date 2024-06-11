@@ -1,9 +1,17 @@
 <template>
 	<TemplateDefault :renderer="renderer">
 		<SectionHero>
-			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
-				{{id ? id : 'Deploy Static App'}} {{loading ? 'loading ' + loading + ' ...' : '' }}
-			</h1>
+			<div class="w-full">
+				<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+					{{id ? id : 'Deploy Static App'}}
+				</h1>
+				<h2
+					v-if="loading"
+					class="font-thin block xl:pl-6 w-full text-center uppercase"
+				>
+					Loading - {{ loading }} ...
+				</h2>
+			</div>
 		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
@@ -59,14 +67,16 @@
 					<label class="block my-2">
 						Clone using a git provider
 					</label>
-					<div v-for="provider in oauthProvidersFiltered" class="mr-4 inline-block">
+					<div
+						v-for="provider in oauthProvidersFiltered"
+						class="mr-4 inline-block"
+					>
 						<button
 							class="rounded p-2 bg-slate-200 mr-1"
 							@click="consent(provider.consent_url)"
 						>
 							Connect to {{provider.provider}}
-						</button>
-						<button
+						</button> <button
 							class="rounded p-2 bg-slate-200"
 							@click="searchRepos = !searchRepos"
 						>
@@ -76,42 +86,52 @@
 					<div v-if="searchRepos">
 						<label class="block my-2">
 							Select user / organisation ({{orgs?.length || '0'}})
-						</label>
-						<select v-model="query" class="mt-2 px-4 py-2 w-full">
-							<option v-for="org in orgs" :value="org.query">
+						</label> <select
+							v-model="query"
+							class="mt-2 px-4 py-2 w-full"
+						>
+							<option
+								v-for="org in orgs"
+								:value="org.query"
+							>
 								{{org.title}}
 							</option>
-						</select>
-						<input
+						</select> <input
 							v-model="search"
 							placeholder="Search for repository ..."
 							class="mt-2 px-4 py-2 w-full"
 							@keypress.enter="getRepositories()"
-						/>
-						<button
+						/> <button
 							class="rounded p-2 mt-2 w-full bg-slate-200"
 							@click="getRepositories()"
 						>
 							Search
-						</button>
-						<label class="block my-2">
+						</button> <label class="block my-2">
 							Select Repository ({{repositories?.items?.length || '0'}})
-						</label>
-						<select v-model="repository" class="mt-2 px-4 py-2 w-full">
-							<option v-for="repo in repositories?.items" :value="repo.clone_url">
+						</label> <select
+							v-model="repository"
+							class="mt-2 px-4 py-2 w-full"
+						>
+							<option
+								v-for="repo in repositories?.items"
+								:value="repo.clone_url"
+							>
 								{{repo.full_name}}
 							</option>
-						</select>
-						<label class="block my-2">
+						</select> <label class="block my-2">
 							Select Branch ({{branches?.length || '0'}})
-						</label>
-						<select v-model="branch" class="mt-2 px-4 py-2 w-full">
-							<option v-for="repoBranch in branches" :value="repoBranch.name">
+						</label> <select
+							v-model="branch"
+							class="mt-2 px-4 py-2 w-full"
+						>
+							<option
+								v-for="repoBranch in branches"
+								:value="repoBranch.name"
+							>
 								{{repoBranch.name}}
 							</option>
 						</select>
-					</div>
-					<input
+					</div> <input
 						v-model="repository"
 						placeholder="Repository url"
 						class="mt-2 px-4 py-2 w-full"
@@ -196,23 +216,23 @@
 		watch: {
 			async searchRepos(open) {
 				if (open) {
-					await this.getOAuthProviders()
-					await this.getUser()
-					await this.getOrganisations()
+					await this.getOAuthProviders();
+					await this.getUser();
+					await this.getOrganisations();
 					if (!this.query && this.orgs.length) {
-						this.query = this.orgs[0].query
-						await this.getRepositories()
+						this.query = this.orgs[0].query;
+						await this.getRepositories();
 					}
 				}
 			},
 			async query() {
-				await this.getRepositories()
+				await this.getRepositories();
 			},
 			async repository(value) {
-				const repo = this.repositories?.items.find(repo => repo.clone_url === value)
+				const repo = this.repositories?.items.find(repo => repo.clone_url === value);
 				if (repo) {
-					this.branch = repo.default_branch
-					await this.getBranches(repo)
+					this.branch = repo.default_branch;
+					await this.getBranches(repo);
 				}
 			}
 		},
@@ -221,20 +241,23 @@
 				return this.$route.params.id || this.hostname;
 			},
 			oauthProvidersFiltered() {
-				const supported = ['github']
-				return this.oauthProviders.filter(provider => supported.includes(provider.provider))
+				const supported = ['github'];
+				return this.oauthProviders.filter(provider => supported.includes(provider.provider));
 			},
 			orgs() {
-				return [
-					{ title: this.user?.login, query: `user:${this.user?.login}` },
-					...this.organisations.map(org => {
-						return { title: org?.organization?.login, query: `org:${org?.organization?.login}` }
-					})
-				]
+				return [{
+					title: this.user?.login,
+					query: `user:${this.user?.login}`
+				}, ...this.organisations.map(org => {
+					return {
+						title: org?.organization?.login,
+						query: `org:${org?.organization?.login}`
+					};
+				})];
 			}
 		},
 		async created() {
-			await this.getOAuthProviders()
+			await this.getOAuthProviders();
 			if (this.id) {
 				await this.getItem();
 			} else {
@@ -243,83 +266,81 @@
 		},
 		methods: {
 			async getUser() {
-				this.loading = 'user'
-				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				this.loading = 'user';
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
 				if (provider) {
 					let response = await fetch('https://api.github.com/user', {
 						headers: {
 							Accept: 'application/vnd.github+json',
 							Authorization: `Bearer ${provider.token}`
 						}
-					})
-					this.user = await response.json()
-					console.log('user', this.user)
+					});
+					this.user = await response.json();
+					console.log('user', this.user);
 				}
-				this.loading = ''
+				this.loading = '';
 			},
 			async getOrganisations() {
-				this.loading = 'organisations'
-				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				this.loading = 'organisations';
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
 				if (provider) {
 					let response = await fetch('https://api.github.com/user/memberships/orgs' + '?per_page=150', {
 						headers: {
 							Accept: 'application/vnd.github+json',
 							Authorization: `Bearer ${provider.token}`
 						}
-					})
-					this.organisations = await response.json()
-					console.log('orgs', this.organisations)
+					});
+					this.organisations = await response.json();
+					console.log('orgs', this.organisations);
 				}
-				this.loading = ''
+				this.loading = '';
 			},
 			async getRepositories() {
-				this.loading = 'repositories'
-				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				this.loading = 'repositories';
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
 				if (provider) {
-					let search = 'q=' + encodeURIComponent(
-						this.search + ((' ' + this.query) || (' user:' + this.user.login))
-					)
+					let search = 'q=' + encodeURIComponent(this.search + (' ' + this.query || ' user:' + this.user.login));
 					let response = await fetch(`https://api.github.com/search/repositories?${search}&per_page=150`, {
 						headers: {
 							Accept: 'application/vnd.github+json',
 							Authorization: `Bearer ${provider.token}`
 						}
-					})
-					this.repositories = await response.json()
-					console.log('repos', this.repositories)
+					});
+					this.repositories = await response.json();
+					console.log('repos', this.repositories);
 				}
-				this.loading = ''
+				this.loading = '';
 			},
 			async getBranches(repo) {
-				this.loading = 'branches'
-				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github')
+				this.loading = 'branches';
+				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
 				if (provider) {
 					let response = await fetch(repo.branches_url.replace('{/branch}', '') + '?per_page=150', {
 						headers: {
 							Accept: 'application/vnd.github+json',
 							Authorization: `Bearer ${provider.token}`
 						}
-					})
-					this.branches = await response.json()
-					console.log('branches', this.branches)
+					});
+					this.branches = await response.json();
+					console.log('branches', this.branches);
 				}
-				this.loading = ''
+				this.loading = '';
 			},
 			consent(url) {
 				if (!url) return;
 				window.open(url, '_blank');
 			},
 			async getOAuthProviders() {
-				this.loading = 'providers'
+				this.loading = 'providers';
 				const result = await this.io.service('oauth_providers')
 					.find({
 						query: {}
 					});
-				this.oauthProviders = result?.data
-				this.loading = ''
+				this.oauthProviders = result?.data;
+				this.loading = '';
 			},
 			async getItem() {
-				this.loading = 'app'
+				this.loading = 'app';
 				const res = await this.io.service('static')
 					.get(this.id);
 				this.hostname = res.id;
@@ -327,38 +348,38 @@
 				this.branch = res.branch;
 				this.webhook = res.webhook;
 				console.log('res', res);
-				this.loading = ''
+				this.loading = '';
 			},
 			async remove() {
-				this.loading = 'remove app'
+				this.loading = 'remove app';
 				const res = await this.io.service('static')
 					.remove(this.id);
 				console.log('res', res);
-				this.$router.push('/apps-static')
-				this.loading = ''
+				this.$router.push('/apps-static');
+				this.loading = '';
 			},
 			async attach() {
-				this.loading = 'attach webhook'
+				this.loading = 'attach webhook';
 				const res = await this.io.service('static')
 					.patch(this.id, {
 						attach: true
 					});
 				console.log('res', res);
 				await this.getItem();
-				this.loading = ''
+				this.loading = '';
 			},
 			async detach() {
-				this.loading = 'detach webhook'
+				this.loading = 'detach webhook';
 				const res = await this.io.service('static')
 					.patch(this.id, {
 						detach: true
 					});
 				console.log('res', res);
 				await this.getItem();
-				this.loading = ''
+				this.loading = '';
 			},
 			async update() {
-				this.loading = 'update app'
+				this.loading = 'update app';
 				try {
 					console.log('files', this.files);
 					const res = await this.io.service('static')
@@ -372,10 +393,10 @@
 				} catch (e) {
 					console.log('error', e);
 				}
-				this.loading = ''
+				this.loading = '';
 			},
 			async deploy() {
-				this.loading = 'deploy app'
+				this.loading = 'deploy app';
 				try {
 					console.log('files', this.files);
 					const res = await this.io.service('static')
@@ -390,7 +411,7 @@
 				} catch (e) {
 					console.log('error', e);
 				}
-				this.loading = ''
+				this.loading = '';
 			},
 			async packTar() {
 				let tape = new Tar();
@@ -491,7 +512,8 @@
 
 </script>
 <style scoped>
-[disabled] {
-	opacity: .5;
-}
+	[disabled] {
+		opacity: .5;
+	}
+
 </style>

@@ -1,9 +1,14 @@
 <template>
 	<TemplateDefault :renderer="renderer">
 		<SectionHero>
-			<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
-				{{ id || 'Deploy Docker App'}} {{loading ? 'loading ' + loading + ' ...' : '' }}
-			</h1>
+			<div class="w-full">
+				<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
+					{{ id || 'Deploy Docker App'}}
+				</h1>
+				<h2 v-if="loading" class="font-thin block xl:pl-6 w-full text-center uppercase">
+					Loading - {{ loading }} ...
+				</h2>
+			</div>
 		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
