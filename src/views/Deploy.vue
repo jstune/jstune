@@ -138,7 +138,7 @@
 						class="rounded p-2 bg-slate-200 mt-2"
 						@click="adjustVolumes = !adjustVolumes"
 					>
-						Move volumes to app folder: {{ adjustVolumes ? 'on' : 'Adjust volumes off' }}
+						Move volumes to app folder: {{ adjustVolumes ? 'Yes' : 'No' }}
 					</button>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
@@ -151,7 +151,7 @@
 						class="rounded p-2 bg-slate-200 my-4"
 						@click="inherit = !inherit"
 					>
-						{{ inherit ? 'Inherit original on' : 'Inherit original off' }}
+						Inherit original docker-compose file: {{ inherit ? 'Yes' : 'No' }}
 					</button> <textarea
 						class="w-full p-4"
 						v-model="dockerComposeFile"
