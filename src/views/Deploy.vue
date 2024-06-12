@@ -442,69 +442,97 @@
 			},
 			async remove() {
 				this.loading = 'remove app';
-				const res = await this.io.service('apps')
-					.remove(this.id);
-				console.log('res', res);
-				this.$router.push('/apps');
+				try {
+					const res = await this.io.service('apps')
+						.remove(this.id);
+					console.log('res', res);
+					this.$router.push('/apps');
+				} catch(e) {
+					console.log('err', e)
+				}
 				this.loading = '';
 			},
 			async attach() {
 				this.loading = 'attach webhook';
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						attach: true
-					});
-				console.log('res', res);
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							attach: true
+						});
+					console.log('res', res);
+				} catch(e) {
+					console.log('err', e)
+				}
 				await this.getItem();
 				this.loading = '';
 			},
 			async detach() {
 				this.loading = 'detach webhook';
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						detach: true
-					});
-				console.log('res', res);
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							detach: true
+						});
+					console.log('res', res);
+				} catch(e) {
+					console.log('err', e)
+				}
 				await this.getItem();
 				this.loading = '';
 			},
 			async start() {
 				this.loading = 'start app';
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						start: true
-					});
-				console.log('res', res);
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							start: true
+						});
+					console.log('res', res);
+				} catch(e) {
+					console.log('err', e)
+				}
 				await this.getItem();
 				this.loading = '';
 			},
 			async stop() {
 				this.loading = 'stop app';
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						stop: true
-					});
-				console.log('res', res);
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							stop: true
+						});
+					console.log('res', res);
+				} catch(e) {
+					console.log('err', e)
+				}
 				await this.getItem();
 				this.loading = '';
 			},
 			async build() {
 				this.loading = 'build app';
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						build: true
-					});
-				console.log('res', res);
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							build: true
+						});
+					console.log('res', res);
+				} catch(e) {
+					console.log('err', e)
+				}
 				await this.getItem();
 				this.loading = '';
 			},
 			async destroy() {
 				this.loading = 'destroy app';
-				const res = await this.io.service('apps')
-					.patch(this.id, {
-						destroy: true
-					});
-				console.log('res', res);
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							destroy: true
+						});
+					console.log('res', res);
+				} catch(e) {
+					console.log('err', e)
+				}
 				await this.getItem();
 				this.loading = '';
 			},
@@ -534,10 +562,10 @@
 							inherit: this.inherit
 						});
 					console.log('res', res);
-					await this.getItem();
 				} catch (e) {
 					console.log('error', e);
 				}
+				await this.getItem();
 				this.loading = '';
 			},
 			async update() {
@@ -554,10 +582,10 @@
 							name: this.name
 						});
 					console.log('res', res);
-					await this.getItem();
 				} catch (e) {
 					console.log('error', e);
 				}
+				await this.getItem();
 				this.loading = '';
 			},
 			async resolveDockerCompose() {
