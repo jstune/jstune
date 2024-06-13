@@ -21,7 +21,7 @@
 				>
 
 					<label class="block my-2">
-						Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
+						Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp * 1000).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
 					</label>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
