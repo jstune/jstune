@@ -5,13 +5,25 @@
 				<h1 class="font-thin text-xl lg:text-3xl xl:pl-6 w-full text-center uppercase">
 					{{ id || 'Deploy Docker App'}}
 				</h1>
-				<h2 v-if="loading" class="font-thin block xl:pl-6 w-full text-center uppercase">
+				<h2
+					v-if="loading"
+					class="font-thin block xl:pl-6 w-full text-center uppercase"
+				>
 					Loading - {{ loading }} ...
 				</h2>
 			</div>
 		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
+				<div
+					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+					v-if="log"
+				>
+
+					<label class="block my-2">
+						Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
+					</label>
+				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
 					<label class="block my-2">
@@ -269,6 +281,7 @@
 			query: '',
 			organisations: [],
 			repositories: null,
+			log: null,
 			loading: ''
 		}),
 		watch: {
@@ -437,6 +450,7 @@
 				this.running = item.running;
 				this.dockerComposeFile = item.dockerComposeFile;
 				this.webhook = item.webhook;
+				this.log = item.log;
 				console.log(item);
 				this.loading = '';
 			},
@@ -447,8 +461,8 @@
 						.remove(this.id);
 					console.log('res', res);
 					this.$router.push('/apps');
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				this.loading = '';
 			},
@@ -460,8 +474,8 @@
 							attach: true
 						});
 					console.log('res', res);
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				await this.getItem();
 				this.loading = '';
@@ -474,8 +488,8 @@
 							detach: true
 						});
 					console.log('res', res);
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				await this.getItem();
 				this.loading = '';
@@ -488,8 +502,8 @@
 							start: true
 						});
 					console.log('res', res);
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				await this.getItem();
 				this.loading = '';
@@ -502,8 +516,8 @@
 							stop: true
 						});
 					console.log('res', res);
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				await this.getItem();
 				this.loading = '';
@@ -516,8 +530,8 @@
 							build: true
 						});
 					console.log('res', res);
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				await this.getItem();
 				this.loading = '';
@@ -530,8 +544,8 @@
 							destroy: true
 						});
 					console.log('res', res);
-				} catch(e) {
-					console.log('err', e)
+				} catch (e) {
+					console.log('err', e);
 				}
 				await this.getItem();
 				this.loading = '';
