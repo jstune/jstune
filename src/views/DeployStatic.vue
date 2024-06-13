@@ -15,6 +15,15 @@
 		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
+				<div
+					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+					v-if="log"
+				>
+
+					<label class="block my-2">
+						Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
+					</label>
+				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
 					<label class="block my-2">
@@ -211,7 +220,8 @@
 			query: '',
 			organisations: [],
 			repositories: null,
-			loading: ''
+			loading: '',
+			log: null
 		}),
 		watch: {
 			async searchRepos(open) {
@@ -347,6 +357,7 @@
 				this.repository = res.repository;
 				this.branch = res.branch;
 				this.webhook = res.webhook;
+				this.log = res.log;
 				console.log('res', res);
 				this.loading = '';
 			},
