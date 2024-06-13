@@ -15,6 +15,14 @@
 		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
+				<div>
+					<button
+						class="py-4 p-2 w-full rounded bg-slate-200"
+						@click="getItem()"
+					>
+						Reload
+					</button>
+				</div>
 				<div
 					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 					v-if="log"

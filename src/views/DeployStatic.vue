@@ -15,6 +15,14 @@
 		</SectionHero>
 		<WrapperPage class="p-6">
 			<div class="mt-8 mb-20 relative overflow-auto w-full">
+				<div>
+					<button
+						class="py-4 p-2 w-full rounded bg-slate-200"
+						@click="getItem()"
+					>
+						Reload
+					</button>
+				</div>
 				<div
 					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 					v-if="log"
@@ -41,7 +49,8 @@
 						class="px-4 py-2 block w-full mb-4"
 					/>
 				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
+					<label class="block my-2">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
 					</label><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
@@ -68,7 +77,8 @@
 						@click="files = []"
 					>
 						Clear files
-					</button> </div>
+					</button>
+				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						Files count: {{files.length}}
 					</label> </div>
