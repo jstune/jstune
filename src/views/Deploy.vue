@@ -200,7 +200,7 @@
 					</button>
 					<div class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 						<label class="block my-2">
-							Service / Node / Image
+							Service / Image
 						</label>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
