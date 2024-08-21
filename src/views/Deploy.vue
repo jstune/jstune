@@ -260,7 +260,7 @@
 					<div class="flex overflow-auto shadow-sm bg-slate-100 text-slate-700">
 						<button
 							class="p-2 mr-1 rounded bg-slate-200"
-							@click="serviceOpen = service"
+							@click="serviceOpen = (serviceOpen?.docker_service_id === service.docker_service_id ? null : service)"
 							v-for="service in services"
 						>
 							{{service.name.replace(slug + '_', '')}}
