@@ -225,8 +225,7 @@
 										<td class="pr-4">
 											<input class="w-full p-2 rounded" />
 										</td>
-										<td class="pr-4"><input class="w-full p-2 rounded" />
-										</td>
+										<td class="pr-4"><input class="w-full p-2 rounded" /> </td>
 										<td><button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -237,8 +236,7 @@
 												@click="inherit = !inherit"
 											>
 												Delete
-											</button>
-										</td>
+											</button> </td>
 									</tr>
 								</tbody>
 							</table><button
@@ -271,8 +269,7 @@
 										<td class="pr-4">
 											<input class="w-full p-2 rounded" />
 										</td>
-										<td class="pr-4"><input class="w-full p-2 rounded" />
-										</td>
+										<td class="pr-4"><input class="w-full p-2 rounded" /> </td>
 										<td><button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -283,8 +280,7 @@
 												@click="inherit = !inherit"
 											>
 												Delete
-											</button>
-										</td>
+											</button> </td>
 									</tr>
 								</tbody>
 							</table><button
@@ -317,8 +313,7 @@
 										<td class="pr-4">
 											<input class="w-full p-2 rounded" />
 										</td>
-										<td class="pr-4"><input class="w-full p-2 rounded" />
-										</td>
+										<td class="pr-4"><input class="w-full p-2 rounded" /> </td>
 										<td><button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -339,8 +334,7 @@
 												@click="inherit = !inherit"
 											>
 												Delete
-											</button>
-										</td>
+											</button> </td>
 									</tr>
 								</tbody>
 							</table><button
@@ -405,6 +399,190 @@
 							</button>
 						</div>
 					</div>
+				</div>
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
+					<label class="my-2 block">
+						Related Nodes
+					</label><button
+						class="rounded p-2 bg-slate-200 my-4"
+						@click="inherit = !inherit"
+					>
+						Reload
+					</button>
+					<div class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
+						<label class="block my-2">
+							Node 1
+						</label>
+						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
+							<caption class="text-left mb-3">
+								Tasks
+							</caption>
+							<table class="w-full">
+								<thead>
+									<tr>
+										<th class="text-left">
+											Timestamp
+										</th>
+										<th class="text-left">
+											State
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Message
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Desired state
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Slot
+										</th>
+										<th class="text-left">
+											Actions
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td style="width:130px">
+											<button
+												class="mr-2 rounded p-2 bg-slate-200 my-4"
+												@click="inherit = !inherit"
+											>
+												Save
+											</button><button
+												class="rounded p-2 bg-slate-200 my-4"
+												@click="inherit = !inherit"
+											>
+												Delete
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table><button
+								class="mr-2 rounded p-2 bg-slate-200 my-4"
+								@click="inherit = !inherit"
+							>
+								New
+							</button>
+						</div>
+						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
+							<caption class="text-left mb-3">
+								Containers
+							</caption>
+							<table class="w-full">
+								<thead>
+									<tr>
+										<th class="text-left">
+											Name
+										</th>
+										<th class="text-left">
+											Command
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											State
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Status
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Image
+										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Task ID
+										</th>
+										<th class="text-left">
+											Actions
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
+										<td style="width:130px">
+											<button
+												class="mr-2 rounded p-2 bg-slate-200 my-4"
+												@click="inherit = !inherit"
+											>
+												Save
+											</button><button
+												class="rounded p-2 bg-slate-200 my-4"
+												@click="inherit = !inherit"
+											>
+												Delete
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table><button
+								class="mr-2 rounded p-2 bg-slate-200 my-4"
+								@click="inherit = !inherit"
+							>
+								New
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
+					<label class="my-2 block">
+						Related Tasks
+					</label><button
+						class="rounded p-2 bg-slate-200 my-4"
+						@click="inherit = !inherit"
+					>
+						Reload
+					</button>
 				</div>
 				<div class="text-right">
 					<button
