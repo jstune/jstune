@@ -203,7 +203,9 @@
 						v-for="service in services"
 					>
 						<label class="block my-2">
-							Service / Image
+							<b>Service name:</b> {{ service.name }}<br>
+							<b>Service ID:</b> {{ service.docker_service_id }}<br>
+							<b>Image:</b> {{ service.docker_image }}
 						</label>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -311,7 +313,7 @@
 									Ports
 								</caption>
 								<thead>
-									<tr v-for="port in service.ports">
+									<tr>
 										<th class="text-left">
 											External
 										</th>
@@ -324,7 +326,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr v-for="port in service.ports">
 										<td class="pr-4">
 											<input
 												v-model="port.port_external"
@@ -390,19 +392,19 @@
 									<tr v-for="volume in service.volumes">
 										<td class="pr-4">
 											<input
-												v-model="model.name"
+												v-model="volume.name"
 												class="w-full p-2 rounded"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
-												v-model="model.path"
+												v-model="volume.path"
 												class="w-full p-2 rounded"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
-												v-model="model.type"
+												v-model="volume.type"
 												class="w-full p-2 rounded"
 											/>
 										</td>
