@@ -369,8 +369,7 @@
 										d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
 										clip-rule="evenodd"
 									/>
-								</svg>
-							</button>
+								</svg> </button>
 						</div>
 					</div>
 					<div class="flex overflow-auto shadow-sm bg-slate-100 text-slate-700">
@@ -857,17 +856,25 @@
 						</div>
 					</div>
 				</div>
-				<div
-					class="text-right"
-					v-if="!log"
-				>
+				<div v-if="!log || log">
 					<button
-						class="py-4 w-full rounded bg-slate-200"
+						class="py-4 rounded bg-slate-200 w-full"
 						:disabled="!slug"
 						@click="deploy()"
-					>
-						Launch
-					</button>
+						title="Launc"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="m-auto w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
+								clip-rule="evenodd"
+							/>
+							<path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
+						</svg> </button>
 				</div>
 				<div
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
@@ -1118,7 +1125,7 @@
 		},
 		computed: {
 			id() {
-				return this.$route.params.id || this.slug || 'ignite-users';
+				return this.$route.params.id || this.slug;
 			},
 			oauthProvidersFiltered() {
 				const supported = ['github'];
