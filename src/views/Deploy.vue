@@ -827,6 +827,10 @@
 		},
 		methods: {
 			async getServices() {
+				console.log('Syncing docker with database...')
+				await this.io.service('docker_nodes')
+					.get('sync');
+				console.log('Fetching services...')
 				const services = (await this.io.service('docker_services')
 						.find({
 							query: {
@@ -835,6 +839,7 @@
 							}
 						}))
 					.data;
+				console.log('Fetching service resources...', service)
 				for (const service of services) {
 					console.log('Resolve', service.name);
 					console.log('Fetching environments');
