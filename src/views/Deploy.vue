@@ -813,6 +813,12 @@
 						Reload
 					</button>
 				</div>
+				<h2
+					v-if="loading"
+					class="font-thin block xl:pl-6 w-full text-center uppercase flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+				>
+					Loading - {{ loading }} ...
+				</h2>
 			</div>
 		</WrapperPage>
 	</TemplateDefault>
