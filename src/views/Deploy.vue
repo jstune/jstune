@@ -343,11 +343,11 @@
 						placeholder="docker-compose.override.yml"
 					/>
 				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<div
-						class="flex mt-2 mb-6"
-						v-if="log"
-					>
+				<div
+					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+					v-if="log"
+				>
+					<div class="flex mt-2 mb-6">
 						<div class="w-1/2">
 							<label class="font-medium text-lg">
 								Related Services
