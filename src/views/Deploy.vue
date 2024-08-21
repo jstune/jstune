@@ -203,9 +203,7 @@
 						v-for="service in services"
 					>
 						<label class="block my-2">
-							<b>Service name:</b> {{ service.name }}<br>
-							<b>Service ID:</b> {{ service.docker_service_id }}<br>
-							<b>Image:</b> {{ service.docker_image }}
+							<b>Service name:</b> {{ service.name }}<br /> <b>Service ID:</b> {{ service.docker_service_id }}<br /> <b>Image:</b> {{ service.docker_image }}
 						</label>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -801,7 +799,7 @@
 		},
 		computed: {
 			id() {
-				return this.$route.params.id || this.slug;
+				return this.$route.params.id || this.slug || 'ignite-users';
 			},
 			oauthProvidersFiltered() {
 				const supported = ['github'];
@@ -823,15 +821,14 @@
 			await this.getOAuthProviders();
 			if (this.id) {
 				await this.getItem();
-				await this.getServices()
 			}
 		},
 		methods: {
 			async getServices() {
-				console.log('Syncing docker with database...')
+				console.log('Syncing docker with database...');
 				await this.io.service('docker_nodes')
 					.get('sync');
-				console.log('Fetching services...')
+				console.log('Fetching services...');
 				const services = (await this.io.service('docker_services')
 						.find({
 							query: {
@@ -840,7 +837,7 @@
 							}
 						}))
 					.data;
-				console.log('Fetching service resources...', services)
+				console.log('Fetching service resources...', services);
 				for (const service of services) {
 					console.log('Resolve', service.name);
 					console.log('Fetching environments');
@@ -1013,6 +1010,7 @@
 				this.webhook = item.webhook;
 				this.log = item.log;
 				console.log(item);
+				await this.getServices();
 				this.loading = '';
 			},
 			async remove() {
