@@ -191,7 +191,7 @@
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="my-2 block">
-						Related Services
+						Related Services (query by stackname)
 					</label><button
 						class="rounded p-2 bg-slate-200 my-4"
 						@click="inherit = !inherit"
@@ -200,7 +200,7 @@
 					</button>
 					<div class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 						<label class="block my-2">
-							Service 1
+							Service / Node / Image
 						</label>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -398,21 +398,6 @@
 								New
 							</button>
 						</div>
-					</div>
-				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="my-2 block">
-						Related Nodes
-					</label><button
-						class="rounded p-2 bg-slate-200 my-4"
-						@click="inherit = !inherit"
-					>
-						Reload
-					</button>
-					<div class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
-						<label class="block my-2">
-							Node 1
-						</label>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<caption class="text-left mb-3">
 								Tasks
@@ -444,6 +429,12 @@
 										>
 											Slot
 										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Node ID
+										</th>
 										<th class="text-left">
 											Actions
 										</th>
@@ -451,6 +442,9 @@
 								</thead>
 								<tbody>
 									<tr>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
 										<td class="pr-4">
 											<input class="w-full p-2 rounded" />
 										</td>
@@ -526,12 +520,18 @@
 											Task ID
 										</th>
 										<th class="text-left">
+											Node ID
+										</th>
+										<th class="text-left">
 											Actions
 										</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
+										<td class="pr-4">
+											<input class="w-full p-2 rounded" />
+										</td>
 										<td class="pr-4">
 											<input class="w-full p-2 rounded" />
 										</td>
@@ -573,16 +573,6 @@
 							</button>
 						</div>
 					</div>
-				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="my-2 block">
-						Related Tasks
-					</label><button
-						class="rounded p-2 bg-slate-200 my-4"
-						@click="inherit = !inherit"
-					>
-						Reload
-					</button>
 				</div>
 				<div class="text-right">
 					<button
