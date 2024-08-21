@@ -823,6 +823,7 @@
 			await this.getOAuthProviders();
 			if (this.id) {
 				await this.getItem();
+				await this.getServices()
 			}
 		},
 		methods: {
