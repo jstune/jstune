@@ -14,32 +14,13 @@
 			</div>
 		</SectionHero>
 		<WrapperPage class="p-6">
-			<div class="mt-8 mb-20 relative overflow-auto w-full">
-				<div>
-					<button
-						class="py-4 p-2 w-full rounded bg-slate-200"
-						@click="getItem()"
-					>
-						Reload
-					</button>
-				</div>
-				<div
-					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
-					v-if="log"
-				>
-
-					<label class="block my-2">
-						Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp * 1000).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
-					</label>
-				</div>
+			<div class="mb-20 relative overflow-auto w-full">
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
-					<label class="block my-2">
-						Basic app settings
-					</label> <input
+					<input
 						v-model="name"
 						placeholder="Name"
-						class="px-4 py-2 block w-full mb-4"
+						class="text-2xl px-4 py-2 block w-full mb-4"
 					/><input
 						v-if="!log"
 						v-model="slug"
@@ -52,6 +33,80 @@
 						readonly=""
 						class="px-4 py-2 block w-full"
 					/>
+				</div>
+				<div
+					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+					v-if="log"
+				>
+					<div class="w-1/2"><label class="block my-2">
+							Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp * 1000).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
+						</label></div>
+					<div class="text-right w-1/2">
+						<button
+							class="p-2 mr-4 rounded bg-slate-200"
+							@click="update()"
+						>
+							Update
+						</button><button
+							class="p-2 rounded bg-slate-200"
+							@click="getItem()"
+						>
+							Reload
+						</button>
+					</div>
+
+				</div>
+				<div
+					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+					v-if="log"
+				>
+					<button
+						v-if="!running"
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="start()"
+					>
+						Start
+					</button><button
+						v-if="running"
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="stop()"
+					>
+						Stop
+					</button>
+					<button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="compose()"
+					>
+						Compose
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="build()"
+					>
+						Build
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="destroy()"
+					>
+						Destroy
+					</button><button
+						v-if="!webhook && repository"
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="attach()"
+					>
+						Attach webhook
+					</button><button
+						v-if="webhook && repository"
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="detach()"
+					>
+						Detach webhook
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="remove()"
+					>
+						Remove
+					</button>
+
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
@@ -659,68 +714,76 @@
 						</div>
 					</div>
 				</div>
-				<div class="text-right">
+				<div
+					class="text-right"
+					v-if="!log"
+				>
 					<button
-						v-if="!log"
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+						class="py-4 w-full rounded bg-slate-200"
 						:disabled="!slug"
 						@click="deploy()"
 					>
 						Launch
-					</button><button
-						v-if="log"
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="update()"
-					>
-						Update
-					</button><button
-						v-if="!webhook && log && repository"
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="attach()"
-					>
-						Attach webhook
-					</button><button
-						v-if="webhook && log && repository"
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						@click="detach()"
-					>
-						Detach webhook
-					</button><button
-						v-if="!running && log"
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+					</button>
+				</div>
+				<div
+					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
+					v-if="log"
+				>
+					<button
+						v-if="!running"
+						class="p-2 mr-4 rounded bg-slate-200"
 						@click="start()"
 					>
 						Start
-					</button> <button
-						v-if="running && log"
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
+					</button><button
+						v-if="running"
+						class="p-2 mr-4 rounded bg-slate-200"
 						@click="stop()"
 					>
 						Stop
 					</button> <button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="log"
-						@click="build()"
-					>
-						Build
-					</button> <button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="log"
-						@click="destroy()"
-					>
-						Destroy
-					</button> <button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="log"
+						class="p-2 mr-4 rounded bg-slate-200"
 						@click="compose()"
 					>
 						Compose
-					</button> <button
-						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="log"
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="build()"
+					>
+						Build
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="destroy()"
+					>
+						Destroy
+					</button><button
+						v-if="!webhook && repository"
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="attach()"
+					>
+						Attach webhook
+					</button><button
+						v-if="webhook && repository"
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="detach()"
+					>
+						Detach webhook
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="update()"
+					>
+						Update
+					</button><button
+						class="p-2 mr-4 rounded bg-slate-200"
 						@click="remove()"
 					>
 						Remove
+					</button><button
+						class="p-2 rounded bg-slate-200"
+						@click="getItem()"
+					>
+						Reload
 					</button>
 				</div>
 			</div>
