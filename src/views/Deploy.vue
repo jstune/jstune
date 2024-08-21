@@ -862,7 +862,7 @@
 						class="py-4 rounded bg-slate-200 w-full"
 						:disabled="!slug"
 						@click="deploy()"
-						title="Launc"
+						title="Launch"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
