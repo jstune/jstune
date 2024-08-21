@@ -59,8 +59,7 @@
 									d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
 									clip-rule="evenodd"
 								/>
-							</svg>
-						</button><button
+							</svg> </button><button
 							class="p-2 rounded bg-slate-200"
 							@click="getItem()"
 							title="Reload"
@@ -75,8 +74,7 @@
 									d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
 									clip-rule="evenodd"
 								/>
-							</svg>
-						</button>
+							</svg> </button>
 					</div>
 				</div>
 				<div
@@ -125,9 +123,12 @@
 							fill="currentColor"
 							class="w-6 h-6"
 						>
-							<path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
-						</svg>
-					</button><button
+							<path
+								fill-rule="evenodd"
+								d="M19.952 1.651a.75.75 0 01.298.599V16.303a3 3 0 01-2.176 2.884l-1.32.377a2.553 2.553 0 11-1.403-4.909l2.311-.66a1.5 1.5 0 001.088-1.442V6.994l-9 2.572v9.737a3 3 0 01-2.176 2.884l-1.32.377a2.553 2.553 0 11-1.402-4.909l2.31-.66a1.5 1.5 0 001.088-1.442V9.017 5.25a.75.75 0 01.544-.721l10.5-3a.75.75 0 01.658.122z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="build()"
 						title="Build"
@@ -164,8 +165,7 @@
 								d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
 								clip-rule="evenodd"
 							/>
-						</svg>
-					</button><button
+						</svg> </button><button
 						v-if="!webhook && repository"
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="attach()"
@@ -181,8 +181,7 @@
 								d="M19.902 4.098a3.75 3.75 0 00-5.304 0l-4.5 4.5a3.75 3.75 0 001.035 6.037.75.75 0 01-.646 1.353 5.25 5.25 0 01-1.449-8.45l4.5-4.5a5.25 5.25 0 117.424 7.424l-1.757 1.757a.75.75 0 11-1.06-1.06l1.757-1.757a3.75 3.75 0 000-5.304zm-7.389 4.267a.75.75 0 011-.353 5.25 5.25 0 011.449 8.45l-4.5 4.5a5.25 5.25 0 11-7.424-7.424l1.757-1.757a.75.75 0 111.06 1.06l-1.757 1.757a3.75 3.75 0 105.304 5.304l4.5-4.5a3.75 3.75 0 00-1.035-6.037.75.75 0 01-.354-1z"
 								clip-rule="evenodd"
 							/>
-						</svg>
-					</button><button
+						</svg> </button><button
 						v-if="webhook && repository"
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="detach()"
@@ -198,8 +197,7 @@
 								d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
 								clip-rule="evenodd"
 							/>
-						</svg>
-					</button><button
+						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="remove()"
 						title="Remove"
@@ -214,10 +212,9 @@
 								d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
 								clip-rule="evenodd"
 							/>
-						</svg>
-					</button>
+						</svg> </button>
 				</div>
-				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2 text-center">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
 					</label><button
 						class="rounded p-2 bg-slate-200 block w-full mt-2"
@@ -244,7 +241,7 @@
 						Files count: {{files.length}}
 					</label> </div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="block my-2">
+					<label class="block mt-2 mb-4 font-medium text-lg">
 						Clone using a git provider
 					</label>
 					<div
@@ -336,7 +333,7 @@
 					</label>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="block my-2">Docker Compose</label><button
+					<label class="block my-2 font-medium text-lg">Docker Compose</label><button
 						class="rounded p-2 bg-slate-200 my-4"
 						@click="inherit = !inherit"
 					>
@@ -354,7 +351,7 @@
 						v-if="log"
 					>
 						<div class="w-1/2">
-							<label>
+							<label class="font-medium text-lg">
 								Related Services
 							</label>
 						</div>
@@ -362,8 +359,19 @@
 							<button
 								class="rounded p-2 bg-slate-200"
 								@click="getServices()"
-							>
-								Reload
+								title="Reload"
+							><svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									fill="currentColor"
+									class="w-6 h-6"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+										clip-rule="evenodd"
+									/>
+								</svg>
 							</button>
 						</div>
 					</div>
@@ -871,57 +879,164 @@
 						v-if="!running"
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="start()"
-					>
-						Start
-					</button><button
+						title="Start"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						v-if="running"
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="stop()"
-					>
-						Stop
-					</button> <button
+						title="Stop"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.5 7.5a3 3 0 013-3h9a3 3 0 013 3v9a3 3 0 01-3 3h-9a3 3 0 01-3-3v-9z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button> <button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="compose()"
-					>
-						Compose
-					</button><button
+						title="Compose"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M19.952 1.651a.75.75 0 01.298.599V16.303a3 3 0 01-2.176 2.884l-1.32.377a2.553 2.553 0 11-1.403-4.909l2.311-.66a1.5 1.5 0 001.088-1.442V6.994l-9 2.572v9.737a3 3 0 01-2.176 2.884l-1.32.377a2.553 2.553 0 11-1.402-4.909l2.31-.66a1.5 1.5 0 001.088-1.442V9.017 5.25a.75.75 0 01.544-.721l10.5-3a.75.75 0 01.658.122z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="build()"
+						title="Build"
 					>
-						Build
-					</button><button
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M12 6.75a5.25 5.25 0 016.775-5.025.75.75 0 01.313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 011.248.313 5.25 5.25 0 01-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 112.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0112 6.75zM4.117 19.125a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z"
+								clip-rule="evenodd"
+							/>
+							<path d="M10.076 8.64l-2.201-2.2V4.874a.75.75 0 00-.364-.643l-3.75-2.25a.75.75 0 00-.916.113l-.75.75a.75.75 0 00-.113.916l2.25 3.75a.75.75 0 00.643.364h1.564l2.062 2.062 1.575-1.297z" />
+							<path
+								fill-rule="evenodd"
+								d="M12.556 17.329l4.183 4.182a3.375 3.375 0 004.773-4.773l-3.306-3.305a6.803 6.803 0 01-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 00-.167.063l-3.086 3.748zm3.414-1.36a.75.75 0 011.06 0l1.875 1.876a.75.75 0 11-1.06 1.06L15.97 17.03a.75.75 0 010-1.06z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="destroy()"
-					>
-						Destroy
-					</button><button
+						title="Destruct"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						v-if="!webhook && repository"
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="attach()"
-					>
-						Attach webhook
-					</button><button
+						title="Attach Webhook"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M19.902 4.098a3.75 3.75 0 00-5.304 0l-4.5 4.5a3.75 3.75 0 001.035 6.037.75.75 0 01-.646 1.353 5.25 5.25 0 01-1.449-8.45l4.5-4.5a5.25 5.25 0 117.424 7.424l-1.757 1.757a.75.75 0 11-1.06-1.06l1.757-1.757a3.75 3.75 0 000-5.304zm-7.389 4.267a.75.75 0 011-.353 5.25 5.25 0 011.449 8.45l-4.5 4.5a5.25 5.25 0 11-7.424-7.424l1.757-1.757a.75.75 0 111.06 1.06l-1.757 1.757a3.75 3.75 0 105.304 5.304l4.5-4.5a3.75 3.75 0 00-1.035-6.037.75.75 0 01-.354-1z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						v-if="webhook && repository"
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="detach()"
-					>
-						Detach webhook
-					</button><button
-						class="p-2 mr-4 rounded bg-slate-200"
-						@click="update()"
-					>
-						Update
-					</button><button
+						title="Detach Webhook"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="remove()"
-					>
-						Remove
-					</button><button
+						title="Remove"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="update()"
+						title="Update"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
 						class="p-2 rounded bg-slate-200"
 						@click="getItem()"
-					>
-						Reload
-					</button>
+						title="Reload"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button>
 				</div>
 				<h2
 					v-if="loading"
