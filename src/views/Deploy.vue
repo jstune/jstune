@@ -41,12 +41,12 @@
 						placeholder="Name"
 						class="px-4 py-2 block w-full mb-4"
 					/><input
-						v-if="!$route.params.id"
+						v-if="!id"
 						v-model="slug"
 						placeholder="Slug"
 						class="px-4 py-2 block w-full"
 					/> <input
-						v-if="$route.params.id"
+						v-if="id"
 						v-model="id"
 						placeholder="Slug"
 						readonly=""
@@ -661,63 +661,63 @@
 				</div>
 				<div class="text-right">
 					<button
-						v-if="!$route.params.id"
+						v-if="!id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						:disabled="!slug"
 						@click="deploy()"
 					>
 						Launch
 					</button><button
-						v-if="$route.params.id"
+						v-if="id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="update()"
 					>
 						Update
 					</button><button
-						v-if="!webhook && $route.params.id && repository"
+						v-if="!webhook && id && repository"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="attach()"
 					>
 						Attach webhook
 					</button><button
-						v-if="webhook && $route.params.id && repository"
+						v-if="webhook && id && repository"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="detach()"
 					>
 						Detach webhook
 					</button><button
-						v-if="!running && $route.params.id"
+						v-if="!running && id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="start()"
 					>
 						Start
 					</button> <button
-						v-if="running && $route.params.id"
+						v-if="running && id"
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
 						@click="stop()"
 					>
 						Stop
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="$route.params.id"
+						v-if="id"
 						@click="build()"
 					>
 						Build
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="$route.params.id"
+						v-if="id"
 						@click="destroy()"
 					>
 						Destroy
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="$route.params.id"
+						v-if="id"
 						@click="compose()"
 					>
 						Compose
 					</button> <button
 						class="py-4 p-2 mt-4 w-full rounded bg-slate-200"
-						v-if="$route.params.id"
+						v-if="id"
 						@click="remove()"
 					>
 						Remove
