@@ -177,11 +177,6 @@
 						@click="inherit = !inherit"
 					>
 						Inherit original docker-compose file: {{ inherit ? 'Yes' : 'No' }}
-					</button><button
-						class="rounded p-2 bg-slate-200 my-4"
-						@click="inherit = !inherit"
-					>
-						Inherit original docker-compose file: {{ inherit ? 'Yes' : 'No' }}
 					</button> <textarea
 						class="w-full p-4"
 						v-model="dockerComposeFile"
