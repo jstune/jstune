@@ -440,7 +440,8 @@
 											</button> </td>
 									</tr>
 								</tbody>
-							</table><button
+							</table>
+							<button
 								class="mr-2 rounded p-2 bg-slate-200 my-4"
 								@click="inherit = !inherit"
 							>
@@ -856,7 +857,7 @@
 						</div>
 					</div>
 				</div>
-				<div v-if="!log || log">
+				<div v-if="!log">
 					<button
 						class="py-4 rounded bg-slate-200 w-full"
 						:disabled="!slug"
