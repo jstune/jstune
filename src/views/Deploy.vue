@@ -406,7 +406,7 @@
 												class="w-full p-2 rounded"
 											/>
 										</td>
-										<td>
+										<td style="width:130px">
 											<button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -448,10 +448,10 @@
 											Message
 										</th>
 										<th
-											class="text-left"
+											class="whitespace-nowrap text-left"
 											style="height:26px"
 										>
-											Desired state
+											Desired State
 										</th>
 										<th
 											class="text-left"
@@ -460,13 +460,13 @@
 											Slot
 										</th>
 										<th
-											class="text-left"
+											class="whitespace-nowrap text-left"
 											style="height:26px"
 										>
 											Node ID
 										</th>
 										<th
-											class="text-left"
+											class="whitespace-nowrap text-left"
 											style="height:26px"
 										>
 											Task ID
@@ -505,6 +505,12 @@
 										<td class="pr-4">
 											<input
 												v-model="task.slot"
+												class="w-full p-2 rounded"
+											/>
+										</td>
+										<td class="pr-4">
+											<input
+												v-model="task.docker_node_id"
 												class="w-full p-2 rounded"
 											/>
 										</td>
@@ -568,15 +574,15 @@
 											Image
 										</th>
 										<th
-											class="text-left"
+											class="whitespace-nowrap text-left"
 											style="height:26px"
 										>
 											Task ID
 										</th>
-										<th class="text-left">
+										<th class="whitespace-nowrap text-left">
 											Node ID
 										</th>
-										<th class="text-left">
+										<th class="whitespace-nowrap text-left">
 											Container ID
 										</th>
 										<th class="text-left">
