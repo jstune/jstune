@@ -38,9 +38,11 @@
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 					v-if="log"
 				>
-					<div class="w-1/2"><label class="block my-2">
+					<div class="w-1/2">
+						<label class="block my-2">
 							Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp * 1000).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
-						</label></div>
+						</label>
+					</div>
 					<div class="text-right w-1/2">
 						<button
 							class="p-2 mr-4 rounded bg-slate-200"
@@ -54,7 +56,6 @@
 							Reload
 						</button>
 					</div>
-
 				</div>
 				<div
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
@@ -72,8 +73,7 @@
 						@click="stop()"
 					>
 						Stop
-					</button>
-					<button
+					</button> <button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="compose()"
 					>
@@ -106,7 +106,6 @@
 					>
 						Remove
 					</button>
-
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
@@ -240,20 +239,48 @@
 					/>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
-					<label class="my-2 block">
-						Related Services
-					</label><button
-						class="rounded p-2 bg-slate-200 my-4"
-						@click="getServices()"
+					<div
+						class="flex mt-2 mb-6"
+						v-if="log"
 					>
-						Reload
-					</button>
+						<div class="w-1/2">
+							<label>
+								Related Services
+							</label>
+						</div>
+						<div class="text-right w-1/2">
+							<button
+								class="rounded p-2 bg-slate-200"
+								@click="getServices()"
+							>
+								Reload
+							</button>
+						</div>
+					</div>
+					<div class="flex overflow-auto shadow-sm bg-slate-100 text-slate-700">
+						<button
+							class="p-2 mr-1 rounded bg-slate-200"
+							@click="serviceOpen = service"
+							v-for="service in services"
+						>
+							{{service.name.replace(slug + '_', '')}}
+						</button>
+					</div>
 					<div
 						class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700"
-						v-for="service in services"
+						v-for="service in (serviceOpen ? [serviceOpen] : [])"
 					>
 						<label class="block my-2">
-							<b>Service name:</b> {{ service.name }}<br /> <b>Service ID:</b> {{ service.docker_service_id }}<br /> <b>Image:</b> {{ service.docker_image }}
+							<b class="block mt-1">
+								Service name
+							</b>
+							{{ service.name }} <b class="block mt-1">
+								Service ID
+							</b>
+							{{ service.docker_service_id }} <b class="block mt-1">
+								Image
+							</b>
+							{{ service.docker_image }}
 						</label>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -829,6 +856,7 @@
 			repositories: null,
 			log: null,
 			loading: '',
+			serviceOpen: null,
 			services: []
 		}),
 		watch: {
