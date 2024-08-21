@@ -191,14 +191,17 @@
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="my-2 block">
-						Related Services (query by stackname)
+						Related Services
 					</label><button
 						class="rounded p-2 bg-slate-200 my-4"
-						@click="inherit = !inherit"
+						@click="getServices()"
 					>
 						Reload
 					</button>
-					<div class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
+					<div
+						class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700"
+						v-for="service in services"
+					>
 						<label class="block my-2">
 							Service / Image
 						</label>
@@ -221,11 +224,17 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr v-for="env in service.environments">
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="env.key"
+												class="w-full p-2 rounded"
+											/>
 										</td>
-										<td class="pr-4"><input class="w-full p-2 rounded" /> </td>
+										<td class="pr-4"><input
+												v-model="env.value"
+												class="w-full p-2 rounded"
+											/> </td>
 										<td><button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -265,11 +274,17 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr v-for="network in service.networks">
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="network.address"
+												class="w-full p-2 rounded"
+											/>
 										</td>
-										<td class="pr-4"><input class="w-full p-2 rounded" /> </td>
+										<td class="pr-4"><input
+												v-model="network.docker_network_id"
+												class="w-full p-2 rounded"
+											/> </td>
 										<td><button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -296,7 +311,7 @@
 									Ports
 								</caption>
 								<thead>
-									<tr>
+									<tr v-for="port in service.ports">
 										<th class="text-left">
 											External
 										</th>
@@ -311,9 +326,15 @@
 								<tbody>
 									<tr>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="port.port_external"
+												class="w-full p-2 rounded"
+											/>
 										</td>
-										<td class="pr-4"><input class="w-full p-2 rounded" /> </td>
+										<td class="pr-4"><input
+												v-model="port.port_internal"
+												class="w-full p-2 rounded"
+											/> </td>
 										<td><button
 												class="mr-2 rounded p-2 bg-slate-200 my-4"
 												@click="inherit = !inherit"
@@ -366,15 +387,24 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr v-for="volume in service.volumes">
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="model.name"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="model.path"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="model.type"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td>
 											<button
@@ -435,30 +465,54 @@
 										>
 											Node ID
 										</th>
+										<th
+											class="text-left"
+											style="height:26px"
+										>
+											Task ID
+										</th>
 										<th class="text-left">
 											Actions
 										</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr v-for="task in service.tasks">
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="task.timestamp"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="task.state"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="task.message"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="task.desired_state"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="task.slot"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="task.docker_task_id"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td style="width:130px">
 											<button
@@ -523,32 +577,62 @@
 											Node ID
 										</th>
 										<th class="text-left">
+											Container ID
+										</th>
+										<th class="text-left">
 											Actions
 										</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr v-for="container in service.containers">
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.name"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.command"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.state"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.status"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.docker_image_name"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.docker_task_id"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td class="pr-4">
-											<input class="w-full p-2 rounded" />
+											<input
+												v-model="container.docker_node_id"
+												class="w-full p-2 rounded"
+											/>
+										</td>
+										<td class="pr-4">
+											<input
+												v-model="container.docker_container_id"
+												class="w-full p-2 rounded"
+											/>
 										</td>
 										<td style="width:130px">
 											<button
@@ -680,7 +764,8 @@
 			organisations: [],
 			repositories: null,
 			log: null,
-			loading: ''
+			loading: '',
+			services: []
 		}),
 		watch: {
 			async searchRepos(open) {
@@ -739,6 +824,76 @@
 			}
 		},
 		methods: {
+			async getServices() {
+				const services = (await this.io.service('docker_services')
+						.find({
+							query: {
+								stackname: this.slug,
+								$limit: 1000
+							}
+						}))
+					.data;
+				for (const service of services) {
+					console.log('Resolve', service.name);
+					console.log('Fetching environments');
+					service.environments = (await this.io.service('docker_services_environments')
+							.find({
+								query: {
+									docker_service_id: service.docker_service_id,
+									$limit: 1000
+								}
+							}))
+						.data;
+					console.log('Fetching networks');
+					service.networks = (await this.io.service('docker_services_networks')
+							.find({
+								query: {
+									docker_service_id: service.docker_service_id,
+									$limit: 1000
+								}
+							}))
+						.data;
+					console.log('Fetching ports');
+					service.ports = (await this.io.service('docker_services_ports')
+							.find({
+								query: {
+									docker_service_id: service.docker_service_id,
+									$limit: 1000
+								}
+							}))
+						.data;
+					console.log('Fetching volumes');
+					service.volumes = (await this.io.service('docker_services_volumes')
+							.find({
+								query: {
+									docker_service_id: service.docker_service_id,
+									$limit: 1000
+								}
+							}))
+						.data;
+					console.log('Fetching tasks');
+					service.tasks = (await this.io.service('docker_tasks')
+							.find({
+								query: {
+									docker_service_id: service.docker_service_id,
+									$limit: 1000
+								}
+							}))
+						.data;
+					console.log('Fetching containers');
+					service.containers = (await this.io.service('docker_containers')
+							.find({
+								query: {
+									docker_service_id: service.docker_service_id,
+									$limit: 1000
+								}
+							}))
+						.data;
+					console.log('Done', service.name);
+				}
+				console.log('Completed', services);
+				this.services = services;
+			},
 			async getDockerCompose(repo) {
 				this.loading = 'docker compose file';
 				const provider = this.oauthProvidersFiltered.find(provider => provider.provider === 'github');
