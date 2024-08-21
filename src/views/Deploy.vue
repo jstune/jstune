@@ -839,7 +839,7 @@
 							}
 						}))
 					.data;
-				console.log('Fetching service resources...', service)
+				console.log('Fetching service resources...', services)
 				for (const service of services) {
 					console.log('Resolve', service.name);
 					console.log('Fetching environments');
