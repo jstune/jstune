@@ -290,7 +290,7 @@
 				>
 					Self Update
 				</button><button
-					class="rounded p-2 bg-slate-200"
+					class="rounded p-2 bg-slate-200 mt-2"
 					@click="test()"
 				>
 					Test
@@ -338,38 +338,50 @@
 			listenerInstallation: null,
 			listenerMigration: null,
 			listenerFinish: null,
-			listenerTest: null,
+			listenerTest: null
 		}),
 		async created() {
 			try {
 				await this.inspectLeader();
 			} catch (e) {}
-			console.log('Adding listeners')
-			this.listenerProgress = line => console.log('progress', line)
-			this.listenerMessage = line => console.log('message', line)
-			this.listenerInstallation = line => console.log('installation', line)
-			this.listenerMigration = line => console.log('migration', line)
-			this.listenerFinish = line => console.log('finish', line)
-			this.listenerTest = (line) => {
-				console.log('test', line)
-			}
-			this.io.service('exec').on('progress', this.listenerProgress);
-			this.io.service('exec').on('message', this.listenerMessage);
-			this.io.service('exec').on('installation', this.listenerInstallation);
-			this.io.service('exec').on('migration', this.listenerMigration);
-			this.io.service('exec').on('finish', this.listenerFinish);
-			this.io.service('exec').on('test', this.listenerTest);
-			console.log('Listeners added')
+			console.log('Adding listeners');
+			this.listenerProgress = line => console.log('progress', line);
+			this.listenerMessage = line => console.log('message', line);
+			this.listenerInstallation = line => console.log('installation', line);
+			this.listenerMigration = line => console.log('migration', line);
+			this.listenerFinish = line => console.log('finish', line);
+			this.listenerTest = line => {
+				console.log('test', line);
+			};
+			this.io.service('exec')
+				.on('progress', this.listenerProgress);
+			this.io.service('exec')
+				.on('message', this.listenerMessage);
+			this.io.service('exec')
+				.on('installation', this.listenerInstallation);
+			this.io.service('exec')
+				.on('migration', this.listenerMigration);
+			this.io.service('exec')
+				.on('finish', this.listenerFinish);
+			this.io.service('exec')
+				.on('test', this.listenerTest);
+			console.log('Listeners added');
 		},
 		beforeUnmount() {
-			console.log('Removing listeners')
-			this.io.service('exec').off('progress', this.listenerProgress);
-			this.io.service('exec').off('message', this.listenerMessage);
-			this.io.service('exec').off('installation', this.listenerInstallation);
-			this.io.service('exec').off('migration', this.listenerMigration);
-			this.io.service('exec').off('finish', this.listenerFinish);
-			this.io.service('exec').off('test', this.listenerTest);
-			console.log('Listeners removed')
+			console.log('Removing listeners');
+			this.io.service('exec')
+				.off('progress', this.listenerProgress);
+			this.io.service('exec')
+				.off('message', this.listenerMessage);
+			this.io.service('exec')
+				.off('installation', this.listenerInstallation);
+			this.io.service('exec')
+				.off('migration', this.listenerMigration);
+			this.io.service('exec')
+				.off('finish', this.listenerFinish);
+			this.io.service('exec')
+				.off('test', this.listenerTest);
+			console.log('Listeners removed');
 		},
 		methods: {
 			async inspectLeader() {
