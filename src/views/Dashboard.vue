@@ -338,6 +338,7 @@
 			try {
 				await this.inspectLeader();
 			} catch (e) {}
+			console.log('Adding listeners')
 			this.listenerProgress = line => console.log('progress', line)
 			this.listenerMessage = line => console.log('message', line)
 			this.listenerInstallation = line => console.log('installation', line)
@@ -348,13 +349,16 @@
 			this.io.service('exec').on('installation', this.listenerInstallation);
 			this.io.service('exec').on('migration', this.listenerMigration);
 			this.io.service('exec').on('finish', this.listenerFinish);
+			console.log('Listeners added')
 		},
 		beforeUnmount() {
+			console.log('Removing listeners')
 			this.io.service('exec').off('progress', this.listenerProgress);
 			this.io.service('exec').off('message', this.listenerMessage);
 			this.io.service('exec').off('installation', this.listenerInstallation);
 			this.io.service('exec').off('migration', this.listenerMigration);
 			this.io.service('exec').off('finish', this.listenerFinish);
+			console.log('Listeners removed')
 		},
 		methods: {
 			async inspectLeader() {
