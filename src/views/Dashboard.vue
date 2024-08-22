@@ -290,6 +290,11 @@
 				>
 					Self Update
 				</button><button
+					class="rounded p-2 bg-slate-200"
+					@click="test()"
+				>
+					Test
+				</button><button
 					class="rounded p-2 bg-slate-200 mt-2"
 					@click="migrate()"
 				>
@@ -333,6 +338,7 @@
 			listenerInstallation: null,
 			listenerMigration: null,
 			listenerFinish: null,
+			listenerTest: null,
 		}),
 		async created() {
 			try {
@@ -344,11 +350,15 @@
 			this.listenerInstallation = line => console.log('installation', line)
 			this.listenerMigration = line => console.log('migration', line)
 			this.listenerFinish = line => console.log('finish', line)
+			this.listenerTest = (line) => {
+				console.log('test', line)
+			}
 			this.io.service('exec').on('progress', this.listenerProgress);
 			this.io.service('exec').on('message', this.listenerMessage);
 			this.io.service('exec').on('installation', this.listenerInstallation);
 			this.io.service('exec').on('migration', this.listenerMigration);
 			this.io.service('exec').on('finish', this.listenerFinish);
+			this.io.service('exec').on('test', this.listenerTest);
 			console.log('Listeners added')
 		},
 		beforeUnmount() {
@@ -358,6 +368,7 @@
 			this.io.service('exec').off('installation', this.listenerInstallation);
 			this.io.service('exec').off('migration', this.listenerMigration);
 			this.io.service('exec').off('finish', this.listenerFinish);
+			this.io.service('exec').off('test', this.listenerTest);
 			console.log('Listeners removed')
 		},
 		methods: {
@@ -386,6 +397,10 @@
 				await this.io.service('exec')
 					.patch('update');
 				alert('jstune will automatically be restarted after update is completed');
+			},
+			async test() {
+				await this.io.service('exec')
+					.patch('test');
 			},
 			async updateNPM() {
 				if (!confirm(`Are you sure you want to update packages?`)) {
