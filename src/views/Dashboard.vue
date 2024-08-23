@@ -371,7 +371,7 @@
 				.on('error', this.listenerError);
 			console.log('Listeners added');
 			this.io.io.on('disconnect', this.listenerDisconnect);
-			this.io.io.on('connect', this.listenerDisconnect);
+			this.io.io.on('connect', this.listenerConnect);
 		},
 		beforeUnmount() {
 			console.log('Removing listeners');
