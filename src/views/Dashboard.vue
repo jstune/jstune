@@ -291,11 +291,6 @@
 					Self Update
 				</button><button
 					class="rounded p-2 bg-slate-200 mt-2"
-					@click="test()"
-				>
-					Test
-				</button><button
-					class="rounded p-2 bg-slate-200 mt-2"
 					@click="migrate()"
 				>
 					Migrate
@@ -338,7 +333,7 @@
 			listenerInstallation: null,
 			listenerMigration: null,
 			listenerFinish: null,
-			listenerTest: null
+			listenerError: null
 		}),
 		async created() {
 			try {
@@ -350,9 +345,7 @@
 			this.listenerInstallation = line => console.log('installation', line);
 			this.listenerMigration = line => console.log('migration', line);
 			this.listenerFinish = line => console.log('finish', line);
-			this.listenerTest = line => {
-				console.log('test', line);
-			};
+			this.listenerError = line => console.log('error', line);
 			this.io.service('exec')
 				.on('progress', this.listenerProgress);
 			this.io.service('exec')
@@ -364,7 +357,7 @@
 			this.io.service('exec')
 				.on('finish', this.listenerFinish);
 			this.io.service('exec')
-				.on('test', this.listenerTest);
+				.on('error', this.listenerError);
 			console.log('Listeners added');
 		},
 		beforeUnmount() {
@@ -380,7 +373,7 @@
 			this.io.service('exec')
 				.off('finish', this.listenerFinish);
 			this.io.service('exec')
-				.off('test', this.listenerTest);
+				.off('error', this.listenerError);
 			console.log('Listeners removed');
 		},
 		methods: {
