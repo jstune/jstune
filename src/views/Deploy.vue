@@ -331,6 +331,20 @@
 					</label>
 				</div>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
+					<label class="block my-2">
+						Check if port is free
+					</label><input
+						v-model="portToCheck"
+						placeholder="Port to check"
+						class="mt-2 px-4 py-2 w-full"
+					/><button
+						class="rounded p-2 bg-slate-200 mt-2"
+						@click="checkPort(portToCheck)"
+					>
+						Check
+					</button>
+				</div>
+				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 					<label class="block my-2 font-medium text-lg">Docker Compose</label><button
 						class="rounded p-2 bg-slate-200 my-4"
 						@click="inherit = !inherit"
@@ -405,6 +419,29 @@
 								<b class="block mt-1">
 									Routes linked to port {{ port.port_external }}
 								</b> </label>
+							<div
+								v-for="provider in portProviders"
+								class="mb-2 p-2 bg-slate-50"
+							>
+								<h3>
+									{{provider}}
+								</h3> <button
+									@click="inspectPort(port.port_external, provider)"
+									class="mb-2 mr-2 hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+								>
+									Inspect Port
+								</button><button
+									@click="openPort(port.port_external, provider)"
+									class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+								>
+									Open Port
+								</button><button
+									@click="closePort(port.port_external, provider)"
+									class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+								>
+									Close Port
+								</button>
+							</div>
 							<table class="border-collapse table-auto w-full text-sm">
 								<thead>
 									<tr>
@@ -1344,6 +1381,7 @@
 		props: ['renderer'],
 		inject: ['io'],
 		data: () => ({
+			portToCheck: '',
 			dockerComposeFile: ``,
 			files: [],
 			name: '',
@@ -1369,6 +1407,7 @@
 			services: [],
 			logs: '',
 			providers: [],
+			portProviders: ['ufw', 'google', 'aws', 'azure'],
 			sslRenewIds: [],
 			demo: false
 		}),
@@ -1436,6 +1475,43 @@
 				.off(`output`, this.listener);
 		},
 		methods: {
+			async checkPort(port) {
+				const res = await this.io.service('docker_services_ports')
+					.find({
+						query: {
+							port_external: port
+						}
+					});
+				if (res?.data?.length) {
+					alert('Port is taken');
+				} else {
+					alert('Port is available');
+				}
+			},
+			async inspectPort(port, provider = 'ufw') {
+				const result = await this.io.service('ports')
+					.get({
+						port,
+						provider
+					});
+				console.log(result);
+			},
+			async openPort(port, provider = 'ufw') {
+				const result = await this.io.service('ports')
+					.create({
+						port,
+						provider
+					});
+				console.log(result);
+			},
+			async closePort(port, provider = 'ufw') {
+				const result = await this.io.service('ports')
+					.remove({
+						port,
+						provider
+					});
+				console.log(result);
+			},
 			openItem(item) {
 				let port = ['studio.vueplay.com', 'next.vueplay.com', 'localhost'].includes(parent?.location?.hostname) ? ':8000' : '';
 				window.open('http://' + item.hostname + port, '_blank');
