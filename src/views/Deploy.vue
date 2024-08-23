@@ -1369,7 +1369,8 @@
 			services: [],
 			logs: '',
 			providers: [],
-			sslRenewIds: []
+			sslRenewIds: [],
+			demo: false
 		}),
 		watch: {
 			async searchRepos(open) {
@@ -1403,7 +1404,7 @@
 		},
 		computed: {
 			id() {
-				return this.$route.params.id || this.slug || 'ignite-users';
+				return this.$route.params.id || this.slug || (this.demo ? 'ignite-users' : '');
 			},
 			oauthProvidersFiltered() {
 				const supported = ['github'];
