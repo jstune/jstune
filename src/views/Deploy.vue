@@ -1174,7 +1174,7 @@
 					.on(`apps/${newSlug}`, this.listener);
 			},
 			listener(line) {
-				this.logs += '\n' + data;
+				this.logs += '\n' + line.data;
 				setTimeout(() => {
 					this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
 				}, 10);
