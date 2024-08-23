@@ -1150,6 +1150,10 @@
 											>
 												Delete
 											</button>
+											<router-link :to="'/docker/containers/' + container.docker_container_id" tag="a"
+    target="_blank">
+												Terminal
+											</router-link>
 										</td>
 									</tr>
 								</tbody>

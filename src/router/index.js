@@ -215,6 +215,14 @@ const routes = [
                 props: { renderer: 'slot' }
             },
             {
+                path: 'containers/:identifier',
+                component: () => import('@/views/DockerContainers.vue'),
+                props: route => ({
+                    identifier: route.params.identifier,
+                    renderer: 'slot'
+                })
+            },
+            {
                 path: 'networks',
                 component: () => import('@/views/DockerNetworks.vue'),
                 props: { renderer: 'slot' }

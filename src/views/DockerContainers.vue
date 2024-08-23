@@ -120,6 +120,7 @@
 			TemplateSidemenu
 		},
 		inject: ['menus', 'io'],
+		props: ['identifier'],
 		data: () => ({
 			service: 'docker_containers',
 			items: null,
@@ -131,6 +132,9 @@
 			listener: null
 		}),
 		async created() {
+			if (this.identifier) {
+				this.search = this.identifier
+			}
 			await this.getItems();
 		},
 		async beforeUnmount() {
