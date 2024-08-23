@@ -440,8 +440,7 @@
 											</button> </td>
 									</tr>
 								</tbody>
-							</table>
-							<button
+							</table> <button
 								class="mr-2 rounded p-2 bg-slate-200 my-4"
 								@click="inherit = !inherit"
 							>
@@ -1047,7 +1046,13 @@
 					class="font-thin block xl:pl-6 w-full text-center uppercase flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 				>
 					Loading - {{ loading }} ...
-				</h2>
+				</h2> <textarea
+					ref="output"
+					readonly=""
+					v-model="logs"
+					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50 my-8 "
+					style="font-family:monospace"
+				/>
 			</div>
 		</WrapperPage>
 	</TemplateDefault>
@@ -1092,7 +1097,8 @@
 			log: null,
 			loading: '',
 			serviceOpen: null,
-			services: []
+			services: [],
+			logs: ''
 		}),
 		watch: {
 			async searchRepos(open) {
@@ -1122,6 +1128,9 @@
 				if (repo) {
 					await this.getDockerCompose(repo);
 				}
+			},
+			slug(val, old) {
+				this.setListener(val, old);
 			}
 		},
 		computed: {
@@ -1147,10 +1156,29 @@
 		async created() {
 			await this.getOAuthProviders();
 			if (this.id) {
+				this.setListener(this.id);
 				await this.getItem();
 			}
 		},
+		beforeUnmount() {
+			this.io.service('apps')
+				.off(`apps/${this.slug}`, this.listener);
+		},
 		methods: {
+			setListener(newSlug, oldSlug = null) {
+				if (oldSlug) {
+					this.io.service('apps')
+						.off(`apps/${oldSlug}`, this.listener);
+				}
+				this.io.service('apps')
+					.on(`apps/${newSlug}`, this.listener);
+			},
+			listener(line) {
+				this.logs += '\n' + data;
+				setTimeout(() => {
+					this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
+				}, 10);
+			},
 			async getServices() {
 				console.log('Syncing docker with database...');
 				await this.io.service('docker_nodes')
