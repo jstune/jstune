@@ -1128,14 +1128,11 @@
 				if (repo) {
 					await this.getDockerCompose(repo);
 				}
-			},
-			slug(val, old) {
-				this.setListener(val, old);
 			}
 		},
 		computed: {
 			id() {
-				return this.$route.params.id || this.slug;
+				return this.$route.params.id || this.slug || 'ignite-users';
 			},
 			oauthProvidersFiltered() {
 				const supported = ['github'];
@@ -1155,25 +1152,19 @@
 		},
 		async created() {
 			await this.getOAuthProviders();
+			this.io.service('apps')
+				.on(`output`, this.listener);
 			if (this.id) {
-				this.setListener(this.id);
 				await this.getItem();
 			}
 		},
 		beforeUnmount() {
 			this.io.service('apps')
-				.off(`apps/${this.slug}`, this.listener);
+				.off(`output`, this.listener);
 		},
 		methods: {
-			setListener(newSlug, oldSlug = null) {
-				if (oldSlug) {
-					this.io.service('apps')
-						.off(`apps/${oldSlug}`, this.listener);
-				}
-				this.io.service('apps')
-					.on(`apps/${newSlug}`, this.listener);
-			},
 			listener(line) {
+				console.log('Got something', line);
 				this.logs += '\n' + line.data;
 				setTimeout(() => {
 					this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
