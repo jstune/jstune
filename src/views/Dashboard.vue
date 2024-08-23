@@ -284,7 +284,13 @@
 					</div>
 					<div class="-mb-8 bg-slate-100 -bottom-5 absolute h-0.5 left-4 right-4">
 					</div>
-				</div><button
+				</div> <textarea
+					ref="output"
+					readonly=""
+					v-model="log"
+					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50"
+					style="font-family:monospace"
+				/> <button
 					class="rounded p-2 bg-slate-200"
 					@click="update()"
 				>
@@ -333,19 +339,20 @@
 			listenerInstallation: null,
 			listenerMigration: null,
 			listenerFinish: null,
-			listenerError: null
+			listenerError: null,
+			log: ''
 		}),
 		async created() {
 			try {
 				await this.inspectLeader();
 			} catch (e) {}
 			console.log('Adding listeners');
-			this.listenerProgress = line => console.log('progress', line);
-			this.listenerMessage = line => console.log('message', line);
-			this.listenerInstallation = line => console.log('installation', line);
-			this.listenerMigration = line => console.log('migration', line);
-			this.listenerFinish = line => console.log('finish', line);
-			this.listenerError = line => console.log('error', line);
+			this.listenerProgress = line => this.terminal('progress', line);
+			this.listenerMessage = line => this.terminal('message', line);
+			this.listenerInstallation = line => this.terminal('installation', line);
+			this.listenerMigration = line => this.terminal('migration', line);
+			this.listenerFinish = line => this.terminal('finish', line);
+			this.listenerError = line => this.terminal('error', line);
 			this.io.service('exec')
 				.on('progress', this.listenerProgress);
 			this.io.service('exec')
@@ -377,6 +384,17 @@
 			console.log('Listeners removed');
 		},
 		methods: {
+			terminal(event, data) {
+				console.log(event, data);
+				if (typeof data === 'object') {
+					this.log += '\n' + JSON.stringify(data);
+				} else {
+					this.log += '\n' + data;
+				}
+				setTimeout(() => {
+					this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
+				}, 10);
+			},
 			async inspectLeader() {
 				const state = await this.io.service('state')
 					.get();
@@ -401,7 +419,6 @@
 				}
 				await this.io.service('exec')
 					.patch('update');
-				alert('jstune will automatically be restarted after update is completed');
 			},
 			async test() {
 				await this.io.service('exec')

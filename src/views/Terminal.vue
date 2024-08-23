@@ -73,7 +73,9 @@
 				} else {
 					this.output += `${line}\n`;
 					if (this.autoscroll) {
-						this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
+						setTimeout(() => {
+							this.$refs.output.scrollTop = this.$refs.output.scrollHeight;
+						}, 10)
 					}
 				}
 			}
