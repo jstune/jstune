@@ -288,7 +288,7 @@
 					ref="output"
 					readonly=""
 					v-model="log"
-					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50"
+					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50 mb-4"
 					style="font-family:monospace"
 				/> <button
 					class="rounded p-2 bg-slate-200"
@@ -340,6 +340,8 @@
 			listenerMigration: null,
 			listenerFinish: null,
 			listenerError: null,
+			listenerDisconnect: null,
+			listenerConnect: null,
 			log: ''
 		}),
 		async created() {
@@ -353,6 +355,8 @@
 			this.listenerMigration = line => this.terminal('migration', line);
 			this.listenerFinish = line => this.terminal('finish', line);
 			this.listenerError = line => this.terminal('error', line);
+			this.listenerDisconnect = line => this.terminal('disconnect', line);
+			this.listenerConnect = line => this.terminal('connect', line);
 			this.io.service('exec')
 				.on('progress', this.listenerProgress);
 			this.io.service('exec')
@@ -366,6 +370,8 @@
 			this.io.service('exec')
 				.on('error', this.listenerError);
 			console.log('Listeners added');
+			this.io.io.on('disconnect', this.listenerDisconnect);
+			this.io.io.on('connect', this.listenerDisconnect);
 		},
 		beforeUnmount() {
 			console.log('Removing listeners');
@@ -381,11 +387,15 @@
 				.off('finish', this.listenerFinish);
 			this.io.service('exec')
 				.off('error', this.listenerError);
+			this.io.io.off('disconnect', this.listenerDisconnect);
+			this.io.io.off('connect', this.listenerConnect);
 			console.log('Listeners removed');
 		},
 		methods: {
 			terminal(event, data) {
 				console.log(event, data);
+				if (event === 'disconnect') data = 'Disconnected from server';
+				if (event === 'connect') data = 'Connected to server';
 				if (typeof data === 'object') {
 					this.log += '\n' + JSON.stringify(data);
 				} else {
