@@ -31,7 +31,7 @@
 						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
-						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
+						disabled="!items || (items?.skip + items?.data?.length) >= items?.total"
 						@click="next()"
 					>
 						Next
@@ -58,7 +58,7 @@
 						{{items?.skip}} - {{items?.skip + items?.data?.length}} of {{items?.total}}
 					</div><button
 						class="p-1.5 w-20 hover:bg-slate-200 font-extralight rounded bg-slate-100"
-						disabled="!items || (items?.skip + items?.data?.length) >= items?.data?.length"
+						disabled="!items || (items?.skip + items?.data?.length) >= items?.total"
 						@click="next()"
 					>
 						Next
