@@ -107,18 +107,14 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.$or = []
-						const searchFields = [
-							'name',
-							'stackname',
-							'docker_image',
-							'docker_service_id',
-							'docker_node_id'
-						];
+						query.$or = [];
+						const searchFields = ['name', 'stackname', 'docker_image', 'docker_service_id', 'docker_node_id'];
 						for (const searchField of searchFields) {
-							const obj = {}
-							obj[searchField] = { $like: `%${this.search}%` }
-							query.$or.push(obj)
+							const obj = {};
+							obj[searchField] = {
+								$like: `%${this.search}%`
+							};
+							query.$or.push(obj);
 						}
 					}
 					this.items = await this.io.service(this.service)
@@ -133,12 +129,12 @@
 			next() {
 				if (!this.items) return;
 				this.items.skip += this.items.limit;
-				this.getItems()
+				this.getItems();
 			},
 			previous() {
 				if (!this.items) return;
 				this.items.skip -= this.items.limit;
-				this.getItems()
+				this.getItems();
 			}
 		}
 	};

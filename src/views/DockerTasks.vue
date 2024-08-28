@@ -109,9 +109,19 @@
 					if (this.search) {
 						query.$or = []
 						const searchFields = [
+							'id',
+							'timestamp',
+							'state',
+							'message',
+							'desired_state',
+							'slot',
 							'docker_task_id',
 							'docker_service_id',
-							'docker_node_id'
+							'docker_node_id',
+							'created',
+							'updated',
+							'created_at',
+							'updated_at',
 						];
 						for (const searchField of searchFields) {
 							const obj = {}
