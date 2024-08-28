@@ -114,9 +114,21 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.hostname = {
-							$like: `%${this.search}%`
-						};
+						query.$or = []
+						const searchFields = [
+							'hostname',
+							'address',
+							'os',
+							'architecture',
+							'role',
+							'manager_address',
+							'docker_node_id'
+						];
+						for (const searchField of searchFields) {
+							const obj = {}
+							obj[searchField] = { $like: `%${this.search}%` }
+							query.$or.push(obj)
+						}
 					}
 					this.items = await this.io.service(this.service)
 						.find({

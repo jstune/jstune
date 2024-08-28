@@ -108,15 +108,22 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.$or = [{
-							repo_tags: {
-								$like: `%${this.search}%`
-							}
-						}, {
-							repo_digests: {
-								$like: `%${this.search}%`
-							}
-						}];
+						query.$or = []
+						const searchFields = [
+							'containers',
+							'shared_size',
+							'size',
+							'virtual_size',
+							'repo_digests',
+							'repo_tags',
+							'image_id',
+							'parent_id'
+						];
+						for (const searchField of searchFields) {
+							const obj = {}
+							obj[searchField] = { $like: `%${this.search}%` }
+							query.$or.push(obj)
+						}
 					}
 					this.items = await this.io.service(this.service)
 						.find({

@@ -107,9 +107,15 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.name = {
-							$like: `%${this.search}%`
-						};
+						query.$or = [];
+						const searchFields = ['name', 'driver', 'scope', 'docker_network_id'];
+						for (const searchField of searchFields) {
+							const obj = {};
+							obj[searchField] = {
+								$like: `%${this.search}%`
+							};
+							query.$or.push(obj);
+						}
 					}
 					this.items = await this.io.service(this.service)
 						.find({
@@ -123,12 +129,12 @@
 			next() {
 				if (!this.items) return;
 				this.items.skip += this.items.limit;
-				this.getItems()
+				this.getItems();
 			},
 			previous() {
 				if (!this.items) return;
 				this.items.skip -= this.items.limit;
-				this.getItems()
+				this.getItems();
 			}
 		}
 	};

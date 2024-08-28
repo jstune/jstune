@@ -153,9 +153,15 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.hostname = {
-							$like: `%${this.search}%`
-						};
+						query.$or = [];
+						const searchFields = ['name', 'command', 'state', 'status', 'created', 'docker_service_name', 'docker_task_name', 'docker_service_id', 'docker_task_id', 'docker_image_name', 'docker_image_id', 'docker_node_id', 'docker_container_id'];
+						for (const searchField of searchFields) {
+							const obj = {};
+							obj[searchField] = {
+								$like: `%${this.search}%`
+							};
+							query.$or.push(obj);
+						}
 					}
 					this.items = await this.io.service(this.service)
 						.find({
