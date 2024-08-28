@@ -108,7 +108,7 @@
 					}
 					if (this.search) {
 						query.$or = [];
-						const searchFields = ['name', 'stackname', 'docker_image', 'docker_service_id', 'docker_node_id'];
+						const searchFields = ['id', 'name', 'stackname', 'docker_image', 'docker_service_id', 'docker_node_id', 'created_at', 'updated_at'];
 						for (const searchField of searchFields) {
 							const obj = {};
 							obj[searchField] = {

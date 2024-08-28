@@ -110,6 +110,7 @@
 					if (this.search) {
 						query.$or = []
 						const searchFields = [
+							'id',
 							'containers',
 							'shared_size',
 							'size',
@@ -117,7 +118,8 @@
 							'repo_digests',
 							'repo_tags',
 							'image_id',
-							'parent_id'
+							'parent_id',
+							'created'
 						];
 						for (const searchField of searchFields) {
 							const obj = {}

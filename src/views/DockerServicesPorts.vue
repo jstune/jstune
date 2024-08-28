@@ -160,9 +160,12 @@
 					if (this.search) {
 						query.$or = []
 						const searchFields = [
+							'id',
 							'port_external',
 							'port_internal',
-							'docker_service_id'
+							'docker_service_id',
+							'created_at',
+							'updated_at',
 						];
 						for (const searchField of searchFields) {
 							const obj = {}

@@ -108,7 +108,7 @@
 					}
 					if (this.search) {
 						query.$or = [];
-						const searchFields = ['name', 'path', 'driver', 'project', 'stackname', 'version', 'volume', 'scope'];
+						const searchFields = ['id', 'name', 'path', 'driver', 'project', 'stackname', 'version', 'volume', 'scope', 'created', 'created_at', 'updated_at'];
 						for (const searchField of searchFields) {
 							const obj = {};
 							obj[searchField] = {
