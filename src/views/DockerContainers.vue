@@ -133,13 +133,13 @@
 		}),
 		async created() {
 			if (this.identifier) {
-				this.search = this.identifier
+				this.search = this.identifier;
 			}
 			await this.getItems();
 		},
 		async beforeUnmount() {
 			if (this.listener) {
-				console.log('Killing container terminal session')
+				console.log('Killing container terminal session');
 				this.io.service('containers')
 					.off('output', this.listener);
 			}
@@ -149,7 +149,8 @@
 				try {
 					const query = {};
 					if (this.items) {
-						query.$limit = this.items?.limit;
+						query.$limit = this.items.limit;
+						query.$skip = this.items.skip;
 					}
 					if (this.search) {
 						query.hostname = {
@@ -171,14 +172,14 @@
 					return;
 				}
 				if (this.listener) {
-					console.log('Killing previous terminal session')
+					console.log('Killing previous terminal session');
 					this.io.service('containers')
 						.off('output', this.listener);
 				}
-				console.log('Generating new terminal session')
+				console.log('Generating new terminal session');
 				this.listener = line => {
 					if (!this.$refs?.output) {
-						console.log('Killing previous terminal session')
+						console.log('Killing previous terminal session');
 						this.io.service('containers')
 							.off('output', this.listener);
 					} else {
@@ -188,10 +189,10 @@
 						}
 					}
 				};
-				console.log('Start listener')
+				console.log('Start listener');
 				this.io.service('containers')
 					.on('output', this.listener);
-				console.log('Que terminal session')
+				console.log('Que terminal session');
 				await this.io.service('containers')
 					.get(this.current.docker_container_id);
 			},
@@ -204,17 +205,19 @@
 							command: this.command
 						});
 					this.command = '';
-				} catch(e) {
-					console.log('error', e.message)
+				} catch (e) {
+					console.log('error', e.message);
 				}
 			},
 			next() {
 				if (!this.items) return;
 				this.items.skip += this.items.limit;
+				this.getItems();
 			},
 			previous() {
 				if (!this.items) return;
 				this.items.skip -= this.items.limit;
+				this.getItems();
 			}
 		}
 	};

@@ -103,7 +103,8 @@
 				try {
 					const query = {};
 					if (this.items) {
-						query.$limit = this.items?.limit;
+						query.$limit = this.items.limit;
+						query.$skip = this.items.skip;
 					}
 					if (this.search) {
 						query.docker_task_id = {
@@ -122,10 +123,12 @@
 			next() {
 				if (!this.items) return;
 				this.items.skip += this.items.limit;
+				this.getItems()
 			},
 			previous() {
 				if (!this.items) return;
 				this.items.skip -= this.items.limit;
+				this.getItems()
 			}
 		}
 	};
