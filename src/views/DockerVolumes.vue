@@ -44,7 +44,7 @@
 					<button
 						v-for="item in items?.data"
 						@click="current = item"
-						class="rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
+						class="overflow-hidden rounded hover:bg-slate-200 font-extralight mb-1 text-left w-full bg-slate-50 py-1 px-2"
 					>
 						{{ item.name }}
 					</button>
@@ -107,9 +107,15 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.name = {
-							$like: `%${this.search}%`
-						};
+						query.$or = [];
+						const searchFields = ['name', 'path', 'driver', 'project', 'stackname', 'version', 'volume', 'scope'];
+						for (const searchField of searchFields) {
+							const obj = {};
+							obj[searchField] = {
+								$like: `%${this.search}%`
+							};
+							query.$or.push(obj);
+						}
 					}
 					this.items = await this.io.service(this.service)
 						.find({
@@ -123,12 +129,12 @@
 			next() {
 				if (!this.items) return;
 				this.items.skip += this.items.limit;
-				this.getItems()
+				this.getItems();
 			},
 			previous() {
 				if (!this.items) return;
 				this.items.skip -= this.items.limit;
-				this.getItems()
+				this.getItems();
 			}
 		}
 	};

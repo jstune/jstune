@@ -158,19 +158,17 @@
 						query.$skip = this.items.skip;
 					}
 					if (this.search) {
-						query.$or = [{
-							port_external: {
-								$like: `%${this.search}%`
-							}
-						}, {
-							port_internal: {
-								$like: `%${this.search}%`
-							}
-						}, {
-							docker_service_id: {
-								$like: `%${this.search}%`
-							}
-						}];
+						query.$or = []
+						const searchFields = [
+							'port_external',
+							'port_internal',
+							'docker_service_id'
+						];
+						for (const searchField of searchFields) {
+							const obj = {}
+							obj[searchField] = { $like: `%${this.search}%` }
+							query.$or.push(obj)
+						}
 					}
 					this.items = await this.io.service(this.service)
 						.find({
