@@ -56,7 +56,7 @@
 		},
 		methods: {
 			async redirect(provider) {
-				const path = this.server.endsWith('/') ? `oauth/${provider}?app_url=${location.href}` : `/oauth/${provider}?app_url=${location.href}`;
+				const path = this.server.endsWith('/') ? `oauth/${provider}?app_url=${location.origin}` : `/oauth/${provider}?app_url=${location.origin}`;
 				location.href = this.server + path;
 			},
 			async getLoginProviders() {
