@@ -1318,6 +1318,33 @@
 			demo: false
 		}),
 		watch: {
+			slug(val) {
+				let slug = val.toLowerCase()
+					.replace(/[\s_]+/g, '-')
+					.replace(/[^a-z0-9-]/g, '')
+					.replace(/-{2,}/g, '-')
+					.replace(/^-+/g, '');
+				if (val !== slug) {
+					this.slug = slug;
+				}
+			},
+			name(val, old) {
+				if (!this.loaded) {
+					let oldSlug = old.toLowerCase()
+						.replace(/[\s_]+/g, '-')
+						.replace(/[^a-z0-9-]/g, '')
+						.replace(/-{2,}/g, '-')
+						.replace(/^-+|-+$/g, '');
+					let slug = val.toLowerCase()
+						.replace(/[\s_]+/g, '-')
+						.replace(/[^a-z0-9-]/g, '')
+						.replace(/-{2,}/g, '-')
+						.replace(/^-+|-+$/g, '');
+					if (!this.slug || oldSlug === this.slug) {
+						this.slug = slug;
+					}
+				}
+			},
 			async searchRepos(open) {
 				if (open) {
 					await this.getOAuthProviders();
