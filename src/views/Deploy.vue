@@ -135,7 +135,7 @@
 						</svg> </button> <button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="destroy()"
-						title="Destruct"
+						title="Remove volumes"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -1278,7 +1278,7 @@
 						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="destroy()"
-						title="Destruct"
+						title="Remove volumes"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -1880,7 +1880,7 @@
 				this.loading = '';
 			},
 			async destroy() {
-				this.loading = 'destroy app';
+				if (!confirm('Destroy volumes?')) this.loading = 'destroy app';
 				try {
 					const res = await this.io.service('apps')
 						.patch(this.id, {
