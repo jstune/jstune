@@ -315,7 +315,7 @@
 		methods: {
 			consent(url) {
 				if (!url) return;
-				window.open(url + `&redirect_uri=${location.origin}/oauth-token-stored`, '_blank');
+				window.open(url + `&redirect_uri=${this.server}/oauth-token-stored`, '_blank');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
