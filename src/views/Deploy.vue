@@ -209,7 +209,7 @@
 						</svg> </button><button
 						class="p-2 rounded bg-slate-200"
 						@click="remove()"
-						title="Delete app"
+						title="Delete application"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -1227,7 +1227,7 @@
 						</svg> </button><button
 						class="p-2 rounded bg-slate-200"
 						@click="remove()"
-						title="Delete app"
+						title="Delete application"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
