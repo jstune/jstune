@@ -316,7 +316,8 @@
 			consent(url, provider = 'github') {
 				if (!url) return;
 				const path = this.server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
-				window.open(url + `&redirect_uri=${path}/callback?app_url=${location.origin}/oauth-token-stored`, '_blank');
+				const redir = encodeURIComponent(`${this.server}${path}/callback?app_url=${location.origin}/oauth-token-stored`)
+				window.open(url + `&redirect_uri=${redir}`, '_blank');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
