@@ -313,9 +313,10 @@
 			} catch (e) {}
 		},
 		methods: {
-			consent(url) {
+			consent(url, provider = 'github') {
 				if (!url) return;
-				window.open(url + `&redirect_uri=${this.server}/oauth-token-stored`, '_blank');
+				const path = this.server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
+				window.open(url + `&redirect_uri=${path}/callback?app_url=${location.origin}/oauth-token-stored`, '_blank');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
