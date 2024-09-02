@@ -10,6 +10,11 @@ const routes = [
         props: { renderer: 'view' },
         children: [
             {
+                path: 'oauth-token-stored',
+                component: () => import('@/views/OAuthTokenStored.vue'),
+                props: { renderer: 'slot' },
+            },
+            {
                 path: 'dashboard',
                 component: () => import('@/views/Dashboard.vue'),
                 props: { renderer: 'slot' },

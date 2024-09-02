@@ -1,7 +1,7 @@
 <template>
 	<TemplateHero
 		class="shadow-2xl"
-		title="Uh oh ..."
+		title="Yay !"
 	>
 		<WrapperPage>
 			<div class="w-full md:flex-row flex-col my-16 py-4 flex">

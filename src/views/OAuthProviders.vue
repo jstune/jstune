@@ -291,7 +291,7 @@
 			TemplateDefault,
 			SectionHero
 		},
-		inject: ['menus', 'io'],
+		inject: ['menus', 'io', 'server'],
 		props: ['renderer'],
 		data: () => ({
 			items: null,
@@ -315,7 +315,7 @@
 		methods: {
 			consent(url) {
 				if (!url) return;
-				window.open(url, '_blank');
+				window.open(url + `&redirect_uri=${location.origin}/oauth-token-stored`, '_blank');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
