@@ -17,11 +17,27 @@
 			<div class="mb-20 relative overflow-auto w-full">
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700">
 
-					<input
-						v-model="name"
-						placeholder="Name"
-						class="text-2xl px-4 py-2 block w-full mb-4"
-					/><input
+					<div class="flex mb-4"><input
+							v-model="name"
+							placeholder="Name"
+							class="text-2xl px-4 py-2 block w-full "
+						/><button
+							class="justify-center items-center flex py-2 rounded bg-slate-200 w-12"
+							@click="rename()"
+							title="Rename app"
+							v-if="log"
+						><svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="currentColor"
+								class="w-6 h-6"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
+									clip-rule="evenodd"
+								/>
+							</svg> </button></div><input
 						v-if="!log"
 						v-model="slug"
 						placeholder="Slug"
@@ -84,7 +100,7 @@
 						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="compose()"
-						title="Compose"
+						title="Compose - Generates commands based on docker compose"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -135,7 +151,7 @@
 						</svg> </button> <button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="destroy()"
-						title="Remove volumes"
+						title="Delete volumes"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -145,6 +161,21 @@
 							<path
 								fill-rule="evenodd"
 								d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm3 10.5a.75.75 0 000-1.5H9a.75.75 0 000 1.5h6z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="update()"
+						title="Update app by repository or provided files"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M10.5 3.75a6 6 0 00-5.98 6.496A5.25 5.25 0 006.75 20.25H18a4.5 4.5 0 002.206-8.423 3.75 3.75 0 00-4.133-4.303A6.001 6.001 0 0010.5 3.75zm2.25 6a.75.75 0 00-1.5 0v4.94l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V9.75z"
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
@@ -173,21 +204,6 @@
 							<path
 								fill-rule="evenodd"
 								d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
-								clip-rule="evenodd"
-							/>
-						</svg> </button><button
-						class="p-2 mr-4 rounded bg-slate-200"
-						@click="update()"
-						title="Update"
-					><svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M10.5 3.75a6 6 0 00-5.98 6.496A5.25 5.25 0 006.75 20.25H18a4.5 4.5 0 002.206-8.423 3.75 3.75 0 00-4.133-4.303A6.001 6.001 0 0010.5 3.75zm2.25 6a.75.75 0 00-1.5 0v4.94l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V9.75z"
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
@@ -1227,7 +1243,7 @@
 						</svg> </button><button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="compose()"
-						title="Compose"
+						title="Compose - Generates commands based on docker compose"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -1278,7 +1294,7 @@
 						</svg> </button> <button
 						class="p-2 mr-4 rounded bg-slate-200"
 						@click="destroy()"
-						title="Remove volumes"
+						title="Delete volumes"
 					><svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -1288,6 +1304,21 @@
 							<path
 								fill-rule="evenodd"
 								d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm3 10.5a.75.75 0 000-1.5H9a.75.75 0 000 1.5h6z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="update()"
+						title="Update app by repository or provided files"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M10.5 3.75a6 6 0 00-5.98 6.496A5.25 5.25 0 006.75 20.25H18a4.5 4.5 0 002.206-8.423 3.75 3.75 0 00-4.133-4.303A6.001 6.001 0 0010.5 3.75zm2.25 6a.75.75 0 00-1.5 0v4.94l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V9.75z"
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
@@ -1316,21 +1347,6 @@
 							<path
 								fill-rule="evenodd"
 								d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
-								clip-rule="evenodd"
-							/>
-						</svg> </button><button
-						class="p-2 mr-4 rounded bg-slate-200"
-						@click="update()"
-						title="Update"
-					><svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M10.5 3.75a6 6 0 00-5.98 6.496A5.25 5.25 0 006.75 20.25H18a4.5 4.5 0 002.206-8.423 3.75 3.75 0 00-4.133-4.303A6.001 6.001 0 0010.5 3.75zm2.25 6a.75.75 0 00-1.5 0v4.94l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V9.75z"
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
@@ -1794,6 +1810,20 @@
 				this.log = item.log;
 				console.log(item);
 				await this.getServices();
+				this.loading = '';
+			},
+			async rename() {
+				this.loading = `Rename to ${this.name} ...`;
+				try {
+					const res = await this.io.service('apps')
+						.patch(this.id, {
+							rename: this.name
+						});
+					console.log('res', res);
+				} catch (e) {
+					console.log('err', e);
+				}
+				await this.getItem();
 				this.loading = '';
 			},
 			async remove() {
