@@ -54,18 +54,31 @@
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 					v-if="log"
 				>
-					<div class="w-1/2">
+					<div>
 						<label class="block my-2">
 							Last updated {{ new Date(log?.[0]?.commit?.author?.timestamp * 1000).toLocaleString() }} by {{ log?.[0]?.commit?.author?.name }}
 						</label>
-					</div>
-					<div class="text-right w-1/2">
 					</div>
 				</div>
 				<div
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 					v-if="loaded"
-				>
+				><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="getItem()"
+						title="Reload"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button>
 					<button
 						v-if="!running"
 						class="p-2 mr-4 rounded bg-slate-200"
@@ -80,21 +93,6 @@
 							<path
 								fill-rule="evenodd"
 								d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-								clip-rule="evenodd"
-							/>
-						</svg> </button><button
-						class="p-2 mr-4 rounded bg-slate-200"
-						@click="getItem()"
-						title="Reload"
-					><svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
@@ -1094,7 +1092,22 @@
 				<div
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
 					v-if="loaded"
-				>
+				><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="getItem()"
+						title="Reload"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+								clip-rule="evenodd"
+							/>
+						</svg> </button>
 					<button
 						v-if="!running"
 						class="p-2 mr-4 rounded bg-slate-200"
@@ -1109,21 +1122,6 @@
 							<path
 								fill-rule="evenodd"
 								d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-								clip-rule="evenodd"
-							/>
-						</svg> </button><button
-						class="p-2 mr-4 rounded bg-slate-200"
-						@click="getItem()"
-						title="Reload"
-					><svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
@@ -1236,6 +1234,17 @@
 								clip-rule="evenodd"
 							/>
 						</svg> </button><button
+						class="p-2 mr-4 rounded bg-slate-200"
+						@click="stats()"
+						title="Get statistics"
+					><svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="w-6 h-6"
+						>
+							<path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
+						</svg> </button><button
 						class="p-2 rounded bg-slate-200"
 						@click="remove()"
 						title="Delete application"
@@ -1315,7 +1324,7 @@
 			providers: [],
 			portProviders: ['ufw', 'google', 'aws', 'azure'],
 			sslRenewIds: [],
-			demo: false
+			demo: true
 		}),
 		watch: {
 			slug(val) {
