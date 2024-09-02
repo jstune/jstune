@@ -25,7 +25,7 @@
 							class="justify-center items-center flex py-2 rounded bg-slate-200 w-12"
 							@click="rename()"
 							title="Rename app"
-							v-if="log"
+							v-if="loaded"
 						><svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
@@ -38,12 +38,12 @@
 									clip-rule="evenodd"
 								/>
 							</svg> </button></div><input
-						v-if="!log"
+						v-if="!loaded"
 						v-model="slug"
 						placeholder="Slug"
 						class="px-4 py-2 block w-full"
 					/> <input
-						v-if="log"
+						v-if="loaded"
 						v-model="id"
 						placeholder="Slug"
 						readonly=""
@@ -64,7 +64,7 @@
 				</div>
 				<div
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
-					v-if="log"
+					v-if="loaded"
 				>
 					<button
 						v-if="!running"
@@ -387,7 +387,7 @@
 				</div>
 				<div
 					class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
-					v-if="log"
+					v-if="loaded"
 				>
 					<div class="flex mt-2 mb-6">
 						<div class="w-1/2">
@@ -1071,7 +1071,7 @@
 						</div>
 					</div>
 				</div>
-				<div v-if="!log">
+				<div v-if="!loaded">
 					<button
 						class="py-4 rounded bg-slate-200 w-full"
 						:disabled="!slug"
@@ -1093,7 +1093,7 @@
 				</div>
 				<div
 					class="flex p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"
-					v-if="log"
+					v-if="loaded"
 				>
 					<button
 						v-if="!running"
@@ -1311,6 +1311,7 @@
 			serviceOpen: null,
 			services: [],
 			logs: '',
+			loaded: false,
 			providers: [],
 			portProviders: ['ufw', 'google', 'aws', 'azure'],
 			sslRenewIds: [],
@@ -1689,20 +1690,25 @@
 			},
 			async getItem() {
 				this.loading = 'app';
-				const item = await this.io.service('apps')
-					.get(this.id);
-				this.name = item.name;
-				this.slug = item.id;
-				this.repository = item.repository;
-				this.branch = item.branch;
-				this.adjustVolumes = item.adjustVolumes;
-				this.inherit = item.inherit;
-				this.running = item.running;
-				this.dockerComposeFile = item.dockerComposeFile;
-				this.webhook = item.webhook;
-				this.log = item.log;
-				console.log(item);
-				await this.getServices();
+				try {
+					const item = await this.io.service('apps')
+						.get(this.id);
+					this.name = item.name;
+					this.slug = item.id;
+					this.repository = item.repository;
+					this.branch = item.branch;
+					this.adjustVolumes = item.adjustVolumes;
+					this.inherit = item.inherit;
+					this.running = item.running;
+					this.dockerComposeFile = item.dockerComposeFile;
+					this.webhook = item.webhook;
+					this.log = item.log;
+					this.loaded = true;
+					console.log('item', item);
+					await this.getServices();
+				} catch (e) {
+					console.log('Error fetching item', e);
+				}
 				this.loading = '';
 			},
 			async rename() {
