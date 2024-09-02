@@ -413,7 +413,7 @@
 						</button>
 					</div>
 					<div
-						class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 text-slate-700"
+						class="bg-slate-50 p-4 overflow-auto shadow-sm mb-2 mt-2 text-slate-700"
 						v-for="service in (serviceOpen ? [serviceOpen] : [])"
 					>
 						<label class="block my-2">
@@ -449,7 +449,7 @@
 									Inspect Port
 								</button><button
 									@click="openPort(port.port_external, provider)"
-									class="hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
+									class="mr-2 hover:bg-slate-200 font-extralight rounded-r p-2 bg-slate-100"
 								>
 									Open Port
 								</button><button
@@ -733,9 +733,6 @@
 										<th class="text-left">
 											Value
 										</th>
-										<th class="text-left">
-											Actions
-										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -743,32 +740,16 @@
 										<td class="pr-4">
 											<input
 												v-model="env.key"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4"><input
 												v-model="env.value"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/> </td>
-										<td><button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Save
-											</button><button
-												class="rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Delete
-											</button> </td>
 									</tr>
 								</tbody>
-							</table> <button
-								class="mr-2 rounded p-2 bg-slate-200 my-4"
-								@click="inherit = !inherit"
-							>
-								New
-							</button>
+							</table>
 						</div>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -783,9 +764,6 @@
 										<th class="text-left">
 											Network ID
 										</th>
-										<th class="text-left">
-											Actions
-										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -793,32 +771,16 @@
 										<td class="pr-4">
 											<input
 												v-model="network.address"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4"><input
 												v-model="network.docker_network_id"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/> </td>
-										<td><button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Save
-											</button><button
-												class="rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Delete
-											</button> </td>
 									</tr>
 								</tbody>
-							</table><button
-								class="mr-2 rounded p-2 bg-slate-200 my-4"
-								@click="inherit = !inherit"
-							>
-								New
-							</button>
+							</table>
 						</div>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -833,9 +795,6 @@
 										<th class="text-left">
 											Internal
 										</th>
-										<th class="text-left">
-											Actions
-										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -843,42 +802,16 @@
 										<td class="pr-4">
 											<input
 												v-model="port.port_external"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4"><input
 												v-model="port.port_internal"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/> </td>
-										<td><button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Open
-											</button><button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Close
-											</button><button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Save
-											</button><button
-												class="rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Delete
-											</button> </td>
 									</tr>
 								</tbody>
-							</table><button
-								class="mr-2 rounded p-2 bg-slate-200 my-4"
-								@click="inherit = !inherit"
-							>
-								New
-							</button>
+							</table>
 						</div>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<table class="w-full">
@@ -896,9 +829,6 @@
 										<th class="text-left">
 											Type
 										</th>
-										<th class="text-left">
-											Actions
-										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -906,42 +836,24 @@
 										<td class="pr-4">
 											<input
 												v-model="volume.name"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="volume.path"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="volume.type"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
-										</td>
-										<td style="width:130px">
-											<button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Save
-											</button><button
-												class="rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Delete
-											</button>
 										</td>
 									</tr>
 								</tbody>
-							</table><button
-								class="mr-2 rounded p-2 bg-slate-200 my-4"
-								@click="inherit = !inherit"
-							>
-								New
-							</button>
+							</table>
 						</div>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<caption class="text-left mb-3">
@@ -986,9 +898,6 @@
 										>
 											Task ID
 										</th>
-										<th class="text-left">
-											Actions
-										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -996,66 +905,48 @@
 										<td class="pr-4">
 											<input
 												v-model="task.timestamp"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="task.state"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="task.message"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="task.desired_state"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="task.slot"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="task.docker_node_id"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="task.docker_task_id"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
-										</td>
-										<td style="width:130px">
-											<button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Save
-											</button><button
-												class="rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Delete
-											</button>
 										</td>
 									</tr>
 								</tbody>
-							</table><button
-								class="mr-2 rounded p-2 bg-slate-200 my-4"
-								@click="inherit = !inherit"
-							>
-								New
-							</button>
+							</table>
 						</div>
 						<div class="bg-slate-100 p-4 overflow-auto shadow-sm mb-2 text-slate-700">
 							<caption class="text-left mb-3">
@@ -1110,78 +1001,62 @@
 										<td class="pr-4">
 											<input
 												v-model="container.name"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.command"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.state"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.status"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.docker_image_name"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.docker_task_id"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.docker_node_id"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td class="pr-4">
 											<input
 												v-model="container.docker_container_id"
-												class="w-full p-2 rounded"
+												class="w-full p-2 rounded my-1"
 											/>
 										</td>
 										<td style="width:130px">
-											<button
-												class="mr-2 rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Save
-											</button><button
-												class="rounded p-2 bg-slate-200 my-4"
-												@click="inherit = !inherit"
-											>
-												Delete
-											</button> <router-link
+											<router-link
 												:to="'/docker/containers/' + container.docker_container_id"
-												tag="a"
-												target="_blank"
+												class="p-2 mr-4 rounded bg-slate-200"
 											>
 												Terminal
 											</router-link>
 										</td>
 									</tr>
 								</tbody>
-							</table><button
-								class="mr-2 rounded p-2 bg-slate-200 my-4"
-								@click="inherit = !inherit"
-							>
-								New
-							</button>
+							</table>
 						</div>
 					</div>
 				</div>
