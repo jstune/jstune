@@ -206,7 +206,13 @@
 								clip-rule="evenodd"
 							/>
 						</svg> </button>
-				</div>
+				</div><textarea
+					ref="output"
+					readonly=""
+					v-model="logs"
+					class="justify-start flex-col-reverse flex overflow-auto h-64 w-full p-4 rounded bg-slate-50 my-8 "
+					style="font-family:monospace"
+				/>
 				<div class="p-4 overflow-auto shadow-sm my-8 bg-slate-100 text-slate-700"><label class="block my-2 text-center">
 						Upload using drop of Tar / Zip / Folder / Docker Compose File / Docker File
 					</label><button
@@ -1791,6 +1797,7 @@
 				this.loading = '';
 			},
 			async remove() {
+				if (!confirm('Remove application entirely?')) return;
 				this.loading = 'remove app';
 				try {
 					const res = await this.io.service('apps')
