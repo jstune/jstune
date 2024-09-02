@@ -14,10 +14,15 @@ let domain = ['jstune.com', 'studio.vueplay.com', 'next.vueplay.com', 'localhost
 const socket = sio(domain, {
     transports: ['websocket', 'polling']
 })
+const socketClient = feathers.socketio(socket)
 
 const io = feathers()
-io.configure(feathers.socketio(socket))
+io.configure(socketClient)
 io.configure(feathers.authentication())
+io.use('apps', socketClient.service('apps'), {
+    methods: ['get', 'create', 'find', 'patch', 'update', 'remove', 'stats'],
+    events: ['output']
+})
 
 io.io.on('disconnect', () => {
     console.log('Disconnected from server') // @todo - Show a dialog notice
