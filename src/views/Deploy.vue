@@ -1314,7 +1314,7 @@
 			providers: [],
 			portProviders: ['ufw', 'google', 'aws', 'azure'],
 			sslRenewIds: [],
-			demo: true
+			demo: false
 		}),
 		watch: {
 			async searchRepos(open) {
