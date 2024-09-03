@@ -54,7 +54,7 @@ router.beforeEach(async to => {
         const timeout = new Promise((_, reject) => {
             setTimeout(() => {
                 reject(new Error('Re-authentication timed out'))
-            }, 800) // ms before timeout
+            }, 2500) // ms before timeout
         })
         const authenticate = new Promise(async (resolve, reject) => {
             try {
@@ -69,7 +69,6 @@ router.beforeEach(async to => {
             }
         })
         await Promise.race([authenticate, timeout])
-        console.log('ok', to.path)
         if (
             ['/', '/setup', '/login', '/register', '/recover', '/reset-password', '/disconnected'].includes(to.path) ||
             to.path.startsWith('/setup/')
@@ -79,7 +78,7 @@ router.beforeEach(async to => {
 
         let uninstalled = []
         const timeout = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Fetching facilities timed out')), 1000)
+            setTimeout(() => reject(new Error('Fetching facilities timed out')), 2500)
         })
         const getUninstalledFacilities = new Promise(async (resolve, reject) => {
             try {
