@@ -240,9 +240,9 @@ const routes = [
         ]
     },
     {
-        path: 'oauth-token-stored',
+        path: '/oauth-token-stored',
         component: () => import('@/views/OAuthTokenStored.vue'),
-        props: true,
+        props: true
     },
     {
         path: '/:catchAll(.*)',
