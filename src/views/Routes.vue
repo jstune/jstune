@@ -516,7 +516,9 @@
 				try {
 					this.items = await this.io.service(this.service)
 						.find({
-							query: {}
+							query: {
+								$limit: 1000
+							}
 						});
 					for (const item of this.items?.data) {
 						for (const key of Object.keys(item)) {
@@ -533,7 +535,11 @@
 			async getProviders() {
 				try {
 					this.providers = await this.io.service('dns_providers')
-						.find();
+						.find({
+							query: {
+								$limit: 1000
+							}
+						});
 				} catch (e) {
 					console.log(e.message);
 				}
