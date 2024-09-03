@@ -64,9 +64,6 @@
 				const path = server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
 				const redir = encodeURIComponent(`${server}${path}/callback?app_url=${location.origin}`)
 				location.href = server + path + `?redirect_uri=${redir}`;
-
-				const pathOld = this.server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
-				const locationHref = this.server + path + `?app_url=${location.origin}`;
 			},
 			async getLoginProviders() {
 				try {
