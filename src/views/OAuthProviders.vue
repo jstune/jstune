@@ -315,8 +315,12 @@
 		methods: {
 			consent(url, provider = 'github') {
 				if (!url) return;
-				const path = this.server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
-				const redir = encodeURIComponent(`${this.server}${path}/callback?app_url=${location.origin}/oauth-token-stored`)
+				let server = this.server
+				if (server === '/' || !server) {
+					server = location.origin
+				}
+				const path = server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
+				const redir = encodeURIComponent(`${server}${path}/callback?app_url=${location.origin}/oauth-token-stored`)
 				window.open(url + `&redirect_uri=${redir}`, '_blank');
 			},
 			async getItems() {
