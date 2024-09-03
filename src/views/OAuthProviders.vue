@@ -317,8 +317,7 @@
 				if (!url) return;
 				const path = this.server.endsWith('/') ? `oauth/${provider}` : `/oauth/${provider}`;
 				const redir = encodeURIComponent(`${this.server}${path}/callback?app_url=${location.origin}/oauth-token-stored`)
-				const state = encodeURIComponent(`${location.origin}/oauth-token-stored`)
-				window.open(url + `&state=${state}&redirect_uri=${redir}`, '_blank');
+				window.open(url + `&redirect_uri=${redir}`, '_blank');
 			},
 			async getItems() {
 				this.items = await this.io.service(this.service)
