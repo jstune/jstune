@@ -45,6 +45,7 @@ io.reAuthenticate().then(user => {
 }).catch(e => {})
 
 router.beforeEach(async to => {
+    console.log('to', to)
     if (to.path === '/logout') {
         await io.logout()
         return '/login'
@@ -68,11 +69,13 @@ router.beforeEach(async to => {
             }
         })
         await Promise.race([authenticate, timeout])
+        console.log('ok', to.path)
         if (
             ['/', '/setup', '/login', '/register', '/recover', '/reset-password', '/disconnected'].includes(to.path) ||
             to.path.startsWith('/setup/')
         ) return '/dashboard'
     } catch (e) {
+        console.log('err', e)
 
         let uninstalled = []
         const timeout = new Promise((_, reject) => {
