@@ -377,6 +377,7 @@
 					.remove(this.id);
 				console.log('res', res);
 				this.$router.push('/apps-static');
+				alert('Static site removed!');
 				this.loading = '';
 			},
 			async attach() {
@@ -387,6 +388,7 @@
 					});
 				console.log('res', res);
 				await this.getItem();
+				alert('Attached to webhook!');
 				this.loading = '';
 			},
 			async detach() {
@@ -397,6 +399,7 @@
 					});
 				console.log('res', res);
 				await this.getItem();
+				alert('Detached from webhook!');
 				this.loading = '';
 			},
 			async update() {
@@ -411,8 +414,10 @@
 						});
 					console.log('res', res);
 					await this.getItem();
+					alert('Updated!');
 				} catch (e) {
 					console.log('error', e);
+					alert('Could not update: ' + e.message);
 				}
 				this.loading = '';
 			},
@@ -429,8 +434,10 @@
 						});
 					console.log('res', res);
 					await this.getItem();
+					alert('Static site is live!');
 				} catch (e) {
 					console.log('error', e);
+					alert('Could not deploy: ' + e.message);
 				}
 				this.loading = '';
 			},
